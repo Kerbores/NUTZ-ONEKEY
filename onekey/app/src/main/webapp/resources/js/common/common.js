@@ -1,6 +1,5 @@
 $(function() {
 	console.log("common.js is runnning...");
-	console.log($('#user'));
 	// 收回展开效果
 	$('.dropdown-toggle').on('click', function() {
 		if ($(this).find('.fa-angle-down').length) {

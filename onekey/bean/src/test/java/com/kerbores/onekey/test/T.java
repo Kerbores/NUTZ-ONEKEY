@@ -1,11 +1,7 @@
 package com.kerbores.onekey.test;
 
-import java.io.File;
-
-import org.beetl.core.Configuration;
-import org.beetl.core.GroupTemplate;
-import org.beetl.core.Template;
-import org.beetl.core.resource.FileResourceLoader;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 
 /**
  * @author Kerbores(kerbores@gmail.com)
@@ -22,13 +18,14 @@ import org.beetl.core.resource.FileResourceLoader;
 public class T {
 	public static void main(String[] args) throws Exception {
 
-		String root = System.getProperty("user.dir") + File.separator + "template";
-		FileResourceLoader resourceLoader = new FileResourceLoader(root, "utf-8");
-		Configuration cfg = Configuration.defaultConfiguration();
-		GroupTemplate gt = new GroupTemplate(resourceLoader, cfg);
-		Template t = gt.getTemplate("/s01/hello.txt");
-		String str = t.render();
-		System.out.println(str);
+		ScriptEngineManager manager = new ScriptEngineManager();
+		ScriptEngine engine = manager.getEngineByName("JavaScript");
+
+		if (engine == null) {
+			throw new RuntimeException("not found JavaScript engine!");
+		}
+
+		engine.eval("println('hello,java7!')");
 
 	}
 }

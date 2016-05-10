@@ -1,6 +1,7 @@
 package com.kerbores.onekey.tasks;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.hyperic.sigar.Sigar;
@@ -20,6 +21,7 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.weixin.bean.WxTemplateData;
 import org.nutz.weixin.spi.WxApi2;
+import org.nutz.weixin.spi.WxResp;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -31,6 +33,7 @@ import com.kerbores.onkey.bean.apm.APMAlarm;
 import com.kerbores.onkey.bean.apm.APMAlarm.Type;
 import com.kerbores.sigar.gathers.CPUGather;
 import com.kerbores.sigar.gathers.MemoryGather;
+import com.kerbores.utils.collection.Lists;
 import com.kerbores.utils.common.Ips;
 import com.kerbores.utils.common.Numbers;
 
@@ -46,7 +49,7 @@ import com.kerbores.utils.common.Numbers;
  * @time 2016年3月15日 上午11:54:46
  *
  */
-@IocBean(name = "apmTask", fields = "dao")
+@IocBean(name = "apmTask", fields = "dao", create = "init")
 public class APMTask implements Job {
 	private static Log LOG = Logs.getLog(APMTask.class);
 	private Dao dao;
@@ -62,6 +65,19 @@ public class APMTask implements Job {
 
 	@Inject
 	EmailService emailService;
+
+	List<User> listeners = Lists.newArrayList();
+
+	public void init() {
+		String listener = config.get("alarm.listener");
+		Lang.each(listener.split(","), new Each<String>() {
+
+			@Override
+			public void invoke(int index, String lis, int length) throws ExitLoop, ContinueLoop, LoopException {
+				listeners.add(userService.fetch(Cnd.where("name", "=", lis)));
+			}
+		});
+	}
 
 	/**
 	 * 
@@ -138,20 +154,18 @@ public class APMTask implements Job {
 
 		String alarmTypes = config.get(device.toLowerCase() + ".alarm.types");
 
-		final String listener = config.get("alarm.listener");
-
 		Lang.each(alarmTypes.split(","), new Each<String>() {
 
 			@Override
 			public void invoke(int index, String type, int length) throws ExitLoop, ContinueLoop, LoopException {
 				if (Strings.equals(type, "EMAIL")) {// 发送邮件
-					sendALarmByEmail(listener, alarm);
+					sendALarmByEmail(alarm);
 				}
 				if (Strings.equals(type, "SMS")) {// 发送短信
 
 				}
 				if (Strings.equals(type, "WECHAT")) {// 发送微信消息
-					sendAlarmByWechat(listener, alarm);
+					sendAlarmByWechat(alarm);
 				}
 			}
 
@@ -164,12 +178,13 @@ public class APMTask implements Job {
 		}
 	}
 
-	private void sendALarmByEmail(String listener, final APMAlarm alarm) {
-		Lang.each(listener.split(","), new Each<String>() {
+	@Async
+	private void sendALarmByEmail(final APMAlarm alarm) {
+
+		Lang.each(listeners, new Each<User>() {
 
 			@Override
-			public void invoke(int index, String toUser, int length) throws ExitLoop, ContinueLoop, LoopException {
-				User user = userService.fetch(Cnd.where("name", "=", toUser));
+			public void invoke(int index, User user, int length) throws ExitLoop, ContinueLoop, LoopException {
 				if (user == null) {
 					return;
 				}
@@ -183,22 +198,23 @@ public class APMTask implements Job {
 	 * @param listener
 	 * @param alarm
 	 */
-	protected void sendAlarmByWechat(String listener, APMAlarm alarm) {
+	@Async
+	protected void sendAlarmByWechat(APMAlarm alarm) {
 		final Map<String, WxTemplateData> data = new HashMap<String, WxTemplateData>();
 		data.put("type", new WxTemplateData(alarm.getTitle()));
 		data.put("ip", new WxTemplateData(alarm.getIp()));
 		data.put("key", new WxTemplateData(alarm.getDevice()));
 		data.put("usage", new WxTemplateData(Numbers.keepPrecision(alarm.getUsage() + "", 2)));
 		data.put("alarm", new WxTemplateData(alarm.getAlarm() + ""));
-		Lang.each(listener.split(","), new Each<String>() {
+		Lang.each(listeners, new Each<User>() {
 
 			@Override
-			public void invoke(int index, String toUser, int length) throws ExitLoop, ContinueLoop, LoopException {
-				User user = userService.fetch(Cnd.where("name", "=", toUser));
+			public void invoke(int index, User user, int length) throws ExitLoop, ContinueLoop, LoopException {
 				if (user == null) {
 					return;
 				}
-				LOG.debug(api.template_send(user.getOpenid(), "MnNkTihmclGa4OAFelkMwAwxUiKu41hsn2l9fHxLRdA", null, data));
+				WxResp resp = api.template_send(user.getOpenid(), "MnNkTihmclGa4OAFelkMwAwxUiKu41hsn2l9fHxLRdA", null, data);
+				LOG.debug(resp);
 			}
 		});
 	}

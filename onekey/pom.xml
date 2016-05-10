@@ -85,6 +85,7 @@
 			<artifactId>gather</artifactId>
 			<version>2.0-SNAPSHOT</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.nutz</groupId>
 			<artifactId>nutz-integration-shiro</artifactId>
@@ -95,11 +96,13 @@
 			<artifactId>nutz-integration-quartz</artifactId>
 			<version>1.r.55-SNAPSHOT</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.kerbores.nutz</groupId>
 			<artifactId>qiniu</artifactId>
 			<version>2.0-SNAPSHOT</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.nutz</groupId>
 			<artifactId>nutzwx</artifactId>
