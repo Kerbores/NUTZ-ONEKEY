@@ -9,7 +9,6 @@ import org.hyperic.sigar.SigarException;
 import org.nutz.aop.interceptor.async.Async;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
-import org.nutz.integration.quartz.annotation.Scheduled;
 import org.nutz.ioc.impl.PropertiesProxy;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.ioc.loader.annotation.IocBean;
@@ -55,7 +54,7 @@ import com.google.common.collect.Lists;
  *
  */
 @IocBean(name = "apmTask", fields = "dao", create = "init")
-@Scheduled(cron = "*/10 * * * * ? ")
+// @Scheduled(cron = "*/10 * * * * ? ")
 public class APMTask implements Job {
 	private static Log LOG = Logs.getLog(APMTask.class);
 	private Dao dao;

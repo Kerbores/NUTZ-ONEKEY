@@ -106,7 +106,7 @@ public class SystemModule extends AbstractBaseModule {
 
 	@At
 	@Ok(">>:/apm/dashboard")
-	public Result main() {
+	public Result main(@Attr(SessionKeys.USER_KEY) User user) {
 		return Result.success();
 	}
 

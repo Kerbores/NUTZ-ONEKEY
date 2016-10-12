@@ -71,6 +71,33 @@ var ioc = {
 			refer : "dataSource"
 		}, {
 			refer : "sqlManeger"
-		} ]
+		} ],
+		fields : {
+			interceptors : [ {
+				refer : "cacheExecutor"
+			}, "log" ]
+		}
+	},
+	cacheExecutor : {
+		type : "org.nutz.plugins.cache.dao.CachedNutDaoExecutor",
+		fields : {
+			cacheProvider : {
+				refer : "cacheProvider"
+			},
+			cachedTableNames : [ "t_user", "t_role_permissione" ], // 需要缓存的表
+			enableWhenTrans : true, // 事务作用域内是否启用,默认false
+			cache4Null : true
+		}
+	},
+	cacheProvider : {
+		type : "org.nutz.plugins.cache.dao.impl.provider.EhcacheDaoCacheProvider",
+		fields : {
+			cacheManager : {
+				refer : "cacheManager"
+			}
+		},
+		events : {
+			create : "init"
+		}
 	}
 }

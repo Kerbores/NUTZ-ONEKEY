@@ -2,6 +2,8 @@ package club.zhcs.thunder;
 
 import java.nio.charset.Charset;
 
+import net.sf.ehcache.CacheManager;
+
 import org.apache.log4j.PropertyConfigurator;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
@@ -84,6 +86,9 @@ public class ThunderSetup implements Setup {
 		Ioc ioc = nc.getIoc();
 
 		Dao dao = ioc.get(Dao.class);
+
+		CacheManager cacheManager = ioc.get(CacheManager.class);
+		log.debug("Ehcache CacheManager = " + cacheManager);
 
 		ioc.get(NutQuartzCronJobFactory.class);// 触发任务
 

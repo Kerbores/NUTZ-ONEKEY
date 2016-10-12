@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.beetl.ext.nutz.BeetlViewMaker;
+import org.nutz.integration.shiro.ShiroSessionProvider;
 import org.nutz.ioc.impl.PropertiesProxy;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.lang.Lang;
@@ -22,6 +23,7 @@ import org.nutz.mvc.annotation.IocBy;
 import org.nutz.mvc.annotation.Modules;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
+import org.nutz.mvc.annotation.SessionBy;
 import org.nutz.mvc.annotation.SetupBy;
 import org.nutz.mvc.annotation.UrlMappingBy;
 import org.nutz.mvc.annotation.Views;
@@ -55,16 +57,17 @@ import club.zhcs.titans.utils.db.Result;
  *
  */
 
-@Modules(scanPackage = true)
-@IocBy(type = ComboIocProvider.class, args = { "*anno", "club.zhcs", "*tx", "*js", "ioc", "*async", "*quartz", "quartz", "*sigar", "sigar" })
-@Views({ BeetlViewMaker.class })
-@UrlMappingBy(ApidocUrlMapping.class)
-@Fail("http:500")
 @Ok("json")
-@Filters({ @By(type = CheckSession.class, args = { SessionKeys.USER_KEY, "/" }) })
+@Fail("http:500")
+@Modules(scanPackage = true)
 @SetupBy(ThunderSetup.class)
+@Views({ BeetlViewMaker.class })
+@SessionBy(ShiroSessionProvider.class)
+@UrlMappingBy(ApidocUrlMapping.class)
 @ChainBy(type = ThunderChainMaker.class, args = {})
-@Api(name="Thunder nop api",description="nop开放平台接口示例",match=ApiMatchMode.NONE)
+@Filters({ @By(type = CheckSession.class, args = { SessionKeys.USER_KEY, "/" }) })
+@Api(name = "Thunder nop api", description = "nop开放平台接口示例", match = ApiMatchMode.NONE)
+@IocBy(type = ComboIocProvider.class, args = { "*anno", "club.zhcs", "*tx", "*js", "ioc", "*async", "*quartz", "quartz", "*sigar", "sigar" })
 public class MainModule extends AbstractBaseModule {
 
 	private @Inject RoleService roleService;
