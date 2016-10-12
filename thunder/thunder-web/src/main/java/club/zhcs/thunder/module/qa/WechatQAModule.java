@@ -40,8 +40,6 @@ import club.zhcs.titans.utils.db.Result;
  *
  */
 @At("qa")
-// @Filters({ @By(type = CheckSession.class, args = {
-// SessionKeys.WECHAT_USER_KEY, "/qa/bind" }) })
 @Filters
 public class WechatQAModule extends AbstractBaseModule {
 
