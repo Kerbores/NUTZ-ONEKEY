@@ -1,4 +1,10 @@
 $(function() {
+	var token = $("#CSRFToken").val();
+	if(token){
+		var _headers = {"RequestVerificationToken":token};
+		var option = {"headers":_headers};
+		$.ajaxSetup(option);  
+	};
 	if (!!KindEditor) {
 		KindEditor.lang({
 			preview : '预览'

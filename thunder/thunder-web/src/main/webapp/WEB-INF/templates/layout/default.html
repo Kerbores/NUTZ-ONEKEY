@@ -48,11 +48,11 @@
     <script src="${base}/resources/ace/js/html5shiv.js"></script>
     <script src="${base}/resources/ace/js/respond.js"></script>
     <![endif]-->
-    <style type="text/css">
-    .scroll-content{
-    	text-align: center;
-    }
-    </style>
+<style type="text/css">
+.scroll-content {
+	text-align: center;
+}
+</style>
 </head>
 
 <body class="no-skin">
@@ -64,8 +64,7 @@
 		<script type="text/javascript">
 			try {
 				ace.settings.check('navbar', 'fixed')
-			} catch (e) {
-			}
+			} catch (e) {}
 		</script>
 
 		<div class="navbar-container" id="navbar-container">
@@ -90,58 +89,8 @@
 			<!-- #section:basics/navbar.dropdown -->
 			<div class="navbar-buttons navbar-header pull-right" role="navigation">
 				<ul class="nav ace-nav">
-					
 
-					<script type="text/javascript">
-						$(function() {
-							loadAlarms();
-							setInterval(loadAlarms(), 100000);
-						})
-						function loadAlarms() {
-							$
-									.get(
-											getRootPath() + "/apm/alarm",
-											function(pager) {
-												$('.alarm-count').text(pager.count);
-												var panel = $('.alarm-items').empty();
-												$(pager.entities)
-														.each(
-																function(i, item) {
-																	var icon = 'comment';
-																	var color = 'pink';
-																	switch (item.type) {
-																	case 'MEM':
-																		icon = 'tasks';
-																		color = 'pink';
-																		break;
-																	case 'SLOW':
-																		icon = 'spinner';
-																		color = 'warning';
-																		break;
-																	case 'DISK':
-																		icon = 'file-code-o';
-																		color = 'purple';
-																		break;
-																	case 'CPU':
-																		icon = 'heartbeat';
-																		color = 'danger';
-																		break;
-																	case 'NETWORK':
-																		icon = 'internet-explorer';
-																		color = 'primary';
-																		break;
-																	default:
-																		icon = 'comment';
-																		color = 'pink';
-																	}
-																	panel
-																			.append('<li><a href="#"><div class="clearfix"><span class="pull-left" title="'+item.msg+'"> <i class="btn btn-xs no-hover btn-'+color+' fa fa-'+icon+'"></i> '
-																					+ item.ip + ' ' + item.alarmTime + '</span></div></a></li>')
-																})
-											}, 'json');
-						}
-					</script>
-					
+
 					<li class="purple"><a data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="ace-icon fa fa-bell icon-animated-bell"></i> <span
 							class="badge badge-important alarm-count">8</span>
 					</a>
@@ -165,19 +114,19 @@
 						<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
 							<li class="dropdown-header"><i class="ace-icon fa fa-cc-visa"></i> 支付宝扫码捐赠</li>
 
-							<li class="dropdown-content">
-								<img alt="" src="https://camo.githubusercontent.com/76b982576767d001170114431217cece53822dd1/687474703a2f2f6769742e6f736368696e612e6e65742f75706c6f6164732f7172636f64652f7172636f64655f616c697061795f31343637353232353037313033303531382e706e67">
+							<li class="dropdown-content"><img alt=""
+								src="https://camo.githubusercontent.com/76b982576767d001170114431217cece53822dd1/687474703a2f2f6769742e6f736368696e612e6e65742f75706c6f6164732f7172636f64652f7172636f64655f616c697061795f31343637353232353037313033303531382e706e67">
 							</li>
 						</ul></li>
-						
-						<li class="grey"><a data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="ace-icon fa fa-wechat"></i> <!-- span class="badge badge-grey">1000</span-->
+
+					<li class="grey"><a data-toggle="dropdown" class="dropdown-toggle" href="#"> <i class="ace-icon fa fa-wechat"></i> <!-- span class="badge badge-grey">1000</span-->
 					</a>
 
 						<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
 							<li class="dropdown-header"><i class="ace-icon fa fa-wechat"></i> 微信扫码捐赠</li>
 
-							<li class="dropdown-content">
-								<img alt="" src="https://camo.githubusercontent.com/e5a4fa058c1724ad036ffd936dceab856f06e325/687474703a2f2f6769742e6f736368696e612e6e65742f75706c6f6164732f7172636f64652f7172636f64655f7765636861745f31343637353232333534313033303531382e706e67">
+							<li class="dropdown-content"><img alt=""
+								src="https://camo.githubusercontent.com/e5a4fa058c1724ad036ffd936dceab856f06e325/687474703a2f2f6769742e6f736368696e612e6e65742f75706c6f6164732f7172636f64652f7172636f64655f7765636861745f31343637353232333534313033303531382e706e67">
 							</li>
 						</ul></li>
 
@@ -216,8 +165,7 @@
 		<script type="text/javascript">
 			try {
 				ace.settings.check('main-container', 'fixed')
-			} catch (e) {
-			}
+			} catch (e) {}
 		</script>
 
 		<!-- #section:basics/sidebar -->
@@ -225,8 +173,7 @@
 			<script type="text/javascript">
 				try {
 					ace.settings.check('sidebar', 'fixed')
-				} catch (e) {
-				}
+				} catch (e) {}
 			</script>
 
 			<div class="sidebar-shortcuts" id="sidebar-shortcuts">
@@ -309,8 +256,7 @@
 			<script type="text/javascript">
 				try {
 					ace.settings.check('sidebar', 'collapsed')
-				} catch (e) {
-				}
+				} catch (e) {}
 			</script>
 		</div>
 
@@ -322,8 +268,7 @@
 					<script type="text/javascript">
 						try {
 							ace.settings.check('breadcrumbs', 'fixed')
-						} catch (e) {
-						}
+						} catch (e) {}
 					</script>
 
 					<ul class="breadcrumb">
@@ -381,7 +326,7 @@
 								</div>
 							</div>
 							<!--#	} #-->
-							${layoutContent}
+							<input type="hidden" id="CSRFToken" value="${CSRFToken}" /> ${layoutContent}
 							<!-- PAGE CONTENT ENDS -->
 						</div>
 						<!-- /.col -->
@@ -471,6 +416,56 @@
 	<script src="${base}/resources/layer/extend/layer.ext.js"></script>
 	<script src="${base}/resources/js/common/common.js"></script>
 	<script src="${base}/resources/js/common/validation.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			loadAlarms();
+			setInterval(loadAlarms(), 100000);
+		})
+		function loadAlarms() {
+			$
+				.get(
+					getRootPath() + "/apm/alarm",
+					function(pager) {
+						$('.alarm-count').text(pager.count);
+						var panel = $('.alarm-items').empty();
+						$(pager.entities)
+							.each(
+								function(i, item) {
+									var icon = 'comment';
+									var color = 'pink';
+									switch (item.type) {
+									case 'MEM':
+										icon = 'tasks';
+										color = 'pink';
+										break;
+									case 'SLOW':
+										icon = 'spinner';
+										color = 'warning';
+										break;
+									case 'DISK':
+										icon = 'file-code-o';
+										color = 'purple';
+										break;
+									case 'CPU':
+										icon = 'heartbeat';
+										color = 'danger';
+										break;
+									case 'NETWORK':
+										icon = 'internet-explorer';
+										color = 'primary';
+										break;
+									default:
+										icon = 'comment';
+										color = 'pink';
+									}
+									panel
+										.append('<li><a href="#"><div class="clearfix"><span class="pull-left" title="' + item.msg + '"> <i class="btn btn-xs no-hover btn-' + color + ' fa fa-' + icon + '"></i> '
+											+ item.ip + ' ' + item.alarmTime + '</span></div></a></li>')
+								})
+					}, 'json');
+		}
+	</script>
+
 	<!-- script src="../docs/assets/js/rainbow.js"></script>
     <script src="../docs/assets/js/language/generic.js"></script>
     <script src="../docs/assets/js/language/html.js"></script>

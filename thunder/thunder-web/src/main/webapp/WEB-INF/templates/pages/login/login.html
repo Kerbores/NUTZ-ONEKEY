@@ -47,6 +47,7 @@
 </head>
 
 <body class="login-layout light-login">
+	<input type="hidden" id="CSRFToken" value="${CSRFToken}" />
 	<div class="main-container">
 		<div class="main-content">
 			<div class="row">
@@ -90,7 +91,7 @@
 												<div class="space"></div>
 
 												<div class="clearfix">
-													<label class="inline"> <input type="checkbox" class="ace" name="checkBox" id="rememberMeCheckBox" ${null == loginInfo.rememberMe!  ? 'checked' : '' } /> <span
+													<label class="inline"> <input type="checkbox" class="ace" name="checkBox" id="rememberMeCheckBox" ${null== loginInfo.rememberMe!  ? 'checked' : '' } /> <span
 														class="lbl"> 记住我</span>
 													</label>
 
