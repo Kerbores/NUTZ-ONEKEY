@@ -18,6 +18,8 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.mvc.Mvcs;
 
+import com.google.common.collect.Lists;
+
 import club.zhcs.thunder.bean.acl.Permission;
 import club.zhcs.thunder.bean.acl.Role;
 import club.zhcs.thunder.bean.acl.User;
@@ -28,8 +30,6 @@ import club.zhcs.thunder.biz.acl.RoleService;
 import club.zhcs.thunder.biz.acl.UserService;
 import club.zhcs.thunder.biz.log.LoginLogService;
 import club.zhcs.titans.utils.db.Result;
-
-import com.google.common.collect.Lists;
 
 /**
  * 
@@ -240,13 +240,13 @@ public class ShiroUserService {
 	 *
 	 * @param userName
 	 *            用户名
-	 * @param password
+	 * @param p
 	 *            密码
 	 * @return 登录结果
 	 *
 	 * @author 王贵源
 	 */
-	public Result login(String userName, String password) {
+	public Result login(String userName, String p) {
 		try {
 			User user = findByName(userName);
 			if (user == null) {
@@ -256,7 +256,7 @@ public class ShiroUserService {
 				return Result.fail("账户被锁定");
 			}
 			Subject currentUser = SecurityUtils.getSubject();
-			UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+			UsernamePasswordToken token = new UsernamePasswordToken(userName, p);
 			token.setRememberMe(true);
 			currentUser.login(token);
 			LoginLog log = new LoginLog();
