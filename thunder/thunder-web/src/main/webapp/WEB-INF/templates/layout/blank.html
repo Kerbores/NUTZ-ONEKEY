@@ -54,6 +54,7 @@ label small {
 </head>
 
 <body class="no-skin">
+	<input type="hidden" id="CSRFToken" value="${CSRFToken}" />
 	${layoutContent}
 	<script type="text/javascript">
 		window.jQuery || document.write("<script src='${base!}/resources/ace/js/jquery.js'>" + "<"+"/script>");
