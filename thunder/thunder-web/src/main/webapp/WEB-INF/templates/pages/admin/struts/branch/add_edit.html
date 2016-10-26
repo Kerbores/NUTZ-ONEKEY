@@ -19,7 +19,7 @@ layout("/layout/default.html",{"menu":["struts","branch_admin"],"breadcrumbs":[{
 									<button class="btn btn-sm btn-primary" type="button">
 										<i class="ace-icon fa fa-plus bigger-110"></i> 选择
 									</button>
-								</span> <input type="hidden" id="parentId" name="parentId" value="${obj.data.branch.parentId!}">
+								</span> <input type="text" class="hide" id="parentId" name="parentId" value="${obj.data.branch.parentId!}">
 							</div>
 						</div>
 					</div>
@@ -44,9 +44,9 @@ layout("/layout/default.html",{"menu":["struts","branch_admin"],"breadcrumbs":[{
 									<button class="btn btn-sm btn-primary" type="button">
 										<i class="ace-icon fa fa-map-marker bigger-110"></i>
 									</button>
-								</span> <input type="hidden" id="province" name="province" value="${obj.data.branch.province!}"> <input type="hidden" id="city" name="city"
-									value="${obj.data.branch.city!}"> <input type="hidden" id="district" name="district" value="${obj.data.branch.district!}"> <input type="hidden"
-									id="longitude" name="longitude" value="${obj.data.branch.longitude!}"> <input type="hidden" id="latitude" name="latitude" value="${obj.data.branch.latitude!}">
+								</span> <input type="text" class="hide" id="province" name="province" value="${obj.data.branch.province!}"> <input type="text" class="hide" id="city" name="city"
+									value="${obj.data.branch.city!}"> <input type="text" class="hide" id="district" name="district" value="${obj.data.branch.district!}"> <input type="text" class="hide"
+									id="longitude" name="longitude" value="${obj.data.branch.longitude!}"> <input type="text" class="hide" id="latitude" name="latitude" value="${obj.data.branch.latitude!}">
 							</div>
 						</div>
 					</div>
@@ -67,12 +67,12 @@ layout("/layout/default.html",{"menu":["struts","branch_admin"],"breadcrumbs":[{
 							</select>
 						</div>
 					</div>
-					<input type="hidden" id="id" name="id" value="${obj.data.branch.id!}">
+					<input type="text" class="hide" id="id" name="id" value="${obj.data.branch.id!}">
 					<div class="form-group ">
 						<label class="control-label col-lg-3"> 机构描述 : </label>
 						<div class="col-lg-9">
 							<textarea rows="25" class="form-control" name="content">${obj.data.branch.description!}</textarea>
-							<input type="hidden" name="description" id="description">
+							<input type="text" class="hide" name="description" id="description">
 						</div>
 					</div>
 					<div class="pull-right" style="margin-right: 45px">

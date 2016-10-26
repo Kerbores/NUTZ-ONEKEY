@@ -50,11 +50,11 @@ layout("/layout/default.html",{"menu":["acl","user_admin"],"breadcrumbs":[{"name
 							<input class="form-control" type="text" placeholder="请输入邮箱地址" name="email" data-type='email' data-error='请输入正确的邮箱地址' value="${obj.data.user.email!}">
 						</div>
 					</div>
-					<input type="hidden" id="id" name="id" value="${obj.data.user.id!}">
+					<input type="text" class="hide" id="id" name="id" value="${obj.data.user.id!}">
 					<div class="form-group ">
 						<label class="control-label col-lg-3"> 用户状态 : </label>
 						<div class="col-lg-9">
-							<input type="hidden" name="status" value="${obj.data.user.status!}"> <label> <input name="statusSwitch" class="ace ace-switch ace-switch-4 btn-flat"
+							<input type="text" class="hide" name="status" value="${obj.data.user.status!}"> <label> <input name="statusSwitch" class="ace ace-switch ace-switch-4 btn-flat"
 								type="checkbox" ${obj.data.user.status! == "ACTIVED" ? "checked":""} /> <span class="lbl"></span></label>
 						</div>
 					</div>

@@ -29,7 +29,7 @@ layout("/layout/default.html",{"menu":["settings","setting_list"],"breadcrumbs":
 							<textarea rows="10" id="description" name="description" class="form-control" placeholder="请填写配置说明">${obj.data.config.description!}</textarea>
 						</div>
 					</div>
-					<input type="hidden" id="id" name="id" value="${obj.data.config.id!}">
+					<input type="text" class="hide" id="id" name="id" value="${obj.data.config.id!}">
 					<div class="pull-right" style="margin-right: 45px">
 						<button type="button" class="btn btn-sm btn-primary" onclick="save(this)">
 							<i class="fa fa-save"></i> 提交

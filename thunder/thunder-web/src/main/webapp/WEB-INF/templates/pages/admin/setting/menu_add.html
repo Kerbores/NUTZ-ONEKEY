@@ -67,8 +67,8 @@ layout("/layout/blank.html",{}){
 					<textarea rows="10" class="form-control" placeholder="请填写菜单描述" name="description">${obj.data.menu.description!}</textarea>
 				</div>
 			</div>
-			<input type="hidden" name="client" value="${obj.data.client!}">
-			<input type="hidden" name="id" value="${obj.data.menu.id!}">
+			<input type="text" class="hide" name="client" value="${obj.data.client!}">
+			<input type="text" class="hide" name="id" value="${obj.data.menu.id!}">
 		</form>
 	</div>
 </div>
