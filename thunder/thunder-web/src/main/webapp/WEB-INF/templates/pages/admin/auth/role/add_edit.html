@@ -19,11 +19,11 @@ layout("/layout/default.html",{"menu":["acl","role_admin"],"breadcrumbs":[{"name
 					<div class="form-group ">
 						<label class="control-label col-lg-3">角色描述</label>
 						<div class="col-lg-9">
-							<input type="hidden" name="description" id="description">
+							<input type="text" class="hide" name="description" id="description">
 							<textarea rows="25" class="form-control" placeholder="请输入角色描述" name="content">${obj.data.role.description!}</textarea>
 						</div>
 					</div>
-					<input type="hidden" id="id" name="id" value="${obj.data.role.id!}">
+					<input type="text" class="hide" id="id" name="id" value="${obj.data.role.id!}">
 					<div class="pull-right" style="margin-right: 45px">
 						<button type="button" class="btn btn-sm btn-primary" onclick="save(this)">
 							<i class="fa fa-save"></i> 提交
