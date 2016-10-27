@@ -136,6 +136,7 @@ public class ThunderSetup implements Setup {
 			public void invoke(int index, InstalledRole role, int length) throws ExitLoop, ContinueLoop, LoopException {
 				if (roleService.fetch(Cnd.where("name", "=", role.getName())) == null) {
 					Role temp = new Role();
+					temp.setInstalled(true);
 					temp.setName(role.getName());
 					temp.setDescription(role.getDescription());
 					roleService.save(temp);

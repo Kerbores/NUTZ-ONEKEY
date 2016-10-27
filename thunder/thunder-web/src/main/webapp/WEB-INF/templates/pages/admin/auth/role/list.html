@@ -45,15 +45,15 @@ layout("/layout/default.html",{"menu":["acl","role_admin"],"breadcrumbs":[{"name
 					</a>
 					<!--# } #-->
 					<!--# if(role.installed){ #-->
-					<!--# if(hasPermission('role.edit')){ #-->
-					<a class="btn btn-xs btn-info" href='${base!}/role/edit/${role.id!}'> <i class="ace-icon fa fa-pencil bigger-120"></i>编辑
-					</a>
-					<!--# } #-->
-					<!--# if(hasPermission('role.delete')){ #-->
-					<button class="btn btn-xs btn-danger btn-delete" data-url='/role/delete' data-id='${role.id!}'>
-						<i class="ace-icon fa fa-trash-o bigger-120"></i>删除
-					</button>
-					<!--# } #-->
+						<!--# if(hasPermission('role.edit')){ #-->
+						<a class="btn btn-xs btn-info" href='${base!}/role/edit/${role.id!}'> <i class="ace-icon fa fa-pencil bigger-120"></i>编辑
+						</a>
+						<!--# } #-->
+						<!--# if(hasPermission('role.delete')){ #-->
+						<button class="btn btn-xs btn-danger btn-delete" data-url='/role/delete' data-id='${role.id!}'>
+							<i class="ace-icon fa fa-trash-o bigger-120"></i>删除
+						</button>
+						<!--# } #-->
 					<!--# } #-->
 				</div>
 			</td>

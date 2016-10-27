@@ -35,7 +35,7 @@ public class Role extends Entity {
 
 	@Column("r_installed")
 	@Comment("是否内置角色标识")
-	private boolean installed = true;
+	private boolean installed = false;
 
 	public String getDescription() {
 		return description;
