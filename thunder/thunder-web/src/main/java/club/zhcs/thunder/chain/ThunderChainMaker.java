@@ -24,7 +24,6 @@ import club.zhcs.thunder.ext.shiro.anno.ThunderRequiresRoles;
 import club.zhcs.thunder.ext.shiro.aop.ThunderPermissionAnnotationMethodInterceptor;
 import club.zhcs.thunder.ext.shiro.aop.ThunderRoleAnnotationMethodInterceptor;
 import club.zhcs.titans.nutz.chain.KerboresActionChainMaker;
-import club.zhcs.titans.nutz.processor.CSRFProtectPostProcessor;
 import club.zhcs.titans.nutz.processor.CSRFProtectPreProcessor;
 import club.zhcs.titans.nutz.processor.KerboresFailProcessor;
 import club.zhcs.titans.nutz.processor.XSSProtectProcessor;
@@ -62,8 +61,9 @@ public class ThunderChainMaker extends KerboresActionChainMaker {
 		addBefore(list, ActionFiltersProcessor.class, new WxUserInjectProcessor());
 		addBefore(list, ActionFiltersProcessor.class, new WxJsSdkConfigProcessor());
 		addBefore(list, ActionFiltersProcessor.class, new XSSProtectProcessor());
+		// addBefore(list, ActionFiltersProcessor.class, new
+		// CSRFProtectPostProcessor());
 		addBefore(list, ActionFiltersProcessor.class, new CSRFProtectPreProcessor());
-		addBefore(list, ActionFiltersProcessor.class, new CSRFProtectPostProcessor());
 
 		Processor error = new KerboresFailProcessor();
 		Lang.each(list, new Each<Processor>() {
