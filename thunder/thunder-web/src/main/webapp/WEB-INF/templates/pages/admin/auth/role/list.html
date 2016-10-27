@@ -44,7 +44,7 @@ layout("/layout/default.html",{"menu":["acl","role_admin"],"breadcrumbs":[{"name
 					<a class="btn btn-xs btn-default" href='${base!}/role/grant/${role.id!}'> <i class="ace-icon fa fa-bolt  bigger-120"></i>设置权限
 					</a>
 					<!--# } #-->
-					<!--# if(role.installed){ #-->
+					<!--# if(!role.installed){ #-->
 						<!--# if(hasPermission('role.edit')){ #-->
 						<a class="btn btn-xs btn-info" href='${base!}/role/edit/${role.id!}'> <i class="ace-icon fa fa-pencil bigger-120"></i>编辑
 						</a>
