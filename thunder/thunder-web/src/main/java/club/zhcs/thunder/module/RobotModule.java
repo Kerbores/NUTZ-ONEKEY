@@ -36,6 +36,9 @@ public class RobotModule extends AbstractBaseModule {
 
 		log.debug(data);
 
+		if (!data.getString("Message").startsWith("#")) {
+			return "";
+		}
 		String key = data.getString("Message").substring(1);
 		Response resp = Http.get("http://nutz.cn/yvr/search?q=" + key + "&format=json");
 		final StringBuilder msgbBuilder = new StringBuilder("请关注以下帖子内容:\r\n");
