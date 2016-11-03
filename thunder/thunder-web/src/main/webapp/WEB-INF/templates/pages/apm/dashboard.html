@@ -87,9 +87,9 @@ layout("/layout/default.html",{"menu":["apm","apm"],"breadcrumbs":[{"name":"告�
 
 								<td>达到 <input type="text" id="cpuAlarmPercent" class="input-sm spinner" value="${obj.data.config['cpu.alarm.percent']}" /> 发送 <select multiple id="cpuAlarmTypes"
 									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL"${alarmType(obj.data.config['cpu.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
-										<option value="SMS"${alarmType(obj.data.config['cpu.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
-										<option value="WECHAT"${alarmType(obj.data.config['cpu.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
+										<option value="EMAIL" ${alarmType(obj.data.config['cpu.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS" ${alarmType(obj.data.config['cpu.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT" ${alarmType(obj.data.config['cpu.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary" onclick="setAlarm('cpu')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
@@ -104,9 +104,9 @@ layout("/layout/default.html",{"menu":["apm","apm"],"breadcrumbs":[{"name":"告�
 
 								<td>达到 <input type="text" id="jvmAlarmPercent" class="input-sm spinner" value="${obj.data.config['jvm.alarm.percent']}" /> 发送 <select multiple="" id="jvmAlarmTypes"
 									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL"${alarmType(obj.data.config['jvm.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
-										<option value="SMS"${alarmType(obj.data.config['jvm.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
-										<option value="WECHAT"${alarmType(obj.data.config['jvm.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
+										<option value="EMAIL" ${alarmType(obj.data.config['jvm.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS" ${alarmType(obj.data.config['jvm.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT" ${alarmType(obj.data.config['jvm.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary" onclick="setAlarm('jvm')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
@@ -121,9 +121,9 @@ layout("/layout/default.html",{"menu":["apm","apm"],"breadcrumbs":[{"name":"告�
 
 								<td>达到 <input type="text" id="ramAlarmPercent" class="input-sm spinner" value="${obj.data.config['ram.alarm.percent']}" /> 发送 <select multiple="" id="ramAlarmTypes"
 									class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL"${alarmType(obj.data.config['ram.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
-										<option value="SMS"${alarmType(obj.data.config['ram.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
-										<option value="WECHAT"${alarmType(obj.data.config['ram.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
+										<option value="EMAIL" ${alarmType(obj.data.config['ram.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS" ${alarmType(obj.data.config['ram.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT" ${alarmType(obj.data.config['ram.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary" onclick="setAlarm('ram')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
@@ -138,9 +138,9 @@ layout("/layout/default.html",{"menu":["apm","apm"],"breadcrumbs":[{"name":"告�
 
 								<td>达到 <input type="text" id="swapAlarmPercent" class="input-sm spinner" value="${obj.data.config['swap.alarm.percent']}" /> 发送 <select multiple=""
 									id="swapAlarmTypes" class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL"${alarmType(obj.data.config['swap.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
-										<option value="SMS"${alarmType(obj.data.config['swap.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
-										<option value="WECHAT"${alarmType(obj.data.config['swap.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
+										<option value="EMAIL" ${alarmType(obj.data.config['swap.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS" ${alarmType(obj.data.config['swap.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT" ${alarmType(obj.data.config['swap.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary" onclick="setAlarm('swap')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
@@ -155,9 +155,9 @@ layout("/layout/default.html",{"menu":["apm","apm"],"breadcrumbs":[{"name":"告�
 
 								<td>达到 <input type="text" id="diskAlarmPercent" class="input-sm spinner" value="${obj.data.config['disk.alarm.percent']}" /> 发送 <select multiple=""
 									id="diskAlarmTypes" class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL"${alarmType(obj.data.config['disk.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
-										<option value="SMS"${alarmType(obj.data.config['disk.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
-										<option value="WECHAT"${alarmType(obj.data.config['disk.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
+										<option value="EMAIL" ${alarmType(obj.data.config['disk.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS" ${alarmType(obj.data.config['disk.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT" ${alarmType(obj.data.config['disk.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary" onclick="setAlarm('disk')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
@@ -172,9 +172,9 @@ layout("/layout/default.html",{"menu":["apm","apm"],"breadcrumbs":[{"name":"告�
 
 								<td>达到 <input type="text" id="networkAlarmPercent" class="input-sm spinner" value="${obj.data.config['network.alarm.percent']}" /> 发送 <select multiple=""
 									id="networkAlarmTypes" class="chosen-select form-control tag-input-style" data-placeholder="选择告警方式">
-										<option value="EMAIL"${alarmType(obj.data.config['network.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
-										<option value="SMS"${alarmType(obj.data.config['network.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
-										<option value="WECHAT"${alarmType(obj.data.config['network.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
+										<option value="EMAIL" ${alarmType(obj.data.config['network.alarm.types'],'EMAIL') ?  'selected' : ''}>邮件</option>
+										<option value="SMS" ${alarmType(obj.data.config['network.alarm.types'],'SMS') ?  'selected' : ''}>短信</option>
+										<option value="WECHAT" ${alarmType(obj.data.config['network.alarm.types'],'WECHAT') ?  'selected' : ''}>微信</option>
 								</select> 告警
 									<button class="btn btn-sm btn-primary" onclick="setAlarm('network')">
 										<i class="ace-icon fa fa-cogs align-top"></i> 设置
