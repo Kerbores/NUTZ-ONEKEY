@@ -73,6 +73,16 @@ public class ThunderSetup implements Setup {
 
 		Ioc ioc = nc.getIoc();
 
+		// SmartQQService smartQQService = ioc.get(SmartQQService.class);
+		//
+		// new Thread(new Runnable() {
+		//
+		// @Override
+		// public void run() {
+		// smartQQService.initQQClient();
+		// }
+		// }).start();
+
 		final PropertiesProxy p = ioc.get(PropertiesProxy.class, "config");
 		nc.setAttribute("rs", p.get("app-rs", ""));
 		nc.setAttribute("appnm", p.get("app-name", "Thunder"));
