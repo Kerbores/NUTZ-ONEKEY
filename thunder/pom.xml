@@ -250,13 +250,34 @@
 		<dependency>
 			<groupId>org.nutz</groupId>
 			<artifactId>nutz-web</artifactId>
-			<version>1.r.57</version>
+			<version>1.r.58.r2</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-jsp -->
 
+		<!-- https://mvnrepository.com/artifact/org.activiti/activiti-engine -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activity.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-bpmn-layout</artifactId>
+			<version>${activity.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.nutz</groupId>
+			<artifactId>nutz-plugins-webqq</artifactId>
+			<version>1.r.57</version>
+		</dependency>
+
+
 	</dependencies>
 	<properties>
 		<nutz.plugins.version>1.r.58</nutz.plugins.version>
+		<activity.version>5.21.0</activity.version>
 	</properties>
 </project>

@@ -49,7 +49,7 @@ public class RobotModule extends AbstractBaseModule {
 				@Override
 				public void invoke(int arg0, NutMap suggestion, int arg2) throws ExitLoop, ContinueLoop, LoopException {
 					if (Strings.equals(suggestion.getString("type"), "ask")) {
-						msgbBuilder.append(suggestion.getString("title") + " : http://nutz.cn/yvr/t/" + suggestion.getString("contentId") + "\r\n");
+						msgbBuilder.append(suggestion.getString("title") + " : https://nutz.cn/yvr/t/" + suggestion.getString("contentId") + "\r\n");
 					}
 				}
 			});

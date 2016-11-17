@@ -1,5 +1,6 @@
 package club.zhcs.thunder.module;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -105,6 +106,13 @@ public class MainModule extends AbstractBaseModule {
 	@Filters
 	public Result dashboard() {
 		return apmTask.data();
+	}
+
+	@At
+	@Filters
+	@Ok("raw:png")
+	public File qqLogin() {
+		return new File("qrcode.png");
 	}
 
 	@At
