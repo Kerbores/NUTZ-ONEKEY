@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.nutz.dao.Cnd;
 import org.nutz.http.Header;
-import org.nutz.http.Http;
 import org.nutz.http.Request;
 import org.nutz.http.Request.METHOD;
 import org.nutz.http.Response;
@@ -161,10 +160,8 @@ public class WechatEventModule extends AbstractBaseModule {
 		@Override
 		public WxOutMsg voice(WxInMsg msg) {
 			try {
-				NutMap m = BaiduDog.send(
-						"http://apis.baidu.com/apistore/weatherservice/cityname?cityname=" + URLEncoder.encode(msg.getRecognition().replace("。", ""), "UTF-8"),
-						NutMap.NEW(),
-						METHOD.GET);
+				NutMap m = BaiduDog.send("http://apis.baidu.com/apistore/weatherservice/cityname?cityname=" + URLEncoder.encode(msg.getRecognition().replace("。", ""), "UTF-8"),
+						NutMap.NEW(), METHOD.GET);
 				return Wxs.respText(msg.getFromUserName(), Json.toJson(m, JsonFormat.nice()));
 			} catch (UnsupportedEncodingException e) {
 				log.error(e);
@@ -192,11 +189,6 @@ public class WechatEventModule extends AbstractBaseModule {
 	@Override
 	public String _getNameSpace() {
 		return null;
-	}
-
-	public static void main(String[] args) {
-		String info = Http.post2("https://nutz.cn/s/api/create/txt?title=Nutz-onekey短点儿", NutMap.NEW().addv("data", "aaa"), 5000).getContent();
-		System.err.println(info);
 	}
 
 	/**
