@@ -12,7 +12,6 @@ import org.nutz.lang.Each;
 import org.nutz.lang.ExitLoop;
 import org.nutz.lang.Lang;
 import org.nutz.lang.LoopException;
-import org.nutz.lang.util.NutMap;
 
 import club.zhcs.thunder.bean.struts.Branch;
 import club.zhcs.titans.utils.biz.BaseService;
@@ -74,18 +73,18 @@ public class BranchService extends BaseService<Branch> {
 	/**
 	 * @return
 	 */
-	public List<NutMap> loadTop() {
+	public List<Record> loadTop() {
 		Sql sql = dao().sqls().create("load.top.branchs");
-		return searchAsMap(sql);
+		return search(sql);
 	}
 
 	/**
 	 * @param id
 	 * @return
 	 */
-	public List<NutMap> nodes(int id) {
+	public List<Record> nodes(int id) {
 		Sql sql = dao().sqls().create("load.branchs.by.id");
 		sql.params().set("id", id);
-		return searchAsMap(sql);
+		return search(sql);
 	}
 }

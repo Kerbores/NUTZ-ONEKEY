@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.shiro.authz.annotation.Logical;
 import org.nutz.dao.Cnd;
+import org.nutz.dao.entity.Record;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.json.Json;
-import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.GET;
 import org.nutz.mvc.annotation.Ok;
@@ -107,7 +107,7 @@ public class BranchModule extends AbstractBaseModule {
 
 	@At
 	@ThunderRequiresPermissions(value = { InstallPermission.STRUTS_ADD, InstallPermission.STRUTS_EDIT, InstallPermission.STRUTS_LIST }, logical = Logical.OR)
-	public List<NutMap> nodes(@Param("id") int id) {
+	public List<Record> nodes(@Param("id") int id) {
 		return branchService.nodes(id);
 	}
 
