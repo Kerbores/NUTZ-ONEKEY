@@ -275,6 +275,14 @@
 		</dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.193</version>
+		</dependency>
+
+
 	</dependencies>
 	<properties>
 		<nutz.plugins.version>1.r.58</nutz.plugins.version>
