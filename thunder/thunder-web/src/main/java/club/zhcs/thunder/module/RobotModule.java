@@ -41,7 +41,7 @@ public class RobotModule extends AbstractBaseModule {
 		}
 		String key = data.getString("Message").substring(1);
 		Response resp = Http.get("http://nutz.cn/yvr/search?q=" + key + "&format=json");
-		final StringBuilder msgbBuilder = new StringBuilder("请关注以下帖子内容:\r\n");
+		final StringBuilder msgbBuilder = new StringBuilder(String.format("@%s(%s)请关注以下帖子内容:\r\n", data.getString("SenderName"), data.getString("Sender")));
 		if (resp.isOK()) {
 			NutMap suggestions = Lang.map(resp.getContent());
 			Lang.each(suggestions.getList("suggestions", NutMap.class), new Each<NutMap>() {
