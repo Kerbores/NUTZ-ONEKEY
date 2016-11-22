@@ -1,5 +1,6 @@
 package club.zhcs.thunder;
 
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 import org.apache.log4j.PropertyConfigurator;
@@ -21,6 +22,7 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
+import org.nutz.repo.Base64;
 import org.nutz.weixin.impl.WxApi2Impl;
 
 import club.zhcs.thunder.bean.acl.Permission;
@@ -44,6 +46,10 @@ import net.sf.ehcache.CacheManager;
 
 public class ThunderSetup implements Setup {
 	private static final Log log = Logs.get();
+
+	public static void main(String[] args) throws UnsupportedEncodingException {
+		System.err.println(Base64.encodeToString("我是中文".getBytes("UTF8"), false));
+	}
 
 	Role admin;
 
