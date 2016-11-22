@@ -1,5 +1,8 @@
 package club.zhcs.thunder.module;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.nutz.http.Http;
@@ -32,7 +35,7 @@ public class RobotModule extends AbstractBaseModule {
 	@Ok("raw")
 	@Fail("void")
 	@Filters
-	public String msg(@Param("..") NutMap data, HttpServletRequest req) {
+	public String msg(@Param("..") NutMap data, HttpServletRequest req) throws UnsupportedEncodingException {
 
 		log.debug(data);
 
@@ -41,7 +44,7 @@ public class RobotModule extends AbstractBaseModule {
 		}
 		String key = data.getString("Message").substring(1);
 		Response resp = Http.get("http://nutz.cn/yvr/search?q=" + key + "&format=json");
-		final StringBuilder msgbBuilder = new StringBuilder(String.format("@%s(%s)请关注以下帖子内容:\r\n", data.getString("SenderName"), data.getString("Sender")));
+		final StringBuilder msgbBuilder = new StringBuilder(String.format("@%s(%s) 请关注以下帖子内容:\r\n", data.getString("SenderName"), data.getString("Sender")));
 		if (resp.isOK()) {
 			NutMap suggestions = Lang.map(resp.getContent());
 			Lang.each(suggestions.getList("suggestions", NutMap.class), new Each<NutMap>() {
@@ -53,7 +56,7 @@ public class RobotModule extends AbstractBaseModule {
 					}
 				}
 			});
-			msgbBuilder.append("论坛完整检索结果: https://nutz.cn/yvr/search?q=" + key);
+			msgbBuilder.append("论坛完整检索结果: https://nutz.cn/yvr/search?q=" + URLEncoder.encode(key, "UTF8"));
 			return msgbBuilder.toString();
 		}
 		return "nutz.cn 正在打盹,请稍后再试!";
