@@ -10,7 +10,7 @@ SELECT
 FROM
 	t_branch
 WHERE
-	sub_parent_id <= 1
+	sub_parent_id = 0
 /*
 load.branchs.by.id
 */

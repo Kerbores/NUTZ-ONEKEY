@@ -36,7 +36,8 @@
 			}
 		}
 	};
-	var zNodes = ${obj.data.topBranchs!};
+	var zNodes =${obj.data.topBranchs!};
+	console.log(zNodes);
 	$(function() {
 		zTreeObj = $.fn.zTree.init($("#branchSelector"), setting, zNodes);
 	});
