@@ -7,11 +7,19 @@ import org.nutz.dao.Cnd;
 import org.nutz.dao.entity.Record;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.json.Json;
+import org.nutz.lang.ContinueLoop;
+import org.nutz.lang.Each;
+import org.nutz.lang.ExitLoop;
+import org.nutz.lang.Lang;
+import org.nutz.lang.LoopException;
+import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.GET;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.POST;
 import org.nutz.mvc.annotation.Param;
+
+import com.google.common.collect.Lists;
 
 import club.zhcs.thunder.aop.SystemLog;
 import club.zhcs.thunder.bean.struts.Branch;
@@ -107,15 +115,35 @@ public class BranchModule extends AbstractBaseModule {
 
 	@At
 	@ThunderRequiresPermissions(value = { InstallPermission.STRUTS_ADD, InstallPermission.STRUTS_EDIT, InstallPermission.STRUTS_LIST }, logical = Logical.OR)
-	public List<Record> nodes(@Param("id") int id) {
-		return branchService.nodes(id);
+	public List<NutMap> nodes(@Param("id") int id) {
+		List<NutMap> data = Lists.newArrayList();
+		Lang.each(branchService.nodes(id), new Each<Record>() {
+
+			@Override
+			public void invoke(int paramInt1, Record r, int paramInt2)
+					throws ExitLoop, ContinueLoop, LoopException {
+				NutMap temp = NutMap.WRAP(r).addv("pId", r.get("pid")).addv("isParent", r.get("isparent"));
+				data.add(temp);
+			}
+		});
+		return data;
 	}
 
 	@At
 	@Ok("beetl:pages/admin/struts/branch/selector.html")
 	@ThunderRequiresPermissions(value = { InstallPermission.STRUTS_ADD, InstallPermission.STRUTS_EDIT }, logical = Logical.OR)
 	public Result selector() {
-		return Result.success().addData("topBranchs", Json.toJson(branchService.loadTop()));
+		List<NutMap> data = Lists.newArrayList();
+		Lang.each(branchService.loadTop(), new Each<Record>() {
+
+			@Override
+			public void invoke(int paramInt1, Record r, int paramInt2)
+					throws ExitLoop, ContinueLoop, LoopException {
+				NutMap temp = NutMap.WRAP(r).addv("pId", r.get("pid")).addv("isParent", r.get("isparent"));
+				data.add(temp);
+			}
+		});
+		return Result.success().addData("topBranchs", Json.toJson(data));
 	}
 
 }
