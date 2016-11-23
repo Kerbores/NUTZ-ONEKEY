@@ -55,10 +55,11 @@ var ioc = {
 			},
 			filters : {
 				java : "$db.get('db-filters')"
-			},
+			}
+			/*,
 			connectionProperties : {
 				java : "$db.get('connectionProperties')"
-			}
+			}*/
 		}
 	},
 	sqlManeger : {
