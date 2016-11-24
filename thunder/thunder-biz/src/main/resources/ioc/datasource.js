@@ -3,7 +3,7 @@ var ioc = {
 		type : "org.nutz.ioc.impl.PropertiesProxy",
 		fields : {
 			ignoreResourceNotFound : true,
-			paths : [ 'datasource', '/var/datasource', 'C:/datasource' ],
+			paths : [ 'datasource', '~/config/datasource.properties'],
 			utf8 : false
 		}
 	},

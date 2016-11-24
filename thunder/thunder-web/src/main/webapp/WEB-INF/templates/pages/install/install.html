@@ -1,0 +1,235 @@
+<!--# layout("/layout/blank.html",{}){  #-->
+<style>
+<!--
+.error{
+	color: #f00;
+}
+-->
+</style>
+<div class="main-container">
+	<div class="row">
+		<div class="col-md-offset-1 col-md-10">
+			<div class="widget-box">
+				<div class="widget-header widget-header-blue widget-header-flat">
+					<h4 class="widget-title lighter">${config('application.name')
+						} 安装向导</h4>
+
+					<div class="widget-toolbar"></div>
+				</div>
+
+				<div class="widget-body">
+					<div class="widget-main">
+						<div id="fuelux-wizard-container" class="wizard-container">
+							<div>
+								<ul class="steps">
+									<li data-step="1" class="active"><span class="step">1</span>
+										<span class="title">数据源设置</span></li>
+
+									<li data-step="2"><span class="step">2</span> <span
+										class="title">数据初始化</span></li>
+
+									<li data-step="3"><span class="step">3</span> <span
+										class="title">完成安装</span></li>
+								</ul>
+
+							</div>
+
+							<hr />
+
+							<div class="step-content pos-rel">
+								<div class="step-pane active" data-step="1">
+									<div class="row">
+										<div class="col-md-8 col-md-offset-2">
+											<form class="form-horizontal" role="form" id="merchants-from">
+
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right"
+														for="form-field-1-1"> 数据库类型 </label>
+
+													<div class="col-sm-9">
+														<select class="form-control" name="db">
+															<option>请选择数据库类型</option>
+															<optgroup label="--------">
+																<option>H2</option>
+																<option>MYSQL</option>
+																<option>ORACLE</option>
+															</optgroup>
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right"
+														for="form-field-1-1"> jdbc 连接 </label>
+
+													<div class="col-sm-9">
+														<input type="text" name="jdbc" placeholder="请输入 jdbc 连接"
+															class="form-control" data-type='required'
+															data-error='请输入 jdbc 连接' />
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right"
+														for="form-field-1-1"> 数据库用户 </label>
+
+													<div class="col-sm-9">
+														<input type="text" name="user" placeholder="请输入数据库用户"
+															class="form-control" data-type='required'
+															data-error='请输入数据库用户' />
+													</div>
+												</div>
+
+												<div class="form-group">
+													<label class="col-sm-3 control-label no-padding-right"
+														for="form-field-1-1"> 数据库密码 </label>
+
+													<div class="col-sm-9">
+														<input type="password" name="password"
+															placeholder="请输入数据库密码" class="form-control"
+															data-type='required' data-error='请输入数据库密码' />
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+
+								<div class="step-pane" data-step="2">
+									<div class="row">
+										<div class="col-md-8 col-md-offset-2">
+											<button class="btn btn-sm btn-primary" id="initData">
+												初始化</button>
+
+											<div class="msg"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="step-pane" data-step="3">
+									<div class="row">
+										<div class="col-md-8 col-md-offset-2 center">
+											<div class="alert alert-info">
+												<button type="button" class="close" data-dismiss="alert">
+													<i class="ace-icon fa fa-times"></i>
+												</button>
+												<strong>提示:</strong>
+												安装成功点击完成之后尽情享用吧!!<br>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+						<hr />
+						<div class="wizard-actions">
+							<button class="btn btn-prev">
+								<i class="ace-icon fa fa-arrow-left"></i> 上一步
+							</button>
+
+							<button class="btn btn-success btn-next" data-last="完成">
+								下一步 <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+							</button>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /.main-container -->
+<script src="${base}/resources/ace/js/fuelux/fuelux.wizard.js"></script>
+<script type="text/javascript">
+<!--
+var status = 0;
+$(function() {
+    $('.wizard-container').ace_wizard({
+        //buttons: '.wizard-actions:eq(0)'
+    }).on('actionclicked.fu.wizard',
+    function(e, info) {
+        //切换事件
+        if (info.step == 2 && info.direction == 'next') { //第三
+            if (status != 1) {
+                console.log('d');
+                e.preventDefault();
+            }
+        }
+        if (info.step == 1) { //第一个表单
+            if ($('#merchants-from').validation()) {
+                $.ajaxSetup({
+                    async: false
+                });
+                $.post(getRootPath() + '/install', $('#merchants-from').serialize(),
+                function(result) {
+                    if (result.operationState != 'SUCCESS') {
+                        layer.alert(result.data.reason, {
+                            title: '操作失败'
+                        });
+                        e.preventDefault();
+                    }
+                },
+                'json');
+                $.ajaxSetup({
+                    async: true
+                });
+            } else {
+                e.preventDefault();
+            }
+        }
+    }).on('finished.fu.wizard',
+    function(e) {
+        //完成事件
+        $.post('${base!}/finish', {},
+        function(result) {
+            if (result.operationState == 'SUCCESS') {
+                layer.open({
+                    title: '配置完成',
+                    content: '恭喜你,安装完成!',
+                    yes:function(){
+                    	location.href = '${base!}';
+                    }
+                });
+            } else {
+                layer.open({
+                    title: '配置失败',
+                    content: '修改安装标识失败!'
+                });
+            }
+        },
+        'json')
+    }).on('stepclick.fu.wizard',
+    function(e) {
+        //e.preventDefault();//this will prevent clicking and selecting steps
+    });
+
+    $('#initData').on('click',
+    function() {
+        $('.msg').append('<h6>开始切换数据源....</h6>');
+        $.post('${base!}/switch', {},
+        function(result) {
+            if (result.operationState == 'SUCCESS') {
+                $('.msg').append('<h6>数据源切换成功....</h6>');
+                $('.msg').append('<h6>开始初始化数据....</h6>');
+                $.post('${base!}/init', {},
+                function(result) {
+                    if (result.operationState == 'SUCCESS') {
+                        $('.msg').append('<h6> 数据初始化成功....</h6>');
+                        status = 1;
+                    } else {
+                        $('.msg').append('<h6 class="error">数据初始化失败!!!</h6>');
+                    }
+                },
+                'json')
+            } else {
+                $('.msg').append('<h6 class="error">数据源切换失败!!!</h6>');
+            }
+        },
+        'json');
+    })
+})
+//-->
+</script>
+<!--# } #-->
