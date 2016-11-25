@@ -35,7 +35,10 @@ public class WxUserInjectProcessor extends AbstractProcessor {
 
 	@Override
 	public void process(ActionContext ac) throws Throwable {
-
+		if (!Mvcs.getIoc().get(PropertiesProxy.class,"config") .getBoolean("install-flag")) {
+			doNext(ac);
+			return;
+		}
 		WxApi2Impl api = ac.getIoc().get(WxApi2Impl.class, "wxApi");
 
 		NutzerService nutzerService = ac.getIoc().get(NutzerService.class);

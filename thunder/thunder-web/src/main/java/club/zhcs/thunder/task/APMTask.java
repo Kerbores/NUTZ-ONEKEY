@@ -31,6 +31,8 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import com.google.common.collect.Lists;
+
 import club.zhcs.thunder.bean.acl.User;
 import club.zhcs.thunder.bean.apm.APMAlarm;
 import club.zhcs.thunder.bean.apm.APMAlarm.Type;
@@ -43,8 +45,6 @@ import club.zhcs.titans.gather.NetInterfaceGather;
 import club.zhcs.titans.utils.common.Ips;
 import club.zhcs.titans.utils.common.Numbers;
 import club.zhcs.titans.utils.db.Result;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author Kerbores(kerbores@gmail.com)
@@ -85,8 +85,9 @@ public class APMTask implements Job {
 
 	public Result data() {
 
-		return Result.success().addData("timePoints", timePoints).addData("cpuUsages", cpuUsages).addData("ramUsages", ramUsages).addData("jvmUsages", jvmUsages)
-				.addData("swapUsages", swapUsages).addData("niUsages", niUsages).addData("noUsages", noUsages);
+		return Result.success().addData("timePoints", timePoints).addData("cpuUsages", cpuUsages)
+				.addData("ramUsages", ramUsages).addData("jvmUsages", jvmUsages).addData("swapUsages", swapUsages)
+				.addData("niUsages", niUsages).addData("noUsages", noUsages);
 	}
 
 	/**
@@ -123,6 +124,9 @@ public class APMTask implements Job {
 	List<User> listeners = Lists.newArrayList();
 
 	public void init() {
+		if (!config.getBoolean("install-flag")) {
+			return;
+		}
 		String listener = config.get("alarm.listener");
 		Lang.each(listener.split(","), new Each<String>() {
 
@@ -160,7 +164,9 @@ public class APMTask implements Job {
 	 */
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-
+		if (!config.getBoolean("install-flag")) {
+			return;
+		}
 		try {
 			Sigar sigar = new Sigar();
 			MemoryGather memory = MemoryGather.gather(sigar);
@@ -174,7 +180,8 @@ public class APMTask implements Job {
 				alarm(Type.MEM, "内存警告", "RAM", ramUsage, config.getInt("ram.alarm.percent"));
 			}
 			if (memory.getSwap().getTotal() != 0) {
-				if ((swapUsage = memory.getSwap().getUsed() * 100 / memory.getSwap().getTotal()) > config.getInt("swap.alarm.percent")) {
+				if ((swapUsage = memory.getSwap().getUsed() * 100 / memory.getSwap().getTotal()) > config
+						.getInt("swap.alarm.percent")) {
 					alarm(Type.MEM, "内存警告", "SWAP", swapUsage, config.getInt("swap.alarm.percent"));
 				}
 			}
@@ -191,8 +198,10 @@ public class APMTask implements Job {
 
 			List<DISKGather> disks = DISKGather.gather(sigar);
 			for (DISKGather disk : disks) {
-				if (disk.getStat() != null && disk.getStat().getUsePercent() * 100 > config.getInt("disk.alarm.percent")) {
-					alarm(Type.DISK, "磁盘警告", "DISK", disk.getStat().getUsePercent(), config.getInt("disk.alarm.percent"));
+				if (disk.getStat() != null
+						&& disk.getStat().getUsePercent() * 100 > config.getInt("disk.alarm.percent")) {
+					alarm(Type.DISK, "磁盘警告", "DISK", disk.getStat().getUsePercent(),
+							config.getInt("disk.alarm.percent"));
 				}
 			}
 
@@ -297,7 +306,8 @@ public class APMTask implements Job {
 				if (user == null) {
 					return;
 				}
-				WxResp resp = api.template_send(user.getOpenid(), "MnNkTihmclGa4OAFelkMwAwxUiKu41hsn2l9fHxLRdA", null, data);
+				WxResp resp = api.template_send(user.getOpenid(), "MnNkTihmclGa4OAFelkMwAwxUiKu41hsn2l9fHxLRdA", null,
+						data);
 				LOG.debug(resp);
 			}
 		});
