@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.beetl.ext.nutz.BeetlViewMaker;
+import org.nutz.dao.Dao;
 import org.nutz.integration.shiro.ShiroSessionProvider;
 import org.nutz.ioc.impl.PropertiesProxy;
 import org.nutz.ioc.loader.annotation.Inject;
@@ -20,9 +21,11 @@ import org.nutz.mvc.annotation.By;
 import org.nutz.mvc.annotation.ChainBy;
 import org.nutz.mvc.annotation.Fail;
 import org.nutz.mvc.annotation.Filters;
+import org.nutz.mvc.annotation.GET;
 import org.nutz.mvc.annotation.IocBy;
 import org.nutz.mvc.annotation.Modules;
 import org.nutz.mvc.annotation.Ok;
+import org.nutz.mvc.annotation.POST;
 import org.nutz.mvc.annotation.Param;
 import org.nutz.mvc.annotation.SessionBy;
 import org.nutz.mvc.annotation.SetupBy;
@@ -69,7 +72,8 @@ import club.zhcs.titans.utils.db.Result;
 @ChainBy(type = ThunderChainMaker.class, args = {})
 @Filters({ @By(type = CheckSession.class, args = { SessionKeys.USER_KEY, "/" }) })
 @Api(name = "Thunder nop api", description = "nop开放平台接口示例", match = ApiMatchMode.NONE)
-@IocBy(type = ComboIocProvider.class, args = { "*anno", "club.zhcs", "*tx", "*js", "ioc", "*async", "*quartz", "quartz", "*sigar", "sigar" })
+@IocBy(type = ComboIocProvider.class, args = { "*anno", "club.zhcs", "*tx", "*js", "ioc", "*async", "*quartz", "quartz",
+		"*sigar", "sigar" })
 public class MainModule extends AbstractBaseModule {
 
 	private @Inject RoleService roleService;
@@ -94,6 +98,15 @@ public class MainModule extends AbstractBaseModule {
 	@Override
 	public String _getNameSpace() {
 		return "main";
+	}
+
+	@Inject
+	Dao dao;
+
+	@At
+	@Filters
+	public Result db() {
+		return Result.success().addData("db", dao.meta());
 	}
 
 	@At
@@ -121,6 +134,20 @@ public class MainModule extends AbstractBaseModule {
 		return Result.success().addData("msg", "Hello nutz-thunder!").addData("url", request.getRequestURL());
 	}
 
+	@At
+	@GET
+	@Filters
+	@Ok("beetl:pages/install/install.html")
+	public Result install() {
+		return Result.success().setTitle("安装!");
+	}
+
+	@At
+	@Filters
+	public Result a() {
+		return Result.success();
+	}
+
 	@At("/")
 	@Filters
 	@Ok("beetl:pages/login/login.html")
@@ -145,7 +172,8 @@ public class MainModule extends AbstractBaseModule {
 	@At
 	@Filters
 	public Result testClassPath() {
-		return Result.success().addData("path", System.getProperty("java.library.path").split(":")).addData("classpath", System.getProperty("java.class.path").split(":"));
+		return Result.success().addData("path", System.getProperty("java.library.path").split(":")).addData("classpath",
+				System.getProperty("java.class.path").split(":"));
 	}
 
 	@At("/testSigar")

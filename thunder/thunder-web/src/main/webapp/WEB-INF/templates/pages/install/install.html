@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>${obj.title!}</title>
+</head>
+<body>
+	我是安装页面
+
+	<a  onclick="test()"> i</a>
+</body>
+<script src="${base!}/resources/ace/js/jquery1x.js"></script>
+<script type="text/javascript">
+	function test() {
+		$.post('${base!}/a', {
+			'db-type' : 'H2'
+		}, function(d) {
+			console.log(d);
+		}, 'json')
+	}
+</script>
+</html>

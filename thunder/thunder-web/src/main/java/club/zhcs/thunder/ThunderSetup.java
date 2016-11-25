@@ -1,6 +1,5 @@
 package club.zhcs.thunder;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 import org.apache.log4j.PropertyConfigurator;
@@ -22,8 +21,9 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.mvc.NutConfig;
 import org.nutz.mvc.Setup;
-import org.nutz.repo.Base64;
 import org.nutz.weixin.impl.WxApi2Impl;
+
+import com.alibaba.druid.filter.config.ConfigTools;
 
 import club.zhcs.thunder.bean.acl.Permission;
 import club.zhcs.thunder.bean.acl.Role;
@@ -47,8 +47,8 @@ import net.sf.ehcache.CacheManager;
 public class ThunderSetup implements Setup {
 	private static final Log log = Logs.get();
 
-	public static void main(String[] args) throws UnsupportedEncodingException {
-		System.err.println(Base64.encodeToString("我是中文".getBytes("UTF8"), false));
+	public static void main(String[] args) throws Exception {
+		ConfigTools.main(new String[]{"123456"});
 	}
 
 	Role admin;
@@ -79,16 +79,6 @@ public class ThunderSetup implements Setup {
 
 		Ioc ioc = nc.getIoc();
 
-		// SmartQQService smartQQService = ioc.get(SmartQQService.class);
-		//
-		// new Thread(new Runnable() {
-		//
-		// @Override
-		// public void run() {
-		// smartQQService.initQQClient();
-		// }
-		// }).start();
-
 		final PropertiesProxy p = ioc.get(PropertiesProxy.class, "config");
 		nc.setAttribute("rs", p.get("app-rs", ""));
 		nc.setAttribute("appnm", p.get("app-name", "Thunder"));
@@ -107,14 +97,13 @@ public class ThunderSetup implements Setup {
 			log.warn("This project must run in UTF-8, pls add -Dfile.encoding=UTF-8 to JAVA_OPTS");
 		}
 
-		Dao dao = ioc.get(Dao.class);
 
 		CacheManager cacheManager = ioc.get(CacheManager.class);
 		log.debug("Ehcache CacheManager = " + cacheManager);
 
 		ioc.get(NutQuartzCronJobFactory.class);// 触发任务
 
-		// ioc.get(SigarClient.class);// 触发 sigar
+		Dao dao = ioc.get(Dao.class);
 
 		// 为全部标注了@Table的bean建表
 
@@ -172,7 +161,8 @@ public class ThunderSetup implements Setup {
 		Lang.each(InstallPermission.values(), new Each<InstallPermission>() {// 内置权限
 
 			@Override
-			public void invoke(int index, InstallPermission permission, int length) throws ExitLoop, ContinueLoop, LoopException {
+			public void invoke(int index, InstallPermission permission, int length)
+					throws ExitLoop, ContinueLoop, LoopException {
 				Permission temp = null;
 				if ((temp = permissionService.fetch(Cnd.where("name", "=", permission.getName()))) == null) {
 					temp = new Permission();
@@ -182,7 +172,8 @@ public class ThunderSetup implements Setup {
 				}
 
 				// 给SU授权
-				if (rolePermissionService.fetch(Cnd.where("permissionId", "=", temp.getId()).and("roleId", "=", admin.getId())) == null) {
+				if (rolePermissionService.fetch(
+						Cnd.where("permissionId", "=", temp.getId()).and("roleId", "=", admin.getId())) == null) {
 					RolePermission rp = new RolePermission();
 					rp.setRoleId(admin.getId());
 					rp.setPermissionId(temp.getId());
@@ -204,7 +195,8 @@ public class ThunderSetup implements Setup {
 		}
 
 		UserRole ur = null;
-		if ((ur = userRoleService.fetch(Cnd.where("userId", "=", surperMan.getId()).and("roleId", "=", admin.getId()))) == null) {
+		if ((ur = userRoleService
+				.fetch(Cnd.where("userId", "=", surperMan.getId()).and("roleId", "=", admin.getId()))) == null) {
 			ur = new UserRole();
 			ur.setUserId(surperMan.getId());
 			ur.setRoleId(admin.getId());
