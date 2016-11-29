@@ -25,7 +25,6 @@ import org.nutz.mvc.annotation.GET;
 import org.nutz.mvc.annotation.IocBy;
 import org.nutz.mvc.annotation.Modules;
 import org.nutz.mvc.annotation.Ok;
-import org.nutz.mvc.annotation.POST;
 import org.nutz.mvc.annotation.Param;
 import org.nutz.mvc.annotation.SessionBy;
 import org.nutz.mvc.annotation.SetupBy;
