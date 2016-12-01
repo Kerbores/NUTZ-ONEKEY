@@ -91,6 +91,7 @@ public class MainModule extends AbstractBaseModule {
 
 	@At
 	public Result aaa() {
+		System.err.println(1);
 		return Result.success();
 	}
 
