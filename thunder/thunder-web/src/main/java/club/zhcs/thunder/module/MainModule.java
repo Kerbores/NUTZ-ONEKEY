@@ -82,17 +82,12 @@ public class MainModule extends AbstractBaseModule {
 
 	@Inject
 	PropertiesProxy config;
+	
 
 	@At("/403")
 	@Ok("http:403")
 	public void _403() {
 
-	}
-
-	@At
-	public Result aaa() {
-		System.err.println(1);
-		return Result.success();
 	}
 
 	/*
@@ -167,6 +162,10 @@ public class MainModule extends AbstractBaseModule {
 		}
 		return ">>:/install";
 	}
+
+	
+	
+	
 
 	@At
 	@Filters
