@@ -164,9 +164,9 @@ public class APMTask implements Job {
 	 */
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		if (!config.getBoolean("install-flag")) {
-			return;
-		}
+//		if (!config.getBoolean("install-flag")) {
+//			return;
+//		}
 		try {
 			Sigar sigar = new Sigar();
 			MemoryGather memory = MemoryGather.gather(sigar);

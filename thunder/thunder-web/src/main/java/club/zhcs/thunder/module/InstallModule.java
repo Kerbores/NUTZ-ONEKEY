@@ -11,6 +11,7 @@ import org.nutz.dao.util.DaoUp;
 import org.nutz.dao.util.Daos;
 import org.nutz.ioc.impl.PropertiesProxy;
 import org.nutz.ioc.loader.annotation.Inject;
+import org.nutz.json.Json;
 import org.nutz.lang.ContinueLoop;
 import org.nutz.lang.Each;
 import org.nutz.lang.ExitLoop;
@@ -93,24 +94,34 @@ public class InstallModule extends AbstractBaseModule {
 		return Result.success().setTitle("安装");
 	}
 
+	public static void main(String[] args) {
+		SimpleDataSource ds = new SimpleDataSource();
+		ds.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false");
+		ds.setPassword("123456");
+		ds.setUsername("root");
+		DaoUp up = DaoUp.me();
+		up.setDataSource(ds);
+		System.err.println(Json.toJson(up.dao().meta()));
+	}
+
 	@At
 	@POST
 	@Filters
 	public Result install(DB db, String jdbc, String user, String password) throws Exception {
 
 		// 首先得保证参入的参数是可以连接的
-
-		try {
-			SimpleDataSource dataSource = new SimpleDataSource();
-			dataSource.setJdbcUrl(jdbc);
-			dataSource.setUsername(user);
-			dataSource.setPassword(password);
-			DaoUp up = DaoUp.me();
-			up.setDataSource(dataSource);
-			up.dao().meta();
-		} catch (Exception e) {
-			return Result.fail("无法连接的数据源");
-		}
+//		try {
+//			SimpleDataSource ds = new SimpleDataSource();
+//			Lang.loadClass("com.mysql.jdbc.Driver");
+//			ds.setJdbcUrl("jdbc:mysql://127.0.0.1:3306/thunder?useUnicode=true&characterEncoding=utf8&useSSL=false");
+//			ds.setPassword("123456");
+//			ds.setUsername("root");
+//			DaoUp up = DaoUp.me();
+//			up.setDataSource(ds);
+//			up.dao().meta();
+//		} catch (Exception e) {
+//			return Result.fail("无法连接的数据源");
+//		}
 
 		String[] arr = ConfigTools.genKeyPair(512);
 		String publicKey = arr[1];
@@ -135,7 +146,7 @@ public class InstallModule extends AbstractBaseModule {
 		}
 		return Result.success();
 	}
-	
+
 	@At
 	@POST
 	@Filters
@@ -169,6 +180,7 @@ public class InstallModule extends AbstractBaseModule {
 			dao.meta();
 			return Result.success();
 		} catch (Exception e) {
+			e.printStackTrace();
 			return Result.fail("数据源无法连接!");
 		}
 	}

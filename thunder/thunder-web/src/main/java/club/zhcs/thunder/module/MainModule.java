@@ -71,8 +71,7 @@ import club.zhcs.titans.utils.db.Result;
 @ChainBy(type = ThunderChainMaker.class, args = {})
 @Filters({ @By(type = CheckSession.class, args = { SessionKeys.USER_KEY, "/" }) })
 @Api(name = "Thunder nop api", description = "nop开放平台接口示例", match = ApiMatchMode.NONE)
-@IocBy(type = ComboIocProvider.class, args = { "*anno", "club.zhcs", "*tx", "*js", "ioc", "*async", "*quartz", "quartz",
-		"*sigar", "sigar" })
+@IocBy(type = ComboIocProvider.class, args = { "*anno", "club.zhcs", "*tx", "*js", "ioc", "*async", "*quartz", "quartz", "*sigar", "sigar" })
 public class MainModule extends AbstractBaseModule {
 
 	private @Inject RoleService roleService;
@@ -82,7 +81,6 @@ public class MainModule extends AbstractBaseModule {
 
 	@Inject
 	PropertiesProxy config;
-	
 
 	@At("/403")
 	@Ok("http:403")
@@ -150,22 +148,33 @@ public class MainModule extends AbstractBaseModule {
 
 	@At("/")
 	@Filters
-	@Ok("re:beetl:pages/login/login.html")
-	public String login(@Attr(SessionKeys.USER_KEY) User user, HttpServletRequest request) {
-		if (config.getBoolean("install-flag")) {
-			String cookie = _getCookie("kerbores");
-			if (!Strings.isBlank(cookie)) {
-				NutMap data = Lang.map(DES.decrypt(cookie));
-				request.setAttribute("loginInfo", data);
-			}
-			return null;
+	@Ok("beetl:pages/login/login.html")
+	public View login(@Attr(SessionKeys.USER_KEY) User user, HttpServletRequest request) {
+		request.setAttribute("config", config);
+		String cookie = _getCookie("kerbores");
+		if (!Strings.isBlank(cookie)) {
+			NutMap data = Lang.map(DES.decrypt(cookie));
+			request.setAttribute("loginInfo", data);
 		}
-		return ">>:/install";
+		return null;
 	}
 
-	
-	
-	
+	// @At("/")
+	// @Filters
+	// @Ok("re:beetl:pages/login/login.html")
+	// public String login(@Attr(SessionKeys.USER_KEY) User user,
+	// HttpServletRequest request) {
+	// if (config.getBoolean("install-flag")) {
+	// String cookie = _getCookie("kerbores");
+	// if (!Strings.isBlank(cookie)) {
+	// NutMap data = Lang.map(DES.decrypt(cookie));
+	// request.setAttribute("loginInfo", data);
+	// }
+	// return null;
+	// }
+	//// return ">>:/install";
+	// return null;
+	// }
 
 	@At
 	@Filters
@@ -178,8 +187,7 @@ public class MainModule extends AbstractBaseModule {
 	@At
 	@Filters
 	public Result testClassPath() {
-		return Result.success().addData("path", System.getProperty("java.library.path").split(":")).addData("classpath",
-				System.getProperty("java.class.path").split(":"));
+		return Result.success().addData("path", System.getProperty("java.library.path").split(":")).addData("classpath", System.getProperty("java.class.path").split(":"));
 	}
 
 	@At("/testSigar")

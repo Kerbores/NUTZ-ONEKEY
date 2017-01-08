@@ -95,6 +95,7 @@ public class APM implements MethodInterceptor {
 		operationLog.setAction(log.methods());
 		operationLog.setIp(ip);
 		operationLog.setModule(log.module());
+		
 
 		Stopwatch stopwatch = Stopwatch.begin();
 		chain.doChain();

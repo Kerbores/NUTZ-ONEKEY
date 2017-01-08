@@ -193,6 +193,7 @@ public class UserModule extends AbstractBaseModule {
 	@GET
 	@ThunderRequiresPermissions(InstallPermission.USER_ROLE)
 	@Ok("beetl:pages/admin/auth/user/role.html")
+	@SystemLog(module = "用户管理", methods = "设置角色")
 	public Result role(int id) {
 		List<Record> records = userService.findRolesWithUserPowerdInfoByUserId(id);
 		return Result.success().addData("records", records).addData("userId", id);
