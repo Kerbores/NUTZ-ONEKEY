@@ -13,11 +13,11 @@ import org.nutz.mvc.Mvcs;
 import org.nutz.weixin.bean.WxMenu;
 import org.nutz.weixin.impl.WxApi2Impl;
 
+import com.google.common.collect.Lists;
+
 import club.zhcs.thunder.bean.config.WechatMenu;
 import club.zhcs.thunder.bean.config.WechatMenu.Type;
 import club.zhcs.titans.utils.biz.BaseService;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author Kerbores(kerbores@gmail.com)

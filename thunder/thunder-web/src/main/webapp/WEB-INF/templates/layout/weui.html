@@ -10,37 +10,46 @@
 	content="Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.
 ">
 
-<link rel="stylesheet" href="${base}/resources/jqweui/css/weui.min.css" tppabs="http://lihongxun945.github.io/jquery-weui/dist/lib/weui.min.css">
-<link rel="stylesheet" href="${base}/resources/jqweui/css/jquery-weui.css" tppabs="http://lihongxun945.github.io/jquery-weui/dist/css/jquery-weui.css">
-<link rel="stylesheet" href="${base}/resources/jqweui/css/demos.css" tppabs="http://lihongxun945.github.io/jquery-weui/dist/demos/css/demos.css">
-
-<script src="${base}/resources/jqweui/js/jquery-2.1.4.js" tppabs="http://lihongxun945.github.io/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
-<script src="${base}/resources/jqweui/js/jquery-weui.js" tppabs="http://lihongxun945.github.io/jquery-weui/dist/js/jquery-weui.js"></script>
+<link rel="stylesheet" href="${base!}/resources/jqweui/css/weui.min.css" tppabs="http://lihongxun945.github.io/jquery-weui/dist/lib/weui.min.css">
+<link rel="stylesheet" href="${base!}/resources/jqweui/css/jquery-weui.css" tppabs="http://lihongxun945.github.io/jquery-weui/dist/css/jquery-weui.css">
+<link rel="stylesheet" href="${base!}/resources/jqweui/css/demos.css" tppabs="http://lihongxun945.github.io/jquery-weui/dist/demos/css/demos.css">
+<style type="text/css">
+.hide {
+	display: none;
+}
+</style>
+<script src="${base!}/resources/jqweui/js/jquery-2.1.4.js" tppabs="http://lihongxun945.github.io/jquery-weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="${base!}/resources/jqweui/js/jquery-weui.js" tppabs="http://lihongxun945.github.io/jquery-weui/dist/js/jquery-weui.js"></script>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 <script type="text/javascript">
-	var contextPath = '${base}';
+	var contextPath = '${base!}';
 	$(function() {
 		wx.config(${jsConfig});
 		wx.error(function(res) {
 			console.log(res);
 		});
-	})
+		var token = $("#CSRFToken").val();
+		if(token){
+			var _headers = {"RequestVerificationToken":token};
+			var option = {"headers":_headers};
+			$.ajaxSetup(option);  
+		};
+		})
 	
 	function genWxSecureRedirectUrl(contextPath){
 		return "https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appid!}&redirect_uri=${config('http.protocol')}://${config('base.domain')}"+contextPath+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 	}
 </script>
-<script src="${base}/resources/layer/layer.js"></script>
-<script src="${base}/resources/layer/extend/layer.ext.js"></script>
-<script src="${base}/resources/js/common/validation.js"></script>
+<script src="${base!}/resources/layer/layer.js"></script>
+<script src="${base!}/resources/layer/extend/layer.ext.js"></script>
+<script src="${base!}/resources/js/common/validation.js"></script>
 </head>
 
 <body ontouchstart>
-	<input type="text" class="hide" id="CSRFToken" value="${CSRFToken}" />
-	${layoutContent}
+	<input type="text" class="hide" id="CSRFToken" value="${CSRFToken}" /> ${layoutContent}
 
 	<footer>
-		<a href="https://github.com/Kerbores/NUTZ-ONEKEY">2016 ©  NUTZ-ONEKEY</a>
+		<a href="https://github.com/Kerbores/NUTZ-ONEKEY">2016 © NUTZ-ONEKEY</a>
 	</footer>
 	<script type="text/javascript">
 	<!--

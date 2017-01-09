@@ -35,7 +35,7 @@ public class WxUserInjectProcessor extends AbstractProcessor {
 
 	@Override
 	public void process(ActionContext ac) throws Throwable {
-		if (!Mvcs.getIoc().get(PropertiesProxy.class,"config") .getBoolean("install-flag")) {
+		if (!Mvcs.getIoc().get(PropertiesProxy.class, "config").getBoolean("install-flag")) {
 			doNext(ac);
 			return;
 		}
@@ -45,7 +45,7 @@ public class WxUserInjectProcessor extends AbstractProcessor {
 
 		if (isDebug()) {
 			// 开发环境模拟一下
-			String openid = "oP6Sxt6WqoxC03M8w4XgB0-HnZQU";
+			String openid = "otOKDvwEbkaeI8MewpbAFWonrCp0";
 			Mvcs.getReq().getSession().setAttribute("openid", openid);
 			Mvcs.getReq().getSession().setAttribute(Application.SessionKeys.WECHAT_USER_KEY, nutzerService.fetch(Cnd.where("openid", "=", openid)));
 			doNext(ac);
