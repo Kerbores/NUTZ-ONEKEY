@@ -148,6 +148,7 @@ public class WechatQAModule extends AbstractBaseModule {
 	}
 
 	@At
+	@Filters
 	public Result bind(@Param("token") String token, @Attr(Application.SessionKeys.WECHAT_USER_KEY) Nutzer nutzer) {
 		Response response = Http.post2("https://nutz.cn/yvr/api/v1/accesstoken", NutMap.NEW().addv("accesstoken", token), 5000);
 		if (response.isOK()) {

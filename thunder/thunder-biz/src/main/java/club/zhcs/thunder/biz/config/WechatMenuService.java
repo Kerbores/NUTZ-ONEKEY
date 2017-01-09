@@ -79,7 +79,7 @@ public class WechatMenuService extends BaseService<WechatMenu> {
 		String appid = wxApi.getAppid();
 		String domain = config.get("base.domain", "www.kerbores.com");
 		String contextPath = config.get("client.context", Mvcs.getReq().getContextPath());
-		String url = action.startsWith("http") ? action : String.format("http://%s/%s/%s", domain, contextPath, action);
+		String url = action.startsWith("http") ? action : String.format("http://%s%s/%s", domain, contextPath, action);
 
 		return String
 				.format("https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",

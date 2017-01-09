@@ -31,7 +31,7 @@ wx.ready(function () {
                 }, function (result) {
                     if (result.operationState == 'SUCCESS') {
                         layer.msg('绑定成功!', function () {
-                            location.href = '${base!}/qa/me';
+                            location.href = '${base!}/qa/topic';
                         });
                     } else {
                         layer.msg(result.data.reason);
