@@ -50,6 +50,7 @@ public class WechatQAModule extends AbstractBaseModule {
 
 	@At
 	@GET
+	@Filters
 	@Ok("beetl:pages/qa/topic.html")
 	public Result topic(@Param(value = "page", df = "1") int page, @Param("tab") String tab, @Param("tag") String tag, @Param("search") String search,
 			@Param(value = "limit", df = "15") int limit) {

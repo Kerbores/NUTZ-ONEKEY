@@ -72,7 +72,6 @@ public class APM implements MethodInterceptor {
 	 */
 	@Override
 	public void filter(InterceptorChain chain) throws Throwable {
-
 		SystemLog log = chain.getCallingMethod().getAnnotation(SystemLog.class);
 		if (log == null) {
 			LOG.debug("没有配置咯!");
@@ -95,7 +94,6 @@ public class APM implements MethodInterceptor {
 		operationLog.setAction(log.methods());
 		operationLog.setIp(ip);
 		operationLog.setModule(log.module());
-		
 
 		Stopwatch stopwatch = Stopwatch.begin();
 		chain.doChain();
