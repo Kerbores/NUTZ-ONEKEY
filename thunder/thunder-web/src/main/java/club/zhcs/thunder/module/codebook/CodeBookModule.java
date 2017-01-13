@@ -1,5 +1,6 @@
 package club.zhcs.thunder.module.codebook;
 
+import org.nutz.dao.Cnd;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Ok;
@@ -33,19 +34,16 @@ public class CodeBookModule extends AbstractBaseModule {
 		return Result.success().addData("pager", pager).addData("groups", groupService.queryAll());
 	}
 
-	// @At
-	// @Ok("beetl:pages/codebook/group/list.html")
-	// @ThunderRequiresPermissions(InstallPermission.GROUP_LIST)
-	// public Result search(@Param("key") String key, @Param(value = "page", df
-	// = "1") int page) {
-	// page = _fixPage(page);
-	// key = _fixSearchKey(key);
-	// Pager<CodeBook> pager = codeBookService.searchByKeyAndPage(key, page,
-	// "name", "description");
-	// pager.setUrl(_base() + "/user/search");
-	// pager.addParas("key", key);
-	// return Result.success().addData("pager", pager);
-	// }
+	@At
+	@Ok("beetl:pages/codebook/list.html")
+	@ThunderRequiresPermissions(InstallPermission.CODEBOOK_LIST)
+	public Result search(@Param("groupId") int groupId, @Param(value = "page", df = "1") int page) {
+		page = _fixPage(page);
+		Pager<CodeBook> pager = codeBookService.searchByPage(page, Cnd.where("groupId", "=", groupId));
+		pager.setUrl(_base() + "/codebook/search");
+		pager.addParas("groupId", groupId);
+		return Result.success().addData("pager", pager).addData("groups", groupService.queryAll());
+	}
 	//
 	// @At
 	// @GET
