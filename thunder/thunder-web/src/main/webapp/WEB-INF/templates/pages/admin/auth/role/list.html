@@ -7,7 +7,7 @@ layout("/layout/default.html",{"menu":["acl","role_admin"],"breadcrumbs":[{"name
 			<th colspan="6">
 				<div class="row">
 					<div class="col-md-3 ">
-						<form action="${base!}/role/search" method="post" class="search-form">
+						<form action="${base!}/role/search"  class="search-form">
 							<div class="input-group">
 								<span class="input-group-addon"> 关键词 </span> <input class="form-control search-query" type="text" name="key" value="${obj.data.pager.paras.key!}" data-type="reg"
 									data-reg="/^[\u4e00-\u9fa5\d\w]{1,}$/" data-default="Search..." data-error="请输入搜索关键词" placeholder="请输入角色名检索"> <span class="input-group-addon search-btn"
