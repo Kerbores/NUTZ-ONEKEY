@@ -39,11 +39,32 @@ public class CodeBookGroupModule extends AbstractBaseModule {
 		return Result.success();
 	}
 
+	@At("/edit/*")
+	@GET
+	@Ok("beetl:pages/codebook/group/add_edit.html")
+	@ThunderRequiresPermissions(InstallPermission.GROUP_EDIT)
+	public Result edit(int id) {
+		return Result.success().addData("group", groupService.fetch(id));
+	}
+
 	@At
 	@POST
 	@ThunderRequiresPermissions(InstallPermission.GROUP_ADD)
 	public Result add(@Param("..") Group group) {
 		return groupService.save(group) != null ? Result.success().addData("group", group) : Result.fail("添加分组失败!");
+	}
+
+	@At
+	@POST
+	@ThunderRequiresPermissions(InstallPermission.GROUP_EDIT)
+	public Result edit(@Param("..") Group group) {
+		return groupService.update(group, "name", "description") ? Result.success() : Result.fail("更新失败!");
+	}
+
+	@At("/delete/*")
+	@ThunderRequiresPermissions(InstallPermission.GROUP_DELETE)
+	public Result delete(int id) {
+		return groupService.delete(id) == 1 ? Result.success() : Result.fail("删除分组失败!");
 	}
 
 }
