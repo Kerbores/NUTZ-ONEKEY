@@ -1,0 +1,65 @@
+<!--# 
+layout("/layout/default.html",{"menu":["codebook","group_list"],"breadcrumbs":[{"name":"分组列表",url:"group/list"},{"name":(obj.data.group==null?"添加分组":"编辑分组")}]}){ 
+ #-->
+<div class="space-4"></div>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2 col-sm-12">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">${obj.data.group==null ? "添加分组":"编辑分组"}</h3>
+			</div>
+			<div class="panel-body">
+				<form id="addgroupForm" class="cmxform form-horizontal adminex-form" novalidate="novalidate">
+					<div class="form-group ">
+						<label for="分组名" class="control-label col-lg-3">分组名 : </label>
+						<div class="col-lg-9">
+							<input class="form-control" type="text" placeholder="请输入分组名称" name="name" data-type='required' data-error='请输入分组名称' value="${obj.data.group.name!}" ${obj.data.group==null? "":"disabled"} />
+						</div>
+					</div>
+					<div class="form-group ">
+						<label class="control-label col-lg-3"> 分组描述 : </label>
+						<div class="col-lg-9">
+							<input class="form-control" type="text" placeholder="请输入分组描述" name="description" data-type='required' data-error='请输入分组描述' value="${obj.data.group.description!}">
+						</div>
+					</div>
+					
+					<input type="text" class="hide" id="id" name="id" value="${obj.data.group.id!}">
+					<div class="pull-right" style="margin-right: 45px">
+						<button type="button" class="btn btn-sm btn-primary" onclick="save(this)">
+							<i class="fa fa-save"></i> 提交
+						</button>
+						<button class="btn btn-sm btn-default btn-back">
+							<i class="fa fa-undo"></i> 返回
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function save(btn) {
+		if ($('#addgroupForm').find('input').validation()) {//验证表单
+			if ($('#id').val()) {
+				$.post(getRootPath() + '/group/edit', $('#addgroupForm').serialize(), function(result) {
+					if (result.operationState == 'SUCCESS') {
+						location.href = getRootPath() + "/group/list";
+					} else {
+						validationFail(result.data.reason, btn);
+					}
+				}, 'json');
+			} else if ($("input[name='password']").val() === $("input[name='rePassword']").val()) {
+				$.post(getRootPath() + '/group/add', $('#addgroupForm').serialize(), function(result) {
+					if (result.operationState == 'SUCCESS') {
+						location.href = getRootPath() + "/group/list";
+					} else {
+						validationFail(result.data.reason, btn);
+					}
+				}, 'json');
+			} else {
+				validationFail("两次输入的密码不一致", $("input[name='rePassword']"));
+			}
+		}
+	}
+</script>
+<!--# } #-->

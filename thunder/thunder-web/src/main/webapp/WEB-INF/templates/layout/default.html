@@ -218,7 +218,22 @@
 						<!--# } #-->
 					</ul></li>
 
-				<li class="${ menu[0] =='settings' ?'active open':''}"><a href="#" class="dropdown-toggle"> <i class="menu-icon fa fa-cogs"></i> <span class="menu-text"> 配置管理 </span>
+				<li class="${ menu[0] =='codebook' ?'active open':''}"><a href="#" class="dropdown-toggle"> <i class="menu-icon fa fa-book"></i> <span class="menu-text"> 码本管理 </span>
+						<b class="arrow fa fa-angle-down"></b>
+				</a> <b class="arrow"></b>
+
+					<ul class="submenu">
+						<!--# if(hasPermission('group.list')){ #-->
+						<li class="${ menu[1] =='group_list' ?'active':''}"><a href="${base!}/group/list"> <i class="menu-icon fa fa-object-group"></i> 分组列表
+						</a> <b class="arrow"></b></li>
+						<!--# } #-->
+						<!--# if(hasPermission('codebook.list')){ #-->
+						<li class="${ menu[1] =='codebook_list' ?'active':''}"><a href="${base!}/codebook/list"> <i class="menu-icon fa fa-cubes"></i> 数据列表
+						</a> <b class="arrow"></b></li>
+						<!--# } #-->
+					</ul></li>
+					
+					<li class="${ menu[0] =='settings' ?'active open':''}"><a href="#" class="dropdown-toggle"> <i class="menu-icon fa fa-cogs"></i> <span class="menu-text"> 配置管理 </span>
 						<b class="arrow fa fa-angle-down"></b>
 				</a> <b class="arrow"></b>
 

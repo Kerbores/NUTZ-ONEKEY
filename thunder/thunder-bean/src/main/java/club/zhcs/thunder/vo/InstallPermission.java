@@ -118,10 +118,42 @@ public enum InstallPermission {
 	 */
 	STRUTS_DELETE("struts.delete", "机构删除"),
 	/**
-	 * ++++++++++++++++++++++机构管理++++++++++++++++++++++++++++++++
+	 * ++++++++++++++++++++++码本管理++++++++++++++++++++++++++++++++
 	 */
-
+	GROUP_LIST("group.list", "码本分组列表"),
+	/**
+	 * 
+	 */
+	GROUP_ADD("group.add", "码本分组添加"),
+	/**
+	 * 
+	 */
+	GROUP_EDIT("group.edit", "码本分组编辑"),
+	/**
+	 * 
+	 */
+	GROUP_DELETE(".delete", "码本分组删除"),
+	/**
+	 * 
+	 */
+	CODEBOOK_LIST("codebook.list", "数据列表"),
+	/**
+	 * 
+	 */
+	CODEBOOK_ADD("codebook.add", "数据添加"),
+	/**
+	 * 
+	 */
+	CODEBOOK_EDIT("codebook.edit", "数据编辑"),
+	/**
+	 * 
+	 */
+	CODEBOOK_DELETE("codebook.delete", "数据删除"),
+	/**
+	 * 
+	 */
 	;
+
 	private String name;
 
 	private String description;
