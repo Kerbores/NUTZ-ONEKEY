@@ -32,6 +32,18 @@ public class CodeBookGroupModule extends AbstractBaseModule {
 	}
 
 	@At
+	@Ok("beetl:pages/codebook/group/list.html")
+	@ThunderRequiresPermissions(InstallPermission.GROUP_LIST)
+	public Result search(@Param("key") String key, @Param(value = "page", df = "1") int page) {
+		page = _fixPage(page);
+		key = _fixSearchKey(key);
+		Pager<Group> pager = groupService.searchByKeyAndPage(key, page, "name", "description");
+		pager.setUrl(_base() + "/user/search");
+		pager.addParas("key", key);
+		return Result.success().addData("pager", pager);
+	}
+
+	@At
 	@GET
 	@Ok("beetl:pages/codebook/group/add_edit.html")
 	@ThunderRequiresPermissions(InstallPermission.GROUP_ADD)
