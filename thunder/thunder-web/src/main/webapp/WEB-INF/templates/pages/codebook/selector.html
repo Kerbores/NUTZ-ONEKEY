@@ -1,0 +1,57 @@
+<!--#  layout("/layout/blank.html",{}){  #-->
+<link rel="stylesheet" href="${base!}/resources/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+<ul id="dataSelector" class="ztree"></ul>
+<input type="text" class="hide" id="data">
+<script type="text/javascript" src="${base!}/resources/ztree/js/jquery.ztree.all.js"></script>
+<script type="text/javascript">
+<!--
+	var zTreeObj;
+	var setting = {
+		check : {
+			enable : true,
+			chkStyle : "radio",
+			radioType : "all"
+		},
+		data : {
+			simpleData : {
+				enable: true
+			}
+		},
+		callback : {
+			onCheck : function(event, treeId, treeNode) {
+				$('#data').val(JSON.stringify(treeNode));
+			}
+		},
+		async : {
+			enable : true,
+			url : "${base!}/codebook/nodes",
+			autoParam : [ "id", "name=n", "level=lv" ],
+			dataFilter : function(treeId, parentNode, childNodes) {
+				if (!childNodes)
+					return null;
+				$(childNodes).map(function(i,obj){
+					obj.pId = obj.parentId;
+					obj.name = obj.name.replace(/\.n/g, '.');
+					obj.open = true;
+					obj.isParent = true;
+				})
+				return childNodes;
+			}
+		}
+	};
+	var zNodes =${obj.data.data!};
+	$(zNodes).map(function(i,obj){
+		obj.pId = obj.parentId;
+		obj.open = true;
+		obj.isParent = true;
+	});
+	$(function() {
+		zTreeObj = $.fn.zTree.init($("#dataSelector"), setting, zNodes);
+	});
+
+	function showMsg() {
+		showMessage('请选择一个分支机构!');
+	}
+//-->
+</script>
+<!--# } #-->

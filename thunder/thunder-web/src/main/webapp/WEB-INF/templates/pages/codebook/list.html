@@ -1,26 +1,33 @@
 <!--# 
 layout("/layout/default.html",{"menu":["codebook","codebook_list"],"breadcrumbs":[{"name":"数据列表"}]}){ 
  #-->
-<table class="table  table-hover general-table table-striped table-bordered">
+<table class="tree_table table  table-hover general-table table-striped table-bordered" id="treeTable2">
 	<thead>
 		<tr>
 			<th colspan="6">
 				<div class="row">
 					<div class="col-md-3 ">
-						<form action="${base}/codebook/search" class="search-form">
-							<div class="input-group">
-								<span class="input-group-addon">选择分组</span> <select class="form-control" name="groupId" onchange="search(this)">
-									<option value="0">全部分组</option>
-									<optgroup label="-------------------">
-										<!--# for(group in obj.data.groups) { #-->
-										<option value="${group.id!}" ${obj.data.pager.paras != null && obj.data.pager.paras.groupId == group.id ?'selected' : ''}>${group.name!}</option>
-										<!--# } #-->
-									</optgroup>
-								</select> <span class="input-group-addon" style="cursor: pointer;"><i class="fa fa-search"></i> GO</span>
-							</div>
-						</form>
+						<div class="input-group">
+							<span class="input-group-addon">选择分组</span> <select class="form-control" id="groupId" onchange="search(this)">
+								<option value="0">全部分组</option>
+								<optgroup label="-------------------">
+									<!--# for(group in obj.data.groups) { #-->
+									<option value="${group.id!}" ${obj.data.pager.paras !=null && obj.data.pager.paras.groupId==group.id?'selected' : ''}>${group.name!}</option>
+									<!--# } #-->
+								</optgroup>
+							</select>
+						</div>
 					</div>
-					<div class="col-md-2 col-md-offset-7">
+					<div class="col-md-3">
+						<div class="input-group">
+							<span class="input-group-addon">选择状态</span> <select class="form-control" id="status" onchange="search(this)">
+								<option value="0" ${obj.data.pager.paras !=null && obj.data.pager.paras.status==0?'selected' : ''}>全部</option>
+								<option value="1" ${obj.data.pager.paras !=null && obj.data.pager.paras.status==1?'selected' : ''}>启用</option>
+								<option value="2" ${obj.data.pager.paras !=null && obj.data.pager.paras.status==2?'selected' : ''}>禁用</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-2 col-md-offset-4">
 						<!--# if(hasPermission('codebook.add')){ #-->
 						<a href="${base}/codebook/add" class="btn btn-info btn-sm"><i class="fa fa-plus-circle"></i> 添加数据</a>
 						<!--# } #-->
@@ -38,10 +45,11 @@ layout("/layout/default.html",{"menu":["codebook","codebook_list"],"breadcrumbs"
 	</thead>
 	<tbody>
 		<!--# for(codebook in obj.data.pager.entities){ #-->
-		<tr>
+		<tr id="${codebook.id!}" hasChild="true">
 			<td>${codebook.id!}</td>
 			<td>${codebook.name!}</td>
-			<td>${codebook.description!}</td>
+			<td>${codebook.value!}</td>
+			<td>${codebook.index!}</td>
 			<td class="center">
 				<div class="hidden-sm hidden-xs btn-group">
 					<!--# if(hasPermission('codebook.detail')){ #-->
@@ -53,8 +61,8 @@ layout("/layout/default.html",{"menu":["codebook","codebook_list"],"breadcrumbs"
 					</a>
 					<!--# } #-->
 					<!--# if(hasPermission('codebook.delete')){ #-->
-					<button class="btn btn-xs btn-danger btn-delete" data-url='/codebook/delete' data-id='${codebook.id!}'>
-						<i class="ace-icon fa fa-trash-o bigger-120"></i> 删除
+					<button class="btn btn-xs btn-danger btn-active" data-url='/codebook/active' data-id='${codebook.id!}' data-status='${codebook.active!}'>
+						<i class="ace-icon fa fa-trash-o bigger-120"></i> ${codebook.active ? '禁用':'启用'}
 					</button>
 					<!--# } #-->
 				</div>
@@ -82,12 +90,90 @@ layout("/layout/default.html",{"menu":["codebook","codebook_list"],"breadcrumbs"
 	#-->
 	</tfoot>
 </table>
+<script type="text/javascript" src="${base!}/resources/treeTable/jquery.treeTable.js"></script>
 <script type="text/javascript">
+	$(function() {
+		$('#treeTable2').treeTable({
+			expandLevel : 1,
+			//theme : 'vsStyle',
+			path : getRootPath() + '/resources/treeTable/',
+			beforeExpand : function($treeTable, id) {
+				if ($('.' + id, $treeTable).length) {
+					return;
+				}
+				$.ajaxSetup({
+					async : false
+				});
+				$.post(getRootPath() + '/codebook/nodes', {
+					id : id,
+					status:$('#status').val()
+				},
+					function(result) {
+						var html = '';
+						if (result.length) {
+							$(result).each(function(i, item) {
+								var aaa = item.isParent > 0 ? ' hasChild="true" ' : '';
+								html += '<tr id="'
+									+ item.id
+									+ '" pId="'
+									+ id
+									+ '" ' + aaa + '><td>'
+									+ item.id
+									+ '</td><td>'
+									+ item.name
+									+ '</td><td>'
+									+ item.value
+									+ '</td><td>'
+									+ item.index
+									+ '</td><td class="center"><div class="hidden-sm hidden-xs btn-group">	 <a class="btn btn-xs btn-info" href="${base}/codebook/edit/'
+									+ item.id + '"> <i class="ace-icon fa fa-pencil bigger-120"></i> 编辑	</a>	<button class="btn btn-xs btn-danger btn-active" data-url="/codebook/active" data-id="'
+									+ item.id + '" data-status="'+item.active+'"><i class="ace-icon fa fa-trash-o bigger-120"></i> '+(item.active ? '禁用' :'启用')+'</button>	</div></td>	</tr>';
+							});
+							$treeTable.addChilds(html);
+						} else {
+							showMessage("该编码没有下级编码!!");
+						}
+					},
+					'json');
+				$.ajaxSetup({
+					async : true
+				});
+			},
+			onSelect : function($treeTable, id) {
+				window.console && console.log('onSelect:' + id);
+			}
+		});
+
+		$('body').on('click','.btn-active', function() {
+			var url = $(this).data('url');
+			var id = $(this).data('id');
+			var status = $(this).data('status');
+			layer.confirm('确认' + (status ? '禁用' : '启用') + '这条数据 ?', {
+				icon : 3,
+				title : '禁用/启用提示'
+			}, function(index) {
+				$.post(getRootPath() + url, {
+					id : id,
+					status : !status
+				}, function(result) {
+					layer.close(index); // 关闭弹窗
+					if (result.operationState == 'SUCCESS') {
+						refresh(); // 刷新页面
+					} else {
+						showMessage(result.data.reason);
+					}
+				}, 'json');
+
+			});
+		})
+	})
 	function search(dom) {
-		if ($(dom).val() > 0) {
-			location.href = getRootPath() + '/codebook/search?groupId=' + $(dom).val() ;	
+		var groupId = $('#groupId').val();
+		var status = $('#status').val();
+		if (!groupId && !status) {
+			location.href = getRootPath() + '/codebook/list';
 		} else {
-			location.href = getRootPath() + '/codebook/list' ;	
+			location.href = getRootPath() + '/codebook/search?groupId=' + groupId + "&status=" + status;
 		}
 	}
 </script>

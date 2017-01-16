@@ -27,6 +27,17 @@ public class CodeBook extends Entity {
 	@Column("c_parent_id")
 	private int parentId;
 
+	@Column("c_is_active")
+	private boolean active = true;
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	public String getName() {
 		return name;
 	}
