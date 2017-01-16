@@ -5,6 +5,12 @@ import java.util.List;
 import org.nutz.dao.Chain;
 import org.nutz.dao.Cnd;
 import org.nutz.ioc.loader.annotation.Inject;
+import org.nutz.lang.ContinueLoop;
+import org.nutz.lang.Each;
+import org.nutz.lang.ExitLoop;
+import org.nutz.lang.Lang;
+import org.nutz.lang.LoopException;
+import org.nutz.lang.util.NutMap;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Filters;
 import org.nutz.mvc.annotation.Param;
@@ -71,6 +77,20 @@ public class CodeBookApiModule extends AbstractBaseModule {
 	@At
 	public Result all() {
 		return Result.success().addData("records", codeBookService.queryAll());
+	}
+
+	@At
+	public Result allByGroup() {
+		List<Group> groups = groupService.queryAll();
+		NutMap data = NutMap.NEW();
+		Lang.each(groups, new Each<Group>() {
+
+			@Override
+			public void invoke(int paramInt1, Group group, int paramInt2) throws ExitLoop, ContinueLoop, LoopException {
+				data.put(group.getName(), codeBookService.query(Cnd.where("groupId", "=", group.getId())));
+			}
+		});
+		return Result.success().addData("records", data);
 	}
 
 	@At
