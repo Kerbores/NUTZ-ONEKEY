@@ -35,7 +35,7 @@ public class CodeBookModule extends AbstractBaseModule {
 	@ThunderRequiresPermissions(InstallPermission.CODEBOOK_LIST)
 	public Result list(@Param(value = "page", df = "1") int page) {
 		page = _fixPage(page);
-		Pager<CodeBook> pager = codeBookService.searchByPage(page, Cnd.where("parentId", "=", 0));
+		Pager<CodeBook> pager = codeBookService.searchByPage(page, Cnd.where("parentId", "=", 0).desc("index"));
 		pager.setUrl(_base() + "/codebook/list");
 		return Result.success().addData("pager", pager).addData("groups", groupService.queryAll());
 	}
@@ -53,7 +53,7 @@ public class CodeBookModule extends AbstractBaseModule {
 			cnd = cnd.and("active", "=", false);
 		}
 
-		Pager<CodeBook> pager = codeBookService.searchByPage(page, cnd);
+		Pager<CodeBook> pager = codeBookService.searchByPage(page, cnd.desc("index"));
 		pager.setUrl(_base() + "/codebook/search");
 		pager.addParas("groupId", groupId);
 		pager.addParas("status", status);

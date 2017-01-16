@@ -34,7 +34,7 @@ import club.zhcs.titans.utils.db.Result;
  * @time 2016年9月20日 下午9:06:05
  *
  */
-@Api(author = "kerbores", name = "Rest api", description = " 提供一组 rest api", match = ApiMatchMode.ONLY)
+@Api(author = "kerbores", name = "Common", description = " 提供一组 rest api", match = ApiMatchMode.ONLY)
 @At("/api")
 @Filters
 public class ApiModule extends AbstractBaseModule {
@@ -43,36 +43,25 @@ public class ApiModule extends AbstractBaseModule {
 	Dao dao;
 
 	@At
-	@Api(author = "kerbores", name = "数据库", description = "获取数据库信息", match = ApiMatchMode.ONLY,
-			ok = {
-					@ReturnKey(key = "db", description = " 数据库的 meta 信息")
-			},
-			fail = {
-					@ReturnKey(key = "reason", description = "失败原因")
-			}
-		)
+	@Api(author = "kerbores", name = "数据库", description = "获取数据库信息", match = ApiMatchMode.ONLY, ok = {
+			@ReturnKey(key = "db", description = " 数据库的 meta 信息")
+	}, fail = {
+			@ReturnKey(key = "reason", description = "失败原因")
+	})
 	public Result db() {
 
 		return Result.success().addData("db", dao.meta());
 	}
 
 	@At
-	@Api(
-			author = "kerbores",
-			name = "系统监控",
-			description = "获取系统运行状况信息",
-			match = ApiMatchMode.ONLY,
-			params = {
-					@ApiParam(index = 1, name = "type", description = "监控信息类型,可选值为CPU, DISK,NI,SYS,MEM,ALL")
-			},
-			ok = {
-					@ReturnKey(key = "sigar", description = "  收集到的心态信息"),
-					@ReturnKey(key = " api", description = "  api 描述")
-			},
-			fail = {
-					@ReturnKey(key = "reason", description = "失败原因")
-			}
-		)
+	@Api(author = "kerbores", name = "系统监控", description = "获取系统运行状况信息", match = ApiMatchMode.ONLY, params = {
+			@ApiParam(index = 1, name = "type", description = "监控信息类型,可选值为CPU, DISK,NI,SYS,MEM,ALL")
+	}, ok = {
+			@ReturnKey(key = "sigar", description = "  收集到的心态信息"),
+			@ReturnKey(key = " api", description = "  api 描述")
+	}, fail = {
+			@ReturnKey(key = "reason", description = "失败原因")
+	})
 	public Result sigar(@Param("type") APIType type) throws SigarException, InterruptedException {
 		Sigar sigar = new Sigar();
 		Result result = Result.success();
