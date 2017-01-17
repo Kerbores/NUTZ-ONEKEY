@@ -64,7 +64,7 @@ public class ACLApiModule extends AbstractBaseModule {
 		if (user == null) {
 			return Result.fail("不存在的用户");
 		}
-		return Result.success().addData("permission", shiroUserService.getAllPermissions(user.getId()));
+		return Result.success().addData("permissions", shiroUserService.getAllPermissions(user.getId()));
 	}
 
 	@At
