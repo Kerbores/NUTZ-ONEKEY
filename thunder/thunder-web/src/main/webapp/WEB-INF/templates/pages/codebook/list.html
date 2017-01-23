@@ -9,7 +9,7 @@ layout("/layout/default.html",{"menu":["codebook","codebook_list"],"breadcrumbs"
 					<div class="col-md-3 ">
 						<form action="${base}/codebook/search" class="search-form">
 							<div class="input-group">
-								<span class="input-group-addon">选择分组</span> <select class="form-control" name="groupId" onchange="search(this)">
+								<span class="input-group-addon">选择分组</span> <select class="form-control" name="groupId" id="groupId" onchange="search(this)">
 									<option value="0">全部分组</option>
 									<optgroup label="-------------------">
 										<!--# for(group in obj.data.groups) { #-->
