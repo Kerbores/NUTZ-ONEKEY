@@ -13,7 +13,7 @@ layout("/layout/default.html",{"menu":["codebook","codebook_list"],"breadcrumbs"
 									<option value="0">全部分组</option>
 									<optgroup label="-------------------">
 										<!--# for(group in obj.data.groups) { #-->
-										<option value="${group.id!}" ${obj.data.pager.paras != null && obj.data.pager.paras.groupId == group.id ?'selected' : ''}>${group.name!}</option>
+										<option value="${group.id!}" ${obj.data.pager.paras != null && obj.data.pager.paras.groupId == group.id ?'selected' : ''}>${group.description!}</option>
 										<!--# } #-->
 									</optgroup>
 								</select> <span class="input-group-addon" style="cursor: pointer;"><i class="fa fa-search"></i> GO</span>
