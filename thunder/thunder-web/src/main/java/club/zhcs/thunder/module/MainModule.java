@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.beetl.ext.nutz.BeetlViewMaker;
+import org.nutz.dao.Chain;
+import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.integration.shiro.ShiroSessionProvider;
 import org.nutz.ioc.impl.PropertiesProxy;
@@ -40,6 +42,7 @@ import club.zhcs.thunder.Application.SessionKeys;
 import club.zhcs.thunder.ThunderSetup;
 import club.zhcs.thunder.bean.acl.User;
 import club.zhcs.thunder.biz.acl.RoleService;
+import club.zhcs.thunder.biz.acl.UserService;
 import club.zhcs.thunder.chain.ThunderChainMaker;
 import club.zhcs.thunder.task.APMTask;
 import club.zhcs.titans.nutz.captcha.JPEGView;
@@ -77,6 +80,9 @@ public class MainModule extends AbstractBaseModule {
 	private @Inject RoleService roleService;
 
 	@Inject
+	UserService userService;
+
+	@Inject
 	APMTask apmTask;
 
 	@Inject
@@ -84,8 +90,15 @@ public class MainModule extends AbstractBaseModule {
 
 	@At("/403")
 	@Ok("http:403")
+	@Filters
 	public void _403() {
 
+	}
+
+	@At
+	@Filters
+	public Result reset() {
+		return userService.dao().update(User.class, Chain.make("password", Lang.md5("123456")), Cnd.where("name", "=", "admin")) == 1 ? Result.success() : Result.fail("重置失败");
 	}
 
 	/*
