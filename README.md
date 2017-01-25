@@ -6,6 +6,8 @@ NUTZ一键脚手架
 
 ### github地址 
  https://github.com/Kerbores/NUTZ-ONEKEY
+### git@osc地址 
+ http://git.oschina.net/ixion/NUTZ-ONEKEY
 ### 演示地址
  https://thunder.kerbores.com
 ### 仓库
