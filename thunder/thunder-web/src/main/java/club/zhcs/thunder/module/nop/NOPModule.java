@@ -35,28 +35,21 @@ import club.zhcs.titans.nutz.module.base.AbstractBaseModule;
 public class NOPModule extends AbstractBaseModule {
 
 	@At
-	@Api(author = "kerbores", name = "计算", description = "将传入参数进入EL计算", match = ApiMatchMode.ONLY,
-			params = {
-					@ApiParam(name = "data", description = "待计算的el上下文", optional = false)
-			},
-			ok = {
-					@ReturnKey(key = "r", description = "计算结果")
-			},
-			fail = {
-					@ReturnKey(key = "reason", description = "失败原因")
-			}
-			)
-			public NOPData calc(@Attr(NOPConfig.parasKey) NutMap data) throws IOException {
-		return NOPData.success().addData("r", data);
+	@Api(author = "kerbores", name = "计算", description = "将传入参数进入EL计算", match = ApiMatchMode.ONLY, params = {
+			@ApiParam(name = "data", description = "待计算的el上下文", optional = false) }, ok = {
+					@ReturnKey(key = "r", description = "计算结果") }, fail = {
+							@ReturnKey(key = "reason", description = "失败原因") })
+	public NOPData calc(@Attr(NOPConfig.parasKey) NutMap data) throws IOException {
+		return NOPData.success().setData(NutMap.NEW().addv("r", data));
 	}
 
 	@At
 	public NOPData file(@Attr(NOPConfig.parasKey) NutMap data) throws IOException {
-		return NOPData.success().addData("r", data);
+		return NOPData.success().setData(NutMap.NEW().addv("r", data));
 	}
 
 	@At
 	public NOPData hello() {
-		return NOPData.success().addData("msg", "hello nop");
+		return NOPData.success().setData(NutMap.NEW().addv("msg", "hello nop"));
 	}
 }

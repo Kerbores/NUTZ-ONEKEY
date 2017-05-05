@@ -170,7 +170,6 @@ public class WechatQAModule extends AbstractBaseModule {
 	}
 
 	@At
-	@SuppressWarnings("deprecation")
 	@AdaptBy(type = UploadAdaptor.class, args = { "${app.root}/WEB-INF/tmp" })
 	public NutMap upload(@Param("editormd-image-file") TempFile img, @Attr(Application.SessionKeys.WECHAT_USER_KEY) Nutzer nutzer) {
 		if (nutzer == null || Strings.isBlank(nutzer.getAccessToken())) {
