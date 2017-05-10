@@ -1,7 +1,6 @@
 package club.zhcs.thunder;
 
 import org.nutz.lang.Lang;
-import org.nutz.web.WebLauncher;
 
 public class ThunderLauncher {
 
@@ -13,6 +12,6 @@ public class ThunderLauncher {
 		} else {
 			System.setProperty("java.library.path", path + ":src/main/webapp/WEB-INF/lib");
 		}
-		WebLauncher.start(args);
+		// WebLauncher.start(args);
 	}
 }

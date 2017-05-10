@@ -253,13 +253,17 @@
 		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
 
 		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
-
-
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>nutz-web</artifactId>
-			<version>${nutz.plugins.version}</version>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+			<scope>provided</scope>
 		</dependency>
+
+
+		<!-- <dependency> <groupId>org.nutz</groupId> <artifactId>nutz-web</artifactId> 
+			<version>${nutz.plugins.version}</version> </dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-jsp -->
 
