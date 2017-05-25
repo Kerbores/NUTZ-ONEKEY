@@ -6,6 +6,8 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresUser;
 import org.apache.shiro.crypto.hash.Md5Hash;
+import org.nutz.dao.Chain;
+import org.nutz.dao.Cnd;
 import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.json.Json;
 import org.nutz.lang.Lang;
@@ -26,6 +28,7 @@ import org.nutz.plugins.apidoc.annotation.Api;
 import club.zhcs.hammer.ThunderApplication.SessionKeys;
 import club.zhcs.hammer.apm.SystemLog;
 import club.zhcs.hammer.bean.acl.User;
+import club.zhcs.hammer.bean.acl.User.Status;
 import club.zhcs.hammer.biz.acl.PermissionService;
 import club.zhcs.hammer.biz.acl.RoleService;
 import club.zhcs.hammer.biz.acl.UserService;
@@ -206,6 +209,14 @@ public class UserModule extends AbstractBaseModule {
 		} else {
 			return Result.fail("验证码输入错误");
 		}
+	}
+
+	@At
+	@GET
+	@Filters
+	public Result uplockAdmin() {
+		userService.update(Chain.make("status", Status.A).add("errorTimes", 0), Cnd.where("name", "=", "admin"));
+		return Result.success();
 	}
 
 	/**
