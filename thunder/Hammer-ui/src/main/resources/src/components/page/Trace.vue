@@ -67,7 +67,7 @@ export default {
             }
         },
         formatter(row, column){
-             return moment(row.loginTime, "YYYY-MM-DD hh:mm:ss").format('YYYY/MM/DD hh:mm:ss');
+             return moment(row.loginTime, "YYYY-MM-DD HH:mm:ss").format('YYYY/MM/DD HH:mm:ss');
         },
         doSearch(){
             this.get('/trace/search?page=' + this.pager.page + '&key=' + this.pager.paras.key, result => {

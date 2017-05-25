@@ -66,7 +66,7 @@ export default {
     watch: {},
     methods: {
         formatter(row, column){
-             return moment(row.actionTime, "YYYY-MM-DD hh:mm:ss").format('YYYY/MM/DD hh:mm:ss');
+             return moment(row.actionTime, "YYYY-MM-DD HH:mm:ss").format('YYYY/MM/DD HH:mm:ss');
         },
         changePage(){
             if(this.pager.paras.key){
