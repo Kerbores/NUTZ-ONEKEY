@@ -37,8 +37,8 @@ export default {
     data: function () {
         return {
             ruleForm: {
-                userName: '',
-                password: '',
+                userName: 'admin',
+                password: '123456',
                 rememberMe: true
             },
             captcha: baseUrl + '/captcha',
