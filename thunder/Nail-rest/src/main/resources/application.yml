@@ -1,0 +1,46 @@
+spring:
+  datasource:
+    name: test
+    url: jdbc:mysql://127.0.0.1:3306/hammer?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+logging:
+  level:
+    root: info
+    org.nutz: debug
+    club.zhcs: debug
+nutz:
+  dao:
+    runtime:
+      add-column: true
+      check-index: true
+      delete-column: true
+      foce-create: false
+      create: true
+      migration: true
+      basepackage: club.zhcs.nail.bean
+    sqlmanager:
+      paths:
+      - sqls
+      - other
+#  json:
+#    auto-unicode: true
+#    mode: compact
+#    quote-name: false
+#    date-format: yyyy-MM-dd HH:mm:ss
