@@ -10,7 +10,10 @@
 
 #workspace Files
 
+node_modules/
 target/
+dist/
+.vscode/
 .settings/
 .classpath
 .project

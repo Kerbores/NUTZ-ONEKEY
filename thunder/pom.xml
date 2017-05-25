@@ -1,29 +1,28 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>club.zhcs</groupId>
-	<artifactId>thunder</artifactId>
-	<version>2.0</version>
-	<packaging>pom</packaging>
-	<build>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-	<name>快速开发脚手架</name>
-	<modules>
-		<module>thunder-bean</module>
-		<module>thunder-biz</module>
-		<module>thunder-web</module>
-	</modules>
-
-	<repositories>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>club.zhcs</groupId>
+  <artifactId>hammer</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Hammer</name>
+  <description>配置中心</description>
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+  <modules>
+  	<module>Hammer-core</module>
+  	<module>Hammer-rest</module>
+  	<module>Hammer-ui</module>
+  </modules>
+  <repositories>
 		<repository>
 			<id>nutz-jcenter</id>
 			<url>http://jfrog.nutz.cn/artifactory/jcenter/</url>
@@ -39,250 +38,7 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
-	<dependencies>
-
-		<!-- junit -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-		<!-- junit -->
-
-		<!-- guava -->
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>19.0</version>
-		</dependency>
-		<!-- guava -->
-
-		<!-- servlet -->
-		<!-- servlet -->
-
-		<!-- db -->
-
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.39</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
-		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>druid</artifactId>
-			<version>1.0.26</version>
-		</dependency>
-
-		<!-- db -->
-
-		<!-- apache -->
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-email</artifactId>
-			<version>1.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.2</version>
-		</dependency>
-		<!-- apache -->
-
-		<!-- nutz -->
-
-		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>nutz-integration-shiro</artifactId>
-			<version>${nutz.plugins.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>nutz</artifactId>
-					<groupId>org.nutz</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>nutz-plugins-daocache</artifactId>
-			<version>${nutz.plugins.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>nutz</artifactId>
-					<groupId>org.nutz</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>nutz-integration-quartz</artifactId>
-			<version>${nutz.plugins.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>nutz</artifactId>
-					<groupId>org.nutz</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>nutzwx</artifactId>
-			<version>${nutz.plugins.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>nutz</artifactId>
-					<groupId>org.nutz</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>nutz-plugins-daocache</artifactId>
-			<version>${nutz.plugins.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>nutz-plugins-sigar</artifactId>
-			<version>${nutz.plugins.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>nutz</artifactId>
-					<groupId>org.nutz</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>nutz-plugins-nop</artifactId>
-			<version>${nutz.plugins.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>nutz</artifactId>
-					<groupId>org.nutz</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>nutz-plugins-views</artifactId>
-			<version>${nutz.plugins.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>nutz</artifactId>
-					<groupId>org.nutz</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<dependency>
-			<groupId>org.nutz</groupId>
-			<artifactId>nutz-plugins-apidoc</artifactId>
-			<version>${nutz.plugins.version}</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>nutz</artifactId>
-					<groupId>org.nutz</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- nutz -->
-
-		<!-- https://mvnrepository.com/artifact/net.sf.ehcache/ehcache -->
-		<dependency>
-			<groupId>net.sf.ehcache</groupId>
-			<artifactId>ehcache</artifactId>
-			<version>2.10.2.2.21</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-ehcache -->
-		<dependency>
-			<groupId>org.apache.shiro</groupId>
-			<artifactId>shiro-ehcache</artifactId>
-			<version>1.3.2</version>
-		</dependency>
-
-		<!-- beetl -->
-		<dependency>
-			<groupId>com.ibeetl</groupId>
-			<artifactId>beetl</artifactId>
-			<version>2.7.0</version>
-		</dependency>
-		<!-- beetl -->
-
-		<!-- log4j -->
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
-		<!-- log4j -->
-
-		<!-- 我的扩展 -->
-		<dependency>
-			<groupId>club.zhcs</groupId>
-			<artifactId>titans</artifactId>
-			<version>2.0.7</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>nutz</artifactId>
-					<groupId>org.nutz</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- 我的扩展 -->
-
-		<dependency>
-			<groupId>com.qiniu</groupId>
-			<artifactId>qiniu-java-sdk</artifactId>
-			<version>7.1.3</version>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
-
-		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
-		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
-			<scope>provided</scope>
-		</dependency>
-
-
-		<!-- <dependency> <groupId>org.nutz</groupId> <artifactId>nutz-web</artifactId> 
-			<version>${nutz.plugins.version}</version> </dependency> -->
-
-		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-jsp -->
-
-		<!-- https://mvnrepository.com/artifact/org.activiti/activiti-engine -->
-
-
-
-
-		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<version>1.4.193</version>
-		</dependency>
-
-
-	</dependencies>
-	<properties>
-		<nutz.plugins.version>1.r.61.r2</nutz.plugins.version>
-		<activity.version>5.21.0</activity.version>
-	</properties>
+  <properties>
+  	<nutz.version>1.r.61.r2</nutz.version>
+  </properties>
 </project>
