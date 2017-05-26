@@ -14,7 +14,7 @@
 		<version>1.5.3.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	
+
 	<repositories>
 		<repository>
 			<id>nutz</id>
