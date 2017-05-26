@@ -122,5 +122,6 @@
 		<module>Nail-rest</module>
 		<module>Nail-shiro</module>
 		<module>Nail-core</module>
+		<module>Nail-sigar</module>
 	</modules>
 </project>

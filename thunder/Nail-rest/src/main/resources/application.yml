@@ -20,6 +20,9 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+management:
+  security:
+    enabled: false
 logging:
   level:
     root: info

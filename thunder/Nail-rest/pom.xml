@@ -13,5 +13,10 @@
   		<artifactId>Nail-core</artifactId>
   		<version>${project.version}</version>
   	</dependency>
+  	<dependency>
+  		<groupId>club.zhcs</groupId>
+  		<artifactId>Nail-sigar</artifactId>
+  		<version>${project.version}</version>
+  	</dependency>
   </dependencies>
 </project>
