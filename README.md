@@ -11,15 +11,7 @@ NUTZ一键脚手架
 ### 演示地址
  https://thunder.kerbores.com
 ### 仓库
-```
-<repositories>
-		<repository>
-			<id>dgj nexus</id>
-			<name>Team Nexus Repository</name>
-			<url>http://maven.kerbores.com/nexus/content/groups/public</url>
-		</repository>
-	</repositories>
-```
+ 代码内已设置repositories
 ## 目标
 - 提供开箱即用的企业级开发平台
 - 提供企业开发中常见的组件和交互示例
