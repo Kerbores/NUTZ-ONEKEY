@@ -215,7 +215,7 @@ public class UserModule extends AbstractBaseModule {
 	@GET
 	@Filters
 	public Result uplockAdmin() {
-		userService.update(Chain.make("status", Status.A).add("errorTimes", 0), Cnd.where("name", "=", "admin"));
+		userService.update(Chain.make("status", Status.A).add("errorTimes", 0).add("password", new Md5Hash("123456", "admin", 2).toString()), Cnd.where("name", "=", "admin"));
 		return Result.success();
 	}
 
