@@ -11,8 +11,8 @@ import "babel-polyfill";
 import axios from 'axios';
 import ElTreeGrid from 'element-tree-grid';
 Vue.component(ElTreeGrid.name, ElTreeGrid);
-import ElTableTreeColumn from 'element-tree-grid/src/index.js';
-Vue.component(ElTableTreeColumn.name, ElTableTreeColumn)
+// import ElTableTreeColumn from 'element-tree-grid/src/index.js';
+// Vue.component(ElTableTreeColumn.name, ElTableTreeColumn)
 
 global.baseUrl = process.env.NODE_ENV == "development" ? 'Hammer-rest' : '';
 
