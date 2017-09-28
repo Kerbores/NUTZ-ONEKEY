@@ -2,6 +2,8 @@
 # NUTZ-ONEKEY
 NUTZ一键脚手架
 
+[![PowerByNutz](https://img.shields.io/badge/PowerBy-Nutz-green.svg?style=plastic)](https://github.com/nutzam/nutz)
+
 ## 概述
 
 ### github地址 
