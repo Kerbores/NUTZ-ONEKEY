@@ -4,7 +4,7 @@ import org.nutz.dao.entity.annotation.ColDefine;
 import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * @author 王贵源
@@ -18,7 +18,7 @@ import club.zhcs.titans.utils.db.po.Entity;
  *
  * @time 2016年1月28日 上午9:06:29
  */
-public class WxUser extends Entity {
+public class WxUser extends ThunderEntity {
 
 	@Column("c_openid")
 	@Comment("微信用户的openid")

@@ -1,15 +1,16 @@
 package club.zhcs.thunder.biz.config;
 
+import org.nutz.plugin.spring.boot.service.BaseService;
+import org.springframework.stereotype.Service;
+
 import club.zhcs.thunder.bean.config.Config;
-import club.zhcs.titans.utils.biz.BaseService;
 
 /**
- * @author 王贵源
- * @description //TODO
- * @Copyright 内部代码,禁止转发
- * @date 2016年3月28日 下午4:08:04
+ * 
+ * @author kerbores
  *
  */
+@Service
 public class ConfigService extends BaseService<Config> {
 
 }

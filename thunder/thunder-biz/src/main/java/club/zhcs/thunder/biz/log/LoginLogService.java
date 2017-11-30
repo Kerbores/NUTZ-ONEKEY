@@ -1,21 +1,16 @@
 package club.zhcs.thunder.biz.log;
 
+import org.nutz.plugin.spring.boot.service.BaseService;
+import org.springframework.stereotype.Service;
+
 import club.zhcs.thunder.bean.log.LoginLog;
-import club.zhcs.titans.utils.biz.BaseService;
 
 /**
  * 
- * @author Kerbores(kerbores@gmail.com)
- *
- * @project thunder-biz
- *
- * @file LoginLogService.java
- *
- * @description
- *
- * @time 2016年3月8日 上午10:51:26
+ * @author kerbores
  *
  */
+@Service
 public class LoginLogService extends BaseService<LoginLog> {
 
 }

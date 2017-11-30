@@ -10,7 +10,7 @@ import org.nutz.dao.entity.annotation.Table;
 import org.nutz.lang.Times;
 import org.nutz.lang.random.R;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * @author Kerbores(kerbores@gmail.com)
@@ -26,7 +26,7 @@ import club.zhcs.titans.utils.db.po.Entity;
  */
 @Table("t_apm_alarm")
 @Comment("性能告警表")
-public class APMAlarm extends Entity {
+public class APMAlarm extends ThunderEntity {
 
 	public static enum Type {
 		SLOW, MEM, DISK, CPU, NETWORK;

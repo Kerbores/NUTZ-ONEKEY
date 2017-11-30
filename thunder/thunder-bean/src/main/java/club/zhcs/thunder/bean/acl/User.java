@@ -9,7 +9,7 @@ import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 import org.nutz.lang.Times;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * 
@@ -26,7 +26,7 @@ import club.zhcs.titans.utils.db.po.Entity;
  */
 @Table("t_user")
 @Comment("用户表")
-public class User extends Entity {
+public class User extends ThunderEntity {
 
 	/**
 	 * 
@@ -120,24 +120,91 @@ public class User extends Entity {
 	@Comment("用户微信 openid")
 	private String openid;
 
-	/*
-	 * (non-Javadoc)
-	 * 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((headKey == null) ? 0 : headKey.hashCode());
+		result = prime * result + ((headUrl == null) ? 0 : headUrl.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
+		result = prime * result + ((openid == null) ? 0 : openid.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result + ((realName == null) ? 0 : realName.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((userType == null) ? 0 : userType.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (getId() != other.getId())
+		if (createTime == null) {
+			if (other.createTime != null)
+				return false;
+		} else if (!createTime.equals(other.createTime))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (headKey == null) {
+			if (other.headKey != null)
+				return false;
+		} else if (!headKey.equals(other.headKey))
+			return false;
+		if (headUrl == null) {
+			if (other.headUrl != null)
+				return false;
+		} else if (!headUrl.equals(other.headUrl))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (nickName == null) {
+			if (other.nickName != null)
+				return false;
+		} else if (!nickName.equals(other.nickName))
+			return false;
+		if (openid == null) {
+			if (other.openid != null)
+				return false;
+		} else if (!openid.equals(other.openid))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (realName == null) {
+			if (other.realName != null)
+				return false;
+		} else if (!realName.equals(other.realName))
+			return false;
+		if (status != other.status)
 			return false;
 		if (userType != other.userType)
 			return false;
@@ -201,19 +268,6 @@ public class User extends Entity {
 		return userType;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + getId();
-		result = prime * result + ((userType == null) ? 0 : userType.hashCode());
-		return result;
-	}
 
 	public boolean isAvailable() {
 		return status == Status.ACTIVED;

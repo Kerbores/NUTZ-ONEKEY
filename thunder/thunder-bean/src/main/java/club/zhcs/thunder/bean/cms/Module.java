@@ -1,6 +1,6 @@
 package club.zhcs.thunder.bean.cms;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * @author Kerbores(kerbores@gmail.com)
@@ -14,6 +14,6 @@ import club.zhcs.titans.utils.db.po.Entity;
  * @time 2016年9月7日 下午3:53:28
  *
  */
-public class Module extends Entity {
+public class Module extends ThunderEntity {
 
 }

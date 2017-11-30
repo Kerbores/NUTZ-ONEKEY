@@ -1,21 +1,18 @@
 package club.zhcs.thunder.biz.acl;
 
+import org.nutz.plugin.spring.boot.service.BaseService;
+import org.springframework.stereotype.Service;
+
 import club.zhcs.thunder.bean.acl.UserRole;
-import club.zhcs.titans.utils.biz.BaseService;
 
 /**
  * 
- * @author Kerbores(kerbores@gmail.com)
+ * @author kerbores
  *
- * @project thunder-biz
- *
- * @file UserRoleService.java
- *
- * @description //TODO
- *
- * @time 2016年3月8日 上午10:51:26
+ * @email kerbores@gmail.com
  *
  */
+@Service
 public class UserRoleService extends BaseService<UserRole> {
 
 }

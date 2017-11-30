@@ -5,7 +5,8 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
+
 
 /**
  * 
@@ -22,7 +23,7 @@ import club.zhcs.titans.utils.db.po.Entity;
  */
 @Table("t_permission")
 @Comment("权限表")
-public class Permission extends Entity {
+public class Permission extends ThunderEntity {
 
 	@Column("p_name")
 	@Name

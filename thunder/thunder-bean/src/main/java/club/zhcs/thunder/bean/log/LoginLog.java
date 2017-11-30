@@ -7,7 +7,7 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 import org.nutz.lang.Times;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * @author Kerbores(kerbores@gmail.com)
@@ -22,11 +22,11 @@ import club.zhcs.titans.utils.db.po.Entity;
  *
  */
 @Table("t_user_login")
-public class LoginLog extends Entity {
+public class LoginLog extends ThunderEntity {
 
 	@Column("login_user_id")
 	@Comment("登录用户 id")
-	private int userId;
+	private long userId;
 
 	@Column("login_account")
 	@Comment("登录账户")
@@ -52,7 +52,7 @@ public class LoginLog extends Entity {
 		return loginTime;
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
@@ -68,7 +68,7 @@ public class LoginLog extends Entity {
 		this.loginTime = loginTime;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 

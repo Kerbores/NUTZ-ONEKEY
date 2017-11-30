@@ -5,7 +5,7 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * 
@@ -22,7 +22,7 @@ import club.zhcs.titans.utils.db.po.Entity;
  */
 @Table("t_role")
 @Comment("角色表")
-public class Role extends Entity {
+public class Role extends ThunderEntity {
 
 	@Column("r_name")
 	@Comment("角色名称")

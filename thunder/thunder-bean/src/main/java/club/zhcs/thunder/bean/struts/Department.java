@@ -1,6 +1,6 @@
 package club.zhcs.thunder.bean.struts;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * 
@@ -15,6 +15,6 @@ import club.zhcs.titans.utils.db.po.Entity;
  * @time 2016年3月8日 上午10:51:26
  *
  */
-public class Department extends Entity {
+public class Department extends ThunderEntity {
 
 }

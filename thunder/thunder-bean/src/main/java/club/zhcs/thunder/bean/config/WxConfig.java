@@ -4,7 +4,7 @@ import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * 
@@ -20,7 +20,7 @@ import club.zhcs.titans.utils.db.po.Entity;
  */
 @Table("t_wechat_config")
 @Comment("微信配置")
-public class WxConfig extends Entity {
+public class WxConfig extends ThunderEntity {
 
 	@Column("wc_app_id")
 	@Comment("微信appid")

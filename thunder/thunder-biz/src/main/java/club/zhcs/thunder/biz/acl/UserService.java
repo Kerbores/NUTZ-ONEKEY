@@ -6,35 +6,31 @@ import java.util.List;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.entity.Record;
 import org.nutz.dao.sql.Sql;
-import org.nutz.ioc.loader.annotation.Inject;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
+import org.nutz.plugin.spring.boot.service.BaseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import club.zhcs.common.Result;
 import club.zhcs.thunder.bean.acl.User;
 import club.zhcs.thunder.bean.acl.UserPermission;
 import club.zhcs.thunder.bean.acl.UserRole;
-import club.zhcs.titans.utils.biz.BaseService;
-import club.zhcs.titans.utils.db.Result;
 
 /**
  * 
- * @author Kerbores(kerbores@gmail.com)
+ * @author kerbores
  *
- * @project thunder-biz
- *
- * @file UserService.java
- *
- * @description 用户
- *
- * @time 2016年3月8日 上午10:51:26
+ * @email kerbores@gmail.com
  *
  */
+@Service
 public class UserService extends BaseService<User> {
 
-	@Inject
+	@Autowired
 	UserPermissionService userPermissionService;
 
-	@Inject
+	@Autowired
 	UserRoleService userRoleService;
 
 	/**
@@ -83,16 +79,16 @@ public class UserService extends BaseService<User> {
 	 * @param id
 	 * @return
 	 */
-	public Result setPermission(int[] ids, int userId) {
+	public Result setPermission(long[] ids, long userId) {
 		/**
 		 * 1.查询用户现在的全部权限<br>
 		 * 2.遍历权限,如果存在更新时间,如果不存在删除,处理之后从目标数组中移除元素<br>
 		 * 3.遍历剩余的目标数组,添加关系
 		 */
 		if (ids == null) {
-			ids = new int[] {};
+			ids = new long[] {};
 		}
-		List<Integer> newIds = Lang.array2list(ids, Integer.class);
+		List<Long> newIds = Lang.array2list(ids, Long.class);
 		Collections.sort(newIds);
 		List<UserPermission> list = userPermissionService.query(Cnd.where("userId", "=", userId));
 		for (UserPermission user : list) {
@@ -103,7 +99,7 @@ public class UserService extends BaseService<User> {
 				userPermissionService.delete(user.getId());
 			}
 		}
-		for (int pid : newIds) {
+		for (long pid : newIds) {
 			UserPermission userp = new UserPermission();
 			userp.setUserId(userId);
 			userp.setPermissionId(pid);
@@ -118,16 +114,16 @@ public class UserService extends BaseService<User> {
 	 * @param id
 	 * @return
 	 */
-	public Result setRole(int[] ids, int userId) {
+	public Result setRole(long[] ids, long userId) {
 		/**
 		 * 1.查询用户现在的全部角色<br>
 		 * 2.遍历角色,如果存在更新时间,如果不存在删除,处理之后从目标数组中移除元素<br>
 		 * 3.遍历剩余的目标数组,添加关系
 		 */
 		if (ids == null) {
-			ids = new int[] {};
+			ids = new long[] {};
 		}
-		List<Integer> newIds = Lang.array2list(ids, Integer.class);
+		List<Long> newIds = Lang.array2list(ids, Long.class);
 		Collections.sort(newIds);
 		List<UserRole> userRoles = userRoleService.query(Cnd.where("userId", "=", userId));
 		for (UserRole role : userRoles) {
@@ -138,7 +134,7 @@ public class UserService extends BaseService<User> {
 				userRoleService.delete(role.getId());
 			}
 		}
-		for (int rid : newIds) {
+		for (long rid : newIds) {
 			UserRole relation = new UserRole();
 			relation.setRoleId(rid);
 			relation.setUserId(userId);

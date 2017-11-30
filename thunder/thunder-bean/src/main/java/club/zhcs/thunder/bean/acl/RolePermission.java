@@ -4,7 +4,7 @@ import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * 
@@ -21,20 +21,20 @@ import club.zhcs.titans.utils.db.po.Entity;
  */
 @Table("t_role_permission")
 @Comment("角色权限关系表")
-public class RolePermission extends Entity {
+public class RolePermission extends ThunderEntity {
 
 	@Column("r_id")
 	@Comment("角色id")
-	private int roleId;
+	private long roleId;
 
 	@Column("p_id")
 	@Comment("权限id")
-	private int permissionId;
+	private long permissionId;
 
 	/**
 	 * @return the permissionId
 	 */
-	public int getPermissionId() {
+	public long getPermissionId() {
 		return permissionId;
 	}
 
@@ -49,7 +49,7 @@ public class RolePermission extends Entity {
 	 * @param permissionId
 	 *            the permissionId to set
 	 */
-	public void setPermissionId(int permissionId) {
+	public void setPermissionId(long permissionId) {
 		this.permissionId = permissionId;
 	}
 
@@ -57,7 +57,7 @@ public class RolePermission extends Entity {
 	 * @param roleId
 	 *            the roleId to set
 	 */
-	public void setRoleId(int roleId) {
+	public void setRoleId(long roleId) {
 		this.roleId = roleId;
 	}
 

@@ -5,23 +5,19 @@ import java.util.HashSet;
 import java.util.List;
 
 import org.nutz.dao.sql.Sql;
+import org.nutz.plugin.spring.boot.service.BaseService;
+import org.springframework.stereotype.Service;
 
 import club.zhcs.thunder.bean.acl.Permission;
-import club.zhcs.titans.utils.biz.BaseService;
 
 /**
  * 
- * @author Kerbores(kerbores@gmail.com)
+ * @author kerbores
  *
- * @project thunder-biz
- *
- * @file PermissionService.java
- *
- * @description 权限
- *
- * @time 2016年3月8日 上午10:51:26
+ * @email kerbores@gmail.com
  *
  */
+@Service
 public class PermissionService extends BaseService<Permission> {
 
 	/**
@@ -32,7 +28,7 @@ public class PermissionService extends BaseService<Permission> {
 	 *            用户id
 	 * @return
 	 */
-	public List<Permission> getAllPermissionsByUserId(int id) {
+	public List<Permission> getAllPermissionsByUserId(long id) {
 		List<Permission> target = listDirectPermissionsByUserId(id);
 		target.addAll(listIndirectPermissionsByUserId(id));
 		return new ArrayList(new HashSet(target));
@@ -46,7 +42,7 @@ public class PermissionService extends BaseService<Permission> {
 	 *            用户id
 	 * @return 角色列表
 	 */
-	public List<Permission> listDirectPermissionsByUserId(int id) {
+	public List<Permission> listDirectPermissionsByUserId(long id) {
 		Sql sql = dao().sqls().create("list.direct.permission.by.user.id");
 		sql.params().set("userId", id);
 		return searchObj(sql);
@@ -60,7 +56,7 @@ public class PermissionService extends BaseService<Permission> {
 	 *            用户id
 	 * @return 角色列表
 	 */
-	public List<Permission> listIndirectPermissionsByUserId(int id) {
+	public List<Permission> listIndirectPermissionsByUserId(long id) {
 		Sql sql = dao().sqls().create("list.indirect.permission.by.user.id");
 		sql.params().set("userId", id);
 		return searchObj(sql);

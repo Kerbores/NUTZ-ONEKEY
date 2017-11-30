@@ -19,7 +19,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>2.4</version>
 				<!-- The configuration of the plugin -->
 				<configuration>
 					<!-- Configuration of the archiver -->
@@ -57,6 +56,16 @@
 			<groupId>club.zhcs</groupId>
 			<artifactId>thunder-biz</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.qiniu</groupId>
+			<artifactId>qiniu-java-sdk</artifactId>
+			<version>7.2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.nutz</groupId>
+			<artifactId>nutzwx</artifactId>
+			<version>1.r.63</version>
 		</dependency>
 	</dependencies>
 	<packaging>war</packaging>

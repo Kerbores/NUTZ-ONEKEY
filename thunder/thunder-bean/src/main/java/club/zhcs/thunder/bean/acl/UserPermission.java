@@ -4,7 +4,7 @@ import org.nutz.dao.entity.annotation.Column;
 import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * 
@@ -21,31 +21,31 @@ import club.zhcs.titans.utils.db.po.Entity;
  */
 @Table("t_user_permission")
 @Comment("用户权限关系表")
-public class UserPermission extends Entity {
+public class UserPermission extends ThunderEntity {
 	/**
 	 * 用户id
 	 */
 	@Column("u_id")
 	@Comment("用户id")
-	private int userId;
+	private long userId;
 	/**
 	 * 权限id
 	 */
 	@Column("p_id")
 	@Comment("权限id")
-	private int permissionId;
+	private long permissionId;
 
 	/**
 	 * @return the permissionId
 	 */
-	public int getPermissionId() {
+	public long getPermissionId() {
 		return permissionId;
 	}
 
 	/**
 	 * @return the userId
 	 */
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
@@ -53,7 +53,7 @@ public class UserPermission extends Entity {
 	 * @param permissionId
 	 *            the permissionId to set
 	 */
-	public void setPermissionId(int permissionId) {
+	public void setPermissionId(long permissionId) {
 		this.permissionId = permissionId;
 	}
 
@@ -61,7 +61,7 @@ public class UserPermission extends Entity {
 	 * @param userId
 	 *            the userId to set
 	 */
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 

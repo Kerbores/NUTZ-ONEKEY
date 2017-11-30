@@ -1,21 +1,16 @@
 package club.zhcs.thunder.biz.log;
 
+import org.nutz.plugin.spring.boot.service.BaseService;
+import org.springframework.stereotype.Service;
+
 import club.zhcs.thunder.bean.log.OperationLog;
-import club.zhcs.titans.utils.biz.BaseService;
 
 /**
  * 
- * @author Kerbores(kerbores@gmail.com)
- *
- * @project thunder-web
- *
- * @file OperationLogService.java
- *
- * @description
- *
- * @time 2016年3月8日 上午10:51:26
+ * @author kerbores
  *
  */
+@Service
 public class OperationLogService extends BaseService<OperationLog> {
 
 }

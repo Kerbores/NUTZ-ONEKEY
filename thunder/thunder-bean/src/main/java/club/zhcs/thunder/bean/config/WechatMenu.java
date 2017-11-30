@@ -7,9 +7,9 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 import org.nutz.json.JsonField;
 
-import club.zhcs.titans.utils.db.po.Entity;
-
 import com.google.common.collect.Lists;
+
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * @author Kerbores(kerbores@gmail.com)
@@ -25,7 +25,7 @@ import com.google.common.collect.Lists;
  */
 @Table("t_wechat_menu")
 @Comment("微信菜单")
-public class WechatMenu extends Entity {
+public class WechatMenu extends ThunderEntity {
 
 	public static enum Type {
 		CLICK("click", "点击推事件"),

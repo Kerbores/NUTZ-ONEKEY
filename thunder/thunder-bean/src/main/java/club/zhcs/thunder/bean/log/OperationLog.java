@@ -7,7 +7,7 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 import org.nutz.lang.Times;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * @author Kerbores(kerbores@gmail.com)
@@ -22,7 +22,7 @@ import club.zhcs.titans.utils.db.po.Entity;
  *
  */
 @Table("t_opt_log")
-public class OperationLog extends Entity {
+public class OperationLog extends ThunderEntity {
 
 	@Column("opt_account")
 	@Comment("操作人员账户")

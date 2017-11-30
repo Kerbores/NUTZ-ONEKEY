@@ -6,7 +6,7 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * 
@@ -23,7 +23,7 @@ import club.zhcs.titans.utils.db.po.Entity;
  */
 @Table("t_branch")
 @Comment("分支机构")
-public class Branch extends Entity {
+public class Branch extends ThunderEntity {
 
 	@Name
 	@Column("sub_name")

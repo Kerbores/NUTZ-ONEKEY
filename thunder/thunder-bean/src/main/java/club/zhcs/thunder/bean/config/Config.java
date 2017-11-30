@@ -7,7 +7,7 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * @author Kerbores(kerbores@gmail.com)
@@ -22,7 +22,7 @@ import club.zhcs.titans.utils.db.po.Entity;
  *
  */
 @Table("t_sys_config")
-public class Config extends Entity {
+public class Config extends ThunderEntity {
 
 	@Name
 	@Column("cfg_key")

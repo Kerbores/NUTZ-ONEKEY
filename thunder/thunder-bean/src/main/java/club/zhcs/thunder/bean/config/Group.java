@@ -5,11 +5,11 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 @Table("t_code_book_group")
 @Comment("码表分组")
-public class Group extends Entity {
+public class Group extends ThunderEntity {
 
 	@Name
 	@Column("g_name")

@@ -6,7 +6,7 @@ import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 import org.nutz.lang.random.R;
 
-import club.zhcs.titans.utils.db.po.Entity;
+import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * @author Kerbores(kerbores@gmail.com)
@@ -22,7 +22,7 @@ import club.zhcs.titans.utils.db.po.Entity;
  */
 @Table("t_article")
 @Comment("文章")
-public class Article extends Entity {
+public class Article extends ThunderEntity {
 
 	@Name
 	@Column("a_uid")
