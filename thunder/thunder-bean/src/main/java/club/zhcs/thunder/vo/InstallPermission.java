@@ -70,6 +70,18 @@ public enum InstallPermission {
 	 */
 	PERMISSION_LIST("permission.list", "权限管理"),
 	/**
+	 * 权限添加
+	 */
+	PERMISSION_ADD("permission.add", "权限添加"),
+	/**
+	 * 权限编辑
+	 */
+	PERMISSION_EDIT("permission.edit", "编辑权限"),
+	/**
+	 * 权限删除
+	 */
+	PERMISSION_DELETE("permission.delete", "删除权限"),
+	/**
 	 * ++++++++++++++++++++++访问控制++++++++++++++++++++++++++++++++
 	 */
 
@@ -97,27 +109,7 @@ public enum InstallPermission {
 	 * ++++++++++++++++++++++配置管理++++++++++++++++++++++++++++++++
 	 */
 
-	/**
-	 * ++++++++++++++++++++++机构管理++++++++++++++++++++++++++++++++
-	 */
-	STRUTS_LIST("struts.list", "机构管理"),
-	/**
-	 * 
-	 */
-	STRUTS_ADD("struts.add", "机构添加"),
-	/**
-	 * 
-	 */
-	STRUTS_EDIT("struts.edit", "机构编辑"),
-	/**
-	 * 
-	 */
-	STRUTS_DETAIL("struts.detail", "机构详情"),
-	/**
-	 * 
-	 */
-	STRUTS_DELETE("struts.delete", "机构删除"),
-	/**
+	/*
 	 * ++++++++++++++++++++++码本管理++++++++++++++++++++++++++++++++
 	 */
 	GROUP_LIST("group.list", "码本分组列表"),
@@ -132,7 +124,11 @@ public enum InstallPermission {
 	/**
 	 * 
 	 */
-	GROUP_DELETE(".delete", "码本分组删除"),
+	GROUP_DETAIL("group.detail", "码本分组详情"),
+	/**
+	 * 
+	 */
+	GROUP_DELETE("group.delete", "码本分组状态"),
 	/**
 	 * 
 	 */
@@ -148,7 +144,24 @@ public enum InstallPermission {
 	/**
 	 * 
 	 */
-	CODEBOOK_DELETE("codebook.delete", "数据删除"),
+	CODEBOOK_DELETE("codebook.delete", "数据状态"),
+
+	/**
+	 * 
+	 */
+	BRANCH_LIST("branch.list", "分支机构列表"),
+	/**
+	 * 
+	 */
+	BRANCH_ADD("branch.add", "分支机构添加"),
+	/**
+	 * 
+	 */
+	BRANCH_EDIT("branch.edit", "分支机构编辑"),
+	/**
+	 * 
+	 */
+	BRANCH_DELETE("beanch.delete", "分支机构状态"),
 	/**
 	 * 
 	 */

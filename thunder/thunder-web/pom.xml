@@ -67,6 +67,11 @@
 			<artifactId>nutzwx</artifactId>
 			<version>1.r.63</version>
 		</dependency>
+		<dependency>
+			<groupId>eu.bitwalker</groupId>
+			<artifactId>UserAgentUtils</artifactId>
+			<version>1.20</version>
+		</dependency>
 	</dependencies>
 	<packaging>war</packaging>
 </project>

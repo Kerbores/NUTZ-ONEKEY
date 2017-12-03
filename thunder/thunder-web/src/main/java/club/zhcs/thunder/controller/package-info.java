@@ -1,5 +1,5 @@
 /**
- * @author kerbores@gmail.com
+ * @author kerbores
  *
  */
 package club.zhcs.thunder.controller;

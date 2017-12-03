@@ -1,0 +1,93 @@
+#application
+spring:
+  application:
+    name: sino soft scaffold nutz dao vue前后端分离版
+    version: 1.0
+  #REDIS
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/spring-thunder?useUnicode=true&characterEncoding=utf8&useSSL=false
+      username: root
+      password: 123456
+      driver-class-name: com.mysql.jdbc.Driver
+      
+      filters: stat,wall,log4j
+      initialSize: 10
+      minIdle: 1
+      maxActive: 50
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 'sino soft'
+      testWhileIdle: true
+      testOnBorrow: true
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: /druid/*,*.js,*.gif,*.jpg,*.png,*.css,*.ico
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+#        login-username: root
+#        login-password: 123456
+        resetEnable: true
+management:
+  security:
+    enabled: false
+#server
+server:
+  port: 8080
+#LOG
+#logging.level.root=DEBUG
+logging:
+  level:
+    org.nutz: DEBUG
+    com.sino: DEBUG
+#nutz-dao
+nutz:
+  dao:
+    runtime:
+      add-column: true
+      basepackage: 
+      - com.sino.scaffold.bean
+      check-index: true
+      create: true
+      delete-column: true
+      foce-create: false
+      migration: true
+    sqlmanager:
+      paths:
+      - sqls
+  json:
+    enabled: true
+    mode: compact
+sino:
+  config:
+    test: test111
+wechat:
+  appid: wx6e4f32b9bfd64693
+  appsecret: 7ec96826e905841e4912e8acdf5037ed
+  encoding-aes-key: Kerbores
+  redis-cache-enable: true
+  token: Kerbores
+swagger:
+  base-package: club.zhcs
+  contact-email: kerbores@gmail.com
+  contact-name: Kerbores
+  contact-url: https://thunder.kerbores.com
+  title: Nutz-Onekey
+  description: API接口手册
+  version: 4.0
+#QIUNIU
+qiniu:
+  access-key: 0_2UjuhLU6jbRzmcGjnraA7t4H_lpSVgNX3Ld1uV
+  secret-key: Svl3Zxbi9KyCFMvAg-2yKNjezhRwgBFNOR-cZQQk
+  bucket: http://7xlb6l.com1.z0.glb.clouddn.com/
+  domain: test

@@ -30,7 +30,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -53,17 +52,9 @@ import club.zhcs.thunder.biz.qa.NutzerService;
 import club.zhcs.thunder.ext.shiro.matcher.SINOCredentialsMatcher;
 import club.zhcs.thunder.vo.InstallPermission;
 import club.zhcs.thunder.vo.InstalledRole;
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
-import springfox.documentation.service.Contact;
-import springfox.documentation.spi.DocumentationType;
-import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableRedisHttpSession
-@EnableSwagger2
 @EnableAsync
 @EnableTransactionManagement
 public class BootNutzVueApplication extends WebMvcConfigurerAdapter {
@@ -87,8 +78,8 @@ public class BootNutzVueApplication extends WebMvcConfigurerAdapter {
 				Dao dao = context.getBean(Dao.class);
 				if (context.getParent() == null) {
 					log.debug("application starter...");
-					Daos.createTablesInPackage(dao, "com.sino.scaffold.bean", false);// 确保表结构正确
-					Daos.migration(dao, "com.sino.scaffold.bean", true, true);
+					Daos.createTablesInPackage(dao, "club.zhcs.thunder.bean", false);// 确保表结构正确
+					Daos.migration(dao, "club.zhcs.thunder.bean", true, true);
 					initAcl(context);
 				}
 			}
@@ -170,30 +161,6 @@ public class BootNutzVueApplication extends WebMvcConfigurerAdapter {
 
 		});
 		application.run(args);
-	}
-
-	@Bean
-	public Docket api() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.genericModelSubstitutes(DeferredResult.class)
-				.useDefaultResponseMessages(false)
-				.forCodeGeneration(true)
-				.pathMapping("/")
-				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.sino"))
-				.build()
-				.apiInfo(apiInfo());
-	}
-
-	private ApiInfo apiInfo() {
-		return new ApiInfoBuilder().title("F")
-				.description("接口手册")// 详细描述
-				.version("1.0")// 版本
-				.termsOfServiceUrl("http://www.sinosoft.com.cn")
-				.contact(new Contact("王贵源", "http://www.sinosoft.com.cn", "wangguiyuan@sinosoft.com.cn"))// 作者
-				.license("The Apache License, Version 2.0")
-				.licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html")
-				.build();
 	}
 
 	public static class QAUserCheckInterceptor implements HandlerInterceptor {

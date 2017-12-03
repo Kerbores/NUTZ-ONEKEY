@@ -18,10 +18,10 @@
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Component;
 //
-//import com.sino.scaffold.bean.acl.User;
-//import com.sino.scaffold.bean.acl.User.Status;
-//import com.sino.scaffold.ext.shiro.token.JwtToken;
-//import com.sino.scaffold.service.acl.ShiroUserService;
+//import club.zhcs.thunder.bean.acl.User;
+//import club.zhcs.thunder.bean.acl.User.Status;
+//import club.zhcs.thunder.ext.shiro.token.JwtToken;
+//import club.zhcs.thunder.service.acl.ShiroUserService;
 //
 ///**
 // * @author kerbores@gmail.com

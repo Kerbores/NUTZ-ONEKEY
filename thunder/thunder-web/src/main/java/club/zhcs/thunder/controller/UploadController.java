@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import club.zhcs.common.Result;
+import club.zhcs.thunder.config.qiniu.QiniuAutoConfiguration.QiniuUploader;
+import club.zhcs.thunder.config.qiniu.QiniuAutoConfiguration.R;
 
 /**
  * @author kerbores
@@ -18,11 +20,11 @@ import club.zhcs.common.Result;
 @RequestMapping("file")
 public class UploadController {
 	@Autowired
-	club.zhcs.thunder.config.qiniu.QiniuAutoConfiguration.QiniuUploader qiniuUploader;
+	QiniuUploader qiniuUploader;
 
 	@PostMapping("upload")
 	public Result test(MultipartFile file) throws IOException {
-		club.zhcs.thunder.config.qiniu.QiniuAutoConfiguration.R r = qiniuUploader.upload(file.getInputStream());
+		R r = qiniuUploader.upload(file.getInputStream());
 		return r == null ? Result.fail("上传失败!") : Result.success().addData("url", r.getUrl());
 	}
 }
