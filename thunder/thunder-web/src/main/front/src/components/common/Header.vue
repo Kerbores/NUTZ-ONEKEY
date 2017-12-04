@@ -1,7 +1,9 @@
 <template>
 <div>
     <div class="header">
-        <div class="logo">送又来平台Boss系统</div>
+        <div class="logo">
+          <img src="../../../static/img/logo.jpg" height="40">
+          Nutz-onekey</div>
         <div class="user-info">
             <el-dropdown trigger="click" @command="handleCommand">
                 <span class="el-dropdown-link">
