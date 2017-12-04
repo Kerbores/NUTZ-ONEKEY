@@ -23,6 +23,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Comment("角色权限关系表")
 public class RolePermission extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column("r_id")
 	@Comment("角色id")
 	private long roleId;

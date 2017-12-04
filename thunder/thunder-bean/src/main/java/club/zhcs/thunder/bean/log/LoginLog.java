@@ -24,6 +24,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Table("t_user_login")
 public class LoginLog extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column("login_user_id")
 	@Comment("登录用户 id")
 	private long userId;

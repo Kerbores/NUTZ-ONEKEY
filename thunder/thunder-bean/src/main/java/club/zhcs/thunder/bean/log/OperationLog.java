@@ -24,6 +24,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Table("t_opt_log")
 public class OperationLog extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column("opt_account")
 	@Comment("操作人员账户")
 	private String account;

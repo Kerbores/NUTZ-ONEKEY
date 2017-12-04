@@ -1,5 +1,7 @@
 package club.zhcs.thunder.bean;
 
+import java.io.Serializable;
+
 import org.nutz.dao.entity.annotation.Id;
 import org.nutz.plugin.spring.boot.service.entity.DataBaseEntity;
 
@@ -7,8 +9,12 @@ import org.nutz.plugin.spring.boot.service.entity.DataBaseEntity;
  * @author kerbores@gmail.com
  *
  */
-public class ThunderEntity extends DataBaseEntity {
+public class ThunderEntity extends DataBaseEntity implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	long id;
 

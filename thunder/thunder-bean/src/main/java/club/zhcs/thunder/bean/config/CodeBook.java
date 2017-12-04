@@ -11,6 +11,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Comment("码表")
 public class CodeBook extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Name
 	@Column("c_name")
 	private String name;

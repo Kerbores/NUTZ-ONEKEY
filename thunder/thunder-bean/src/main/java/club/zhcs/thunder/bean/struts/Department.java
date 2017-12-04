@@ -17,4 +17,9 @@ import club.zhcs.thunder.bean.ThunderEntity;
  */
 public class Department extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

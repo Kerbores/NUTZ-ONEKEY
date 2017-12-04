@@ -28,6 +28,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Comment("性能告警表")
 public class APMAlarm extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static enum Type {
 		SLOW, MEM, DISK, CPU, NETWORK;
 	}

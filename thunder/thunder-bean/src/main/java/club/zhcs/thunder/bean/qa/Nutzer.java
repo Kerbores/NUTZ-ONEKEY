@@ -21,6 +21,11 @@ import org.nutz.dao.entity.annotation.Table;
 @Comment("nutz 用户")
 public class Nutzer extends WxUser {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column("n_access_token")
 	@Comment("nutz.cn的accesstoken")
 	private String accessToken;

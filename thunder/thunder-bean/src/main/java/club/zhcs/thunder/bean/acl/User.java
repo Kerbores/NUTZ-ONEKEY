@@ -30,6 +30,11 @@ public class User extends ThunderEntity {
 
 	/**
 	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 
 	 * @author 王贵源
 	 *
 	 * @email kerbores@kerbores.com

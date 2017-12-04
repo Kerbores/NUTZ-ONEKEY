@@ -25,6 +25,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Comment("分支机构")
 public class Branch extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Name
 	@Column("sub_name")
 	@Comment("分支机构名称")

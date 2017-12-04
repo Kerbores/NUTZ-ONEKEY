@@ -22,6 +22,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Comment("微信配置")
 public class WxConfig extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column("wc_app_id")
 	@Comment("微信appid")
 	private String appid;

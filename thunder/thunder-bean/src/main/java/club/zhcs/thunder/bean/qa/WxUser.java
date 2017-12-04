@@ -20,6 +20,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
  */
 public class WxUser extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column("c_openid")
 	@Comment("微信用户的openid")
 	@ColDefine(width = 32)

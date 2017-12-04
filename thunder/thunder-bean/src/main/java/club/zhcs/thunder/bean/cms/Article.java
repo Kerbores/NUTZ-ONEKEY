@@ -24,6 +24,10 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Comment("文章")
 public class Article extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Name
 	@Column("a_uid")
 	@Comment("文章uuid")

@@ -16,4 +16,9 @@ import club.zhcs.thunder.bean.ThunderEntity;
  */
 public class Module extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 }

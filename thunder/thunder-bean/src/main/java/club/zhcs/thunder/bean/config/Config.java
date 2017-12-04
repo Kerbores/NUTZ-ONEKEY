@@ -24,6 +24,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Table("t_sys_config")
 public class Config extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Name
 	@Column("cfg_key")
 	@Comment("配置键")

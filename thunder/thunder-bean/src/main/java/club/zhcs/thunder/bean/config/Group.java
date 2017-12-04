@@ -11,6 +11,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Comment("码表分组")
 public class Group extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Name
 	@Column("g_name")
 	@Comment("分组名称")

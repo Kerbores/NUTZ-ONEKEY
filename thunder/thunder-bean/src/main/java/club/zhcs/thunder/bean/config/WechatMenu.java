@@ -27,6 +27,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Comment("微信菜单")
 public class WechatMenu extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static enum Type {
 		CLICK("click", "点击推事件"),
 		VIEW("view", "跳转URL"),

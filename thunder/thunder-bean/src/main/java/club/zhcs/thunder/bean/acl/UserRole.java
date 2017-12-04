@@ -23,6 +23,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Comment("用户角色关系表")
 public class UserRole extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column("u_id")
 	@Comment("用户id")
 	private long userId;

@@ -25,6 +25,11 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Comment("权限表")
 public class Permission extends ThunderEntity {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Column("p_name")
 	@Name
 	@Comment("权限名称")
