@@ -223,22 +223,22 @@ public class UserController extends BaseController {
 	 */
 	@PostMapping("login")
 	@ApiOperation(value = "用户登录")
-	public Result login(@RequestBody ApiRequest<UserLoginDto> request, @ApiIgnore HttpSession session, HttpServletResponse resp) {
-		if (Strings.equalsIgnoreCase(request.getData().getCaptcha(), Strings.safeToString(session.getAttribute(BootNutzVueApplication.CAPTCHA_KEY), ""))) {
-			Result result = shiroUserService.login(request.getData().getUserName(), request.getData().getPassword(), Lang.getIP(request()));
+	public Result login(@RequestBody UserLoginDto userLoginDto, @ApiIgnore HttpSession session, HttpServletResponse resp) {
+		if (Strings.equalsIgnoreCase(userLoginDto.getCaptcha(), Strings.safeToString(session.getAttribute(BootNutzVueApplication.CAPTCHA_KEY), ""))) {
+			Result result = shiroUserService.login(userLoginDto.getUserName(), userLoginDto.getPassword(), Lang.getIP(request()));
 			if (result.isSuccess()) {
 				// 登录成功处理
 				_putSession(BootNutzVueApplication.USER_KEY, result.getData().get("loginUser"));
-				if (request.getData().isRememberMe()) {
+				if (userLoginDto.isRememberMe()) {
 					NutMap data = NutMap.NEW();
-					data.put("user", request.getData().getUserName());
-					data.put("password", request.getData().getPassword());
-					data.put("rememberMe", request.getData().getPassword());
+					data.put("user", userLoginDto.getUserName());
+					data.put("password", userLoginDto.getPassword());
+					data.put("rememberMe", userLoginDto.getPassword());
 					_addCookie("kerbores", DES.encrypt(Json.toJson(data)), 24 * 60 * 60 * 365);
 				}
 				return result
-						.addData("roles", shiroUserService.roleInfos(request.getData().getUserName()))
-						.addData("permissions", shiroUserService.permissionInfos(request.getData().getUserName()));
+						.addData("roles", shiroUserService.roleInfos(userLoginDto.getUserName()))
+						.addData("permissions", shiroUserService.permissionInfos(userLoginDto.getUserName()));
 			}
 			return result;
 		} else {

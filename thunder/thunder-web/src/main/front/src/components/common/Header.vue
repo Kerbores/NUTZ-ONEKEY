@@ -48,7 +48,7 @@ export default {
     handleCommand(command) {
       if (command == "loginout") {
         const self = this;
-        self.$http.get("/employee/logout", {}, data => {
+        self.$http.get("/user/logout", {}, data => {
           self.$store.commit("remove");
         });
       }

@@ -1,8 +1,8 @@
 {
-  "name": "syl_boss",
+  "name": "nutz_onekey",
   "version": "1.0.0",
-  "description": "送又来平台Boss系统",
-  "author": "Kerbores <kerbores@songyoulai.com>",
+  "description": "NUTZ-ONEKEY",
+  "author": "Kerbores <kerbores@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",

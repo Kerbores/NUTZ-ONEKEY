@@ -1,19 +1,23 @@
 <template>
     <div class="login-wrap">
-        <div class="ms-title"> 送又来平台Boss系统</div>
         <div class="ms-login">
             <el-form :model="loginForm" status-icon :rules="$rules"  ref="loginForm" label-width="0px" class="demo-ruleForm">
-                <el-form-item prop="mobile">
-                    <el-input v-model="loginForm.mobile" placeholder="请输入手机号"    prefix-icon="el-icon-fa-phone" @keyup.enter.native="submitForm('loginForm')">
-                        <!-- <template slot="prepend">手机号</template> -->
-                        <template slot="append">
-                            <el-button type="primary" @click="sendCaptcha('loginForm')" :disabled="!loginForm.mobile" icon="el-icon-fa-send-o"></el-button>
-                        </template>
+                <div class="ms-title"> NUTZ-ONEKEY</div>
+                <el-form-item prop="userName">
+                    <el-input v-model="loginForm.userName" placeholder="请输入用户名" icon="user" @keyup.enter.native="submitForm('loginForm')">
+                        <template slot="prepend">用户</template>
+                    </el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                    <el-input type="password" placeholder="请输入密码" v-model="loginForm.password" icon="lock" @keyup.enter.native="submitForm('loginForm')">
+                        <template slot="prepend">密码</template>
                     </el-input>
                 </el-form-item>
                 <el-form-item prop="captcha">
-                    <el-input  placeholder="请输入验证码" v-model="loginForm.captcha" prefix-icon="el-icon-fa-key" @keyup.enter.native="submitForm('loginForm')">
-                        <!-- <template slot="prepend">验证码</template> -->
+                    <el-input placeholder="请输入验证码" v-model="loginForm.captcha" @keyup.enter.native="submitForm('loginForm')">
+                        <template slot="append">
+                            <img :src="captcha" @click="refreshCaptcha" class="append-img" title="点击刷新验证码">
+                        </template>
                     </el-input>
                 </el-form-item>
                 <el-form-item prop="rememberMe">
@@ -32,10 +36,11 @@ import axios from "axios";
 export default {
   data: function() {
     return {
+      captcha: baseUrl + "/captcha?length=4",
       loginForm: {
-        mobile: "",
+        userName: "admin",
+        password: "123456",
         captcha: "",
-        key: "",
         rememberMe: true
       }
     };
@@ -45,33 +50,14 @@ export default {
     this.loginForm.mobile = me ? me : "";
   },
   methods: {
-    sendCaptcha(formName) {
-      this.$refs[formName].validateField("mobile", msg => {
-        if (!msg) {
-          this.$http.get(
-            "/employee/captcha",
-            { mobile: this.loginForm.mobile },
-            result => {
-              this.$notify({
-                title: "成功",
-                message: "验证码发送成功!",
-                type: "success",
-                showClose: false,
-                onClose: () => {
-                  this.loginForm.key = result.key;
-                  this.loginForm.captcha = result.captcha;
-                }
-              });
-            }
-          );
-        }
-      });
+    refreshCaptcha() {
+      this.captcha = baseUrl + "/captcha?length=4&" + Math.random();
     },
     submitForm(formName) {
       const self = this;
       self.$refs[formName].validate(valid => {
         if (valid) {
-          self.$http.post("/employee/login", self.loginForm, data => {
+          self.$http.postBody("/user/login", self.loginForm, data => {
             let loginUser = data.loginUser;
             loginUser.roles = data.roles;
             loginUser.permissions = data.permissions;
@@ -99,29 +85,28 @@ export default {
 }
 
 .append-img {
-  height: 31px;
+  height: 39px;
+  border-radius: 0 4px 4px 0;
   cursor: pointer;
-  margin-left: -10px;
-  margin-right: -10px;
+  margin-left: -20px;
+  margin-right: -20px;
   margin-bottom: -5px;
 }
 
 .ms-title {
-  position: absolute;
-  top: 50%;
-  width: 100%;
-  margin-top: -230px;
+  font-family: -webkit-pictograph;
   text-align: center;
   font-size: 30px;
-  color: #fff;
+  color: #018abd;
+  padding-bottom: 10px
 }
 
 .ms-login {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 45%;
   width: 300px;
-  height: 280px;
+  height: 300px;
   margin: -150px 0 0 -190px;
   padding: 40px;
   border-radius: 5px;
