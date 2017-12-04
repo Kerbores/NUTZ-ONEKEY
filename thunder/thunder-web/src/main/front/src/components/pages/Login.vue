@@ -4,17 +4,17 @@
             <el-form :model="loginForm" status-icon :rules="$rules"  ref="loginForm" label-width="0px" class="demo-ruleForm">
                 <div class="ms-title"> NUTZ-ONEKEY</div>
                 <el-form-item prop="userName">
-                    <el-input v-model="loginForm.userName" placeholder="请输入用户名" icon="user" @keyup.enter.native="submitForm('loginForm')">
+                    <el-input v-model="loginForm.userName" placeholder="请输入用户名" suffix-icon="el-icon-fa-user" @keyup.enter.native="submitForm('loginForm')">
                         <template slot="prepend">用户</template>
                     </el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                    <el-input type="password" placeholder="请输入密码" v-model="loginForm.password" icon="lock" @keyup.enter.native="submitForm('loginForm')">
+                    <el-input type="password" placeholder="请输入密码" v-model="loginForm.password" suffix-icon="el-icon-fa-lock" @keyup.enter.native="submitForm('loginForm')">
                         <template slot="prepend">密码</template>
                     </el-input>
                 </el-form-item>
                 <el-form-item prop="captcha">
-                    <el-input placeholder="请输入验证码" v-model="loginForm.captcha" @keyup.enter.native="submitForm('loginForm')">
+                    <el-input placeholder="请输入验证码" prefix-icon="el-icon-fa-picture-o"  v-model="loginForm.captcha" @keyup.enter.native="submitForm('loginForm')">
                         <template slot="append">
                             <img :src="captcha" @click="refreshCaptcha" class="append-img" title="点击刷新验证码">
                         </template>
@@ -36,7 +36,7 @@ import axios from "axios";
 export default {
   data: function() {
     return {
-      captcha: baseUrl + "/captcha?length=4",
+      captcha: baseUrl + "/captcha?length=4&" + Math.random(),
       loginForm: {
         userName: "admin",
         password: "123456",
@@ -98,7 +98,7 @@ export default {
   text-align: center;
   font-size: 30px;
   color: #018abd;
-  padding-bottom: 10px
+  padding-bottom: 10px;
 }
 
 .ms-login {
