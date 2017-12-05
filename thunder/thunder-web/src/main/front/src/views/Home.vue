@@ -26,7 +26,7 @@
                 <el-menu background-color="#545c64"
                          text-color="#fff"
                          active-text-color="#ffd04b" :default-active="$route.path" class="el-menu-vertical-demo"
-                         @open="handleopen" @close="handleclose" @select="handleselect" unique-opened router
+                          unique-opened router
                          :collapse="collapsed">
                     <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
                         <el-menu-item v-if="item.leaf" :index="item.children[0].index + ''" :key="index">
@@ -71,8 +71,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
+import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -100,48 +99,29 @@ export default {
           ? "sufix" + this.loginUser.headKey
           : "http://www.sucaijishi.com/uploadfile/2014/0524/20140524012041558.png";
       }
-    })
+    }),
+    ...mapGetters(["hasRole", "hasPermission"])
   },
   methods: {
-    onSubmit() {
-      console.log("submit!");
-    },
-    handleopen() {
-      //console.log('handleopen');
-    },
-    handleclose() {
-      //console.log('handleclose');
-    },
-    handleselect: function(a, b) {},
-    //退出登录
+    ...mapMutations(["save", "remove"]),
     logout: function() {
-      var _this = this;
-      this.$confirm("确认退出吗?", "提示", {
-        //type: 'warning'
-      })
+      this.$confirm("确认退出吗?", "提示", {})
         .then(() => {
-          sessionStorage.removeItem("user");
-          _this.$router.push("/");
+          this.$api.User.logout(result => {
+            this.remove();
+            this.$router.push("/");
+          });
         })
         .catch(() => {});
     },
     //折叠导航栏
     collapse: function() {
       this.collapsed = !this.collapsed;
-    },
-    showMenu(i, status) {
-      this.$refs.menuCollapsed.getElementsByClassName(
-        "submenu-hook-" + i
-      )[0].style.display = status ? "block" : "none";
     }
   },
-  mounted() {
-    var user = sessionStorage.getItem("user");
-    if (user) {
-      user = JSON.parse(user);
-      this.sysUserName = user.name || "";
-      this.sysUserAvatar = user.avatar || "";
-    }
+  created() {
+    console.log(this.hasRole("admin"));
+    console.log(this.hasPermission("user.list"));
   }
 };
 </script>

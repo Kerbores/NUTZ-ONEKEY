@@ -91,5 +91,12 @@ export default {
             id: id,
             grantIds: powers
         }, success)
+    },
+    /**
+     * 退出登录
+     * @param {Function} success 回调
+     */
+    logout(success) {
+        http.get('user/logout', {}, success)
     }
 }
