@@ -53,7 +53,7 @@
                     <el-col :span="24" class="breadcrumb-container">
                         <strong class="title">{{$route.name}}</strong>
                         <el-breadcrumb separator="/" class="breadcrumb-inner">
-                            <el-breadcrumb-item v-for="item in $route.matched" :key="item.path">
+                            <el-breadcrumb-item v-for="item in $route.matched" :to="item.path" :key="item.path">
                                 {{ item.name }}
                             </el-breadcrumb-item>
                         </el-breadcrumb>
