@@ -75,7 +75,7 @@ import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      sysName: "Nutz-Onekey",
+      sysName: "NUTZ-ONEKEY",
       collapsed: false,
       sysUserName: "",
       sysUserAvatar: "",
@@ -156,7 +156,7 @@ export default {
       }
     }
     .logo {
-      //width:230px;
+      font-family: -webkit-pictograph;
       height: 60px;
       font-size: 22px;
       padding-left: 20px;

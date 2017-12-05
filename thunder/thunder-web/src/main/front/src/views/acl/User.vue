@@ -68,10 +68,10 @@
                     <el-input type="password" v-model="user.rePassword" auto-complete="off" suffix-icon="el-icon-fa-lock"></el-input>
                 </el-form-item>
                 <el-form-item label="电话" :label-width="formLabelWidth" prop="phone">
-                    <el-input v-model="user.phone" auto-complete="off" suffix-icon="el-icon-fa-mobile"></el-input>
+                    <el-input v-model="user.phone" auto-complete="off" suffix-icon="el-icon-fa-phone"></el-input>
                 </el-form-item>
                 <el-form-item label="邮箱" :label-width="formLabelWidth" prop="email">
-                    <el-input v-model="user.email" auto-complete="off" suffix-icon="el-icon-fa-send"></el-input>
+                    <el-input v-model="user.email" auto-complete="off" suffix-icon="el-icon-fa-envelope"></el-input>
                 </el-form-item>
                 <el-form-item label="用户状态" :label-width="formLabelWidth">
                     <el-switch v-model="user.status" active-value="ACTIVED" inactive-value="DISABLED">

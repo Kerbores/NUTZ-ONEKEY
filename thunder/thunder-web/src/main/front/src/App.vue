@@ -66,4 +66,10 @@
     .fade-leave-active {
         opacity: 0;
     }
+    .el-dialog__header{
+        border-bottom: 1px solid #e0dbdb
+    }
+    .el-dialog__footer{
+        border-top: 1px solid #e0dbdb
+    }
 </style>
