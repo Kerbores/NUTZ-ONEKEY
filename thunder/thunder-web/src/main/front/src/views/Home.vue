@@ -25,7 +25,7 @@
             <aside :class="collapsed?'menu-collapsed':'menu-expanded'">
                 <el-menu background-color="#545c64"
                          text-color="#fff"
-                         active-text-color="#ffd04b" :default-active="$route.path" class="el-menu-vertical-demo"
+                         active-text-color="#20a0ff" :default-active="$route.path" class="el-menu-vertical-demo"
                           unique-opened router
                          :collapse="collapsed">
                     <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
@@ -163,7 +163,9 @@ export default {
       padding-right: 20px;
       border-color: rgba(238, 241, 146, 0.3);
       border-right-width: 1px;
+      border-bottom-width: 1px;
       border-right-style: solid;
+      border-bottom-style: solid;
       img {
         width: 40px;
         float: left;
