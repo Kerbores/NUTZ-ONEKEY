@@ -47,6 +47,7 @@ axios.interceptors.response.use(response => {
   if (loadinginstace) {
     loadinginstace.close();
   }
+  console.log(baseUrl);
   switch (error.response.status) {
     case 403:
       location.href = '/';

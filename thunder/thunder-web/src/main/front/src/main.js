@@ -1,31 +1,59 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
 import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-import router from './router'
-import http from './http'
-import rules from './rules'
-import Cookie from 'js-cookie'
-import './assets/style.less'
-import store from './store'
 
-Vue.config.productionTip = false
+import 'element-ui/lib/theme-chalk/index.css'
+//import 'element-ui/lib/theme-default/index.css'
+//import './assets/theme/theme-green/index.css'
+import VueRouter from 'vue-router'
+import store from './vuex/store'
+import Vuex from 'vuex'
+import NProgress from 'nprogress'
+//import 'nprogress/nprogress.css'
+import routes from './routes'
+import 'font-awesome/css/font-awesome.min.css'
+import './assets/style.less'
+
+import http from './http'
+
+import rules from './rules'
+
+
+Vue.use(ElementUI)
+Vue.use(VueRouter)
+Vue.use(Vuex)
 
 Vue.prototype.$http = http;
 Vue.prototype.$rules = rules;
-Vue.prototype.$cookie = Cookie;
-
-Vue.use(ElementUI)
 global.baseUrl = process.env.NODE_ENV == "development" ? 'api' : '';
-/* eslint-disable no-new */
-new Vue({
-  el: '#app',
-  store,
-  router,
-  template: '<App/>',
-  components: {
-    App
-  }
+// NProgress.configure({ showSpinner: false });
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: routes
 })
+
+// router.beforeEach((to, from, next) => {
+//     //NProgress.start();
+//     if (to.path == '/login') {
+//         sessionStorage.removeItem('user');
+//     }
+//     let user = JSON.parse(sessionStorage.getItem('user'));
+//     if (!user && to.path != '/login') {
+//         next({
+//             path: '/login'
+//         })
+//     } else {
+//         next()
+//     }
+// })
+
+//router.afterEach(transition => {
+//NProgress.done();
+//});
+
+new Vue({
+    router,
+    store,
+    render: h => h(App)
+}).$mount('#app')

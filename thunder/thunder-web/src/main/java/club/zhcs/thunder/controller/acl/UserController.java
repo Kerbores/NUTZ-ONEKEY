@@ -25,7 +25,6 @@ import club.zhcs.thunder.bean.acl.User;
 import club.zhcs.thunder.biz.acl.ShiroUserService;
 import club.zhcs.thunder.biz.acl.UserService;
 import club.zhcs.thunder.controller.base.BaseController;
-import club.zhcs.thunder.dto.ApiRequest;
 import club.zhcs.thunder.dto.GrantDTO;
 import club.zhcs.thunder.dto.UserLoginDto;
 import club.zhcs.thunder.ext.shiro.anno.SINORequiresPermissions;
