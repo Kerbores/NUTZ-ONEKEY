@@ -142,7 +142,7 @@ public class BootNutzVueApplication extends WebMvcConfigurerAdapter {
 					surperMan = new User();
 					surperMan.setEmail("kerbores@zhcs.club");
 					surperMan.setName("admin");
-					surperMan.setPassword(SINOCredentialsMatcher.password("admin", "123456"));
+					surperMan.setPassword(SINOCredentialsMatcher.password("admin", "12345678"));
 					surperMan.setPhone("18996359755");
 					surperMan.setRealName("Kerbores");
 					surperMan.setNickName("Kerbores");

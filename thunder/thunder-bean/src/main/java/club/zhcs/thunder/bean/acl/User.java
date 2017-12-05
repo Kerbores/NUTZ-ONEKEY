@@ -65,6 +65,7 @@ public class User extends ThunderEntity {
 			this.name = name;
 		}
 	}
+	
 
 	/**
 	 * 用户类型

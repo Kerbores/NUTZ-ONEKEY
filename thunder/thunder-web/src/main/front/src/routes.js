@@ -1,7 +1,6 @@
 import Login from './views/Login.vue'
 import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
-import Table from './views/acl/Table.vue'
 import Form from './views/acl/Form.vue'
 import User from './views/acl/User.vue'
 import Page4 from './views/nav2/Page4.vue'
@@ -10,11 +9,11 @@ import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
 
 let routes = [{
-        path: '/',
-        component: Login,
-        name: '',
-        hidden: true
-    },
+    path: '/',
+    component: Login,
+    name: '',
+    hidden: true
+},
     {
         path: '/404',
         component: NotFound,
@@ -28,11 +27,11 @@ let routes = [{
         name: '访问控制',
         iconCls: 'el-icon-fa-users', //图标样式class
         children: [{
-                path: '/user',
-                iconCls: 'el-icon-fa-user',
-                component: User,
-                name: '用户管理'
-            },
+            path: '/user',
+            iconCls: 'el-icon-fa-user',
+            component: User,
+            name: '用户管理'
+        },
             {
                 path: '/role',
                 iconCls: 'el-icon-fa-lock',
@@ -53,10 +52,10 @@ let routes = [{
         name: '导航二',
         iconCls: 'fa fa-id-card-o',
         children: [{
-                path: '/page4',
-                component: Page4,
-                name: '页面4'
-            },
+            path: '/page4',
+            component: Page4,
+            name: '页面4'
+        },
             {
                 path: '/page5',
                 component: Page5,
