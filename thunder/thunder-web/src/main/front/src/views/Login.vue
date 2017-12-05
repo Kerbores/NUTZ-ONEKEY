@@ -42,7 +42,7 @@
                 captcha: baseUrl + "/captcha?length=4&" + Math.random(),
                 loginForm: {
                     userName: "admin",
-                    password: "123456",
+                    password: "12345678",
                     captcha: "",
                     rememberMe: true
                 }
