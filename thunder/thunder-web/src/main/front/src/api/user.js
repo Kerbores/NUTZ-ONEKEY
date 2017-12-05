@@ -53,7 +53,7 @@ export default {
      * @param {Function} success 回调
      */
     delete(id, success) {
-        http.get('user/delete/' + id, {}, success);
+        http.get('user/delete/' + id, success);
     },
     /**
      * 重置密码
@@ -77,7 +77,7 @@ export default {
      */
     userGrantInfo(type, id, success) {
         let url = "/user/" + type + "/" + id;
-        http.get(url, {}, success);
+        http.get(url, success);
     },
     /**
      * 用户授权
@@ -97,6 +97,6 @@ export default {
      * @param {Function} success 回调
      */
     logout(success) {
-        http.get('user/logout', {}, success)
+        http.get('user/logout', success)
     }
 }

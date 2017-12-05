@@ -2,7 +2,10 @@
 
 import axios from 'axios'
 import qs from 'qs'
-import {Loading, Message} from 'element-ui'
+import {
+    Loading,
+    Message
+} from 'element-ui'
 
 var loadinginstace;
 axios.defaults.timeout = 5000
@@ -48,7 +51,7 @@ axios.interceptors.response.use(response => {
     switch (error.response.status) {
         case 403:
             location.href = '/';
-        //return Promise.reject("用户没有登录");
+            //return Promise.reject("用户没有登录");
         case 404:
             return Promise.reject("接口不存在");
         case 500:
@@ -70,7 +73,6 @@ export default {
             baseURL: baseUrl,
             url,
             data: qs.stringify(data),
-            timeout: 10000,
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -88,7 +90,16 @@ export default {
         })
     },
     postBody(url, data, done, fail) {
-        return axios.post(url, data)
+        return axios.post({
+                method: 'post',
+                baseURL: baseUrl,
+                url,
+                data: data,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json; charset=UTF-8'
+                }
+            })
             .then(data => done(data))
             .catch(error => {
                 if (fail) {
@@ -100,13 +111,22 @@ export default {
                 }
             });
     },
-    get(url, params, done, fail) {
+    get(url, ...options) {
+        let params, done, fail;
+        if (typeof options[0] === 'object') {
+            params = options[0];
+            done = options[1];
+            fail = options[2];
+        } else {
+            params = {};
+            done = options[0];
+            fail = options[1];
+        }
         return axios({
             method: 'get',
             baseURL: baseUrl,
             url,
             params, // get 请求时带的参数
-            timeout: 10000,
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
