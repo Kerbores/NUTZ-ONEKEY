@@ -10,6 +10,7 @@ import {
 var loadinginstace;
 axios.defaults.timeout = 5000
 axios.defaults.baseURL = process.env.NODE_ENV == "development" ? 'http://localhost:8888/api' : '';
+//请求前拦截
 axios.interceptors.request.use(config => {
     if (loadinginstace) {
         loadinginstace.visible = false;
@@ -34,17 +35,17 @@ axios.interceptors.request.use(config => {
     }
     return Promise.reject('加载超时')
 })
-
+//设置response统一处理
 axios.interceptors.response.use(response => {
     if (loadinginstace) {
         loadinginstace.close();
     }
-    if (response.data.operationState == 'SUCCESS') {
+    if (response.data.operationState == 'SUCCESS') { //数据成功
         return Promise.resolve(response.data.data)
-    } else {
+    } else { //数据失败直接reject
         return Promise.reject(response.data.errors[0]);
     }
-}, error => {
+}, error => { //http失败
     if (loadinginstace) {
         loadinginstace.close();
     }
@@ -67,6 +68,13 @@ axios.interceptors.response.use(response => {
 
 
 export default {
+    /**
+     * 发送post请求(form表单)
+     * @param {string} url 地址
+     * @param {object} data 请求数据
+     * @param {Function} done 成功回调
+     * @param {Function} fail 失败回调(可选)
+     */
     post(url, data, done, fail) {
         return axios({
             method: 'post',
@@ -89,6 +97,13 @@ export default {
             }
         })
     },
+    /**
+     * 发送post请求(body流)
+     * @param {string} url 地址
+     * @param {object} data 请求数据
+     * @param {Function} done 成功回调
+     * @param {Function} fail 失败回调(可选)
+     */
     postBody(url, data, done, fail) {
         return axios.post({
                 method: 'post',
@@ -111,6 +126,13 @@ export default {
                 }
             });
     },
+    /**
+     * 发送get请求
+     * @param {string} url 请求地址
+     * @param {object} data 请求数据(可选)
+     * @param {Function} done 成功回调
+     * @param {Function} fail 失败回调(可选)
+     */
     get(url, ...options) {
         let params, done, fail;
         if (typeof options[0] === 'object') {
