@@ -33,7 +33,7 @@
         width: 100%;
     }
 
-    .el-row {
+    section .el-row {
         margin-bottom: 10px;
     }
 
