@@ -29,7 +29,7 @@
                           unique-opened router
                          :collapse="collapsed">
                     <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
-                        <el-menu-item v-if="item.leaf" :index="item.children[0].index + ''" :key="index">
+                        <el-menu-item v-if="item.leaf" :index="item.children[0].path" :key="index">
                             <i :class="item.iconCls || item.children[0].iconCls"></i>
                             <span slot="title">{{item.children[0].name}}</span>
                         </el-menu-item>
