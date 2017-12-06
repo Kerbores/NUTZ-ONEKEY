@@ -54,10 +54,11 @@
         <el-dialog :title="role.id == 0 ? '添加角色' : '编辑角色' " :visible.sync="addEditShow" width="30%">
             <el-form :model="role" :rules="$rules" ref="roleForm">
                 <el-form-item label="名称" :label-width="formLabelWidth" prop="name">
-                    <el-input v-model="role.name" auto-complete="off"></el-input>
+                    <el-input v-model="role.name" auto-complete="off" placeholder="请填写角色名称" suffix-icon="el-icon-fa-vcard" ></el-input>
                 </el-form-item>
                 <el-form-item label="描述" :label-width="formLabelWidth" prop="description">
-                    <el-input v-model="role.description" auto-complete="off"></el-input>
+                    <el-input type="textarea" :maxlength="500"
+                    :autosize="{ minRows: 4, maxRows: 8}" v-model="role.description" auto-complete="off" placeholder="请填写角色描述" suffix-icon="el-icon-fa-file-word-o"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -145,9 +146,13 @@ export default {
       }
     },
     doSearch() {
-      this.$api.Role.search(this.pager.pager.pageNumber, this.searchKey, result => {
-        this.pager = result.pager;
-      });
+      this.$api.Role.search(
+        this.pager.pager.pageNumber,
+        this.searchKey,
+        result => {
+          this.pager = result.pager;
+        }
+      );
     },
     saveOrUpdateRole(formName) {
       this.$refs[formName].validate(valid => {

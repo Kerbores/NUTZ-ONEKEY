@@ -61,26 +61,26 @@
         <el-dialog :title="user.id == 0 ? '添加用户' : '编辑用户' " :visible.sync="addEditShow" width="30%">
             <el-form :model="user" :rules="$rules" ref="userForm">
                 <el-form-item label="用户名" :label-width="formLabelWidth" prop="name">
-                    <el-input v-model="user.name" auto-complete="off" suffix-icon="el-icon-fa-user"></el-input>
+                    <el-input v-model="user.name" auto-complete="off" suffix-icon="el-icon-fa-user" placeholder="请填写用户名"></el-input>
                 </el-form-item>
                 <el-form-item label="真实姓名" :label-width="formLabelWidth" prop="realName">
-                    <el-input v-model="user.realName" auto-complete="off" suffix-icon="el-icon-fa-vcard"></el-input>
+                    <el-input v-model="user.realName" auto-complete="off" suffix-icon="el-icon-fa-vcard" placeholder="请填写用户真实姓名"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" :label-width="formLabelWidth" prop="password"
                               v-show="user.password != '00000000'">
                     <el-input type="password" v-model="user.password" auto-complete="off"
-                              suffix-icon="el-icon-fa-lock"></el-input>
+                              suffix-icon="el-icon-fa-lock" placeholder="请填写用户密码"></el-input>
                 </el-form-item>
                 <el-form-item label="确认密码" :label-width="formLabelWidth" prop="rePassword"
                               v-show="user.rePassword != '00000000'">
                     <el-input type="password" v-model="user.rePassword" auto-complete="off"
-                              suffix-icon="el-icon-fa-lock"></el-input>
+                              suffix-icon="el-icon-fa-lock" placeholder="请再次填写用户密码"></el-input>
                 </el-form-item>
                 <el-form-item label="电话" :label-width="formLabelWidth" prop="phone">
-                    <el-input v-model="user.phone" auto-complete="off" suffix-icon="el-icon-fa-phone"></el-input>
+                    <el-input v-model="user.phone" auto-complete="off" suffix-icon="el-icon-fa-phone" placeholder="请填写用户电话号码"></el-input>
                 </el-form-item>
                 <el-form-item label="邮箱" :label-width="formLabelWidth" prop="email">
-                    <el-input v-model="user.email" auto-complete="off" suffix-icon="el-icon-fa-envelope"></el-input>
+                    <el-input v-model="user.email" auto-complete="off" suffix-icon="el-icon-fa-envelope" placeholder="请填写用户Email地址"></el-input>
                 </el-form-item>
                 <el-form-item label="用户状态" :label-width="formLabelWidth">
                     <el-switch v-model="user.status" active-value="ACTIVED" inactive-value="DISABLED">

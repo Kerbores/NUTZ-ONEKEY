@@ -52,10 +52,11 @@
         <el-dialog :title="Permission.id == 0 ? '添加权限' : '编辑权限' " :visible.sync="addEditShow" width="30%">
             <el-form :model="Permission" :rules="$rules" ref="PermissionForm">
                 <el-form-item label="名称" :label-width="formLabelWidth" prop="name">
-                    <el-input v-model="Permission.name" auto-complete="off"></el-input>
+                    <el-input v-model="Permission.name" auto-complete="off" placeholder="请填写权限名称" suffix-icon="el-icon-fa-vcard" ></el-input>
                 </el-form-item>
                 <el-form-item label="描述" :label-width="formLabelWidth" prop="description">
-                    <el-input v-model="Permission.description" auto-complete="off"></el-input>
+                    <el-input type="textarea" :maxlength="500"
+                    :autosize="{ minRows: 4, maxRows: 8}" v-model="Permission.description" auto-complete="off" placeholder="请填写权限描述" suffix-icon="el-icon-fa-file-word-o"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
