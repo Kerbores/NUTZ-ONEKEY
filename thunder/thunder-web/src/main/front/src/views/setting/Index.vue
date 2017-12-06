@@ -5,7 +5,7 @@
                 <el-input placeholder="请输入内容" v-model="searchKey" prefix-icon="el-icon-fa-search">
                     <div slot="append">
                         <el-button type="primary" icon="el-icon-fa-search"
-                                   @click=" pager.page = 1 ;doSearch()"></el-button>
+                                   @click=" pager.pager.pageNumber = 1 ;doSearch()"></el-button>
                     </div>
                 </el-input>
             </el-col>

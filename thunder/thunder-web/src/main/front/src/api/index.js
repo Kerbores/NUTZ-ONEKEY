@@ -7,11 +7,14 @@ import CodeBookGroup from './codebook/group'
 
 import Setting from './setting'
 
+import APM from './monitor/apm'
+
 export default {
     User: User,
     Role: Role,
     Permission: Permission,
     CodeBook: CodeBook,
     CodeBookGroup: CodeBookGroup,
-    Setting: Setting
+    Setting: Setting,
+    APM: APM
 };

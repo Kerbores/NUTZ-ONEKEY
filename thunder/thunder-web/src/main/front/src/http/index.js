@@ -12,7 +12,9 @@ axios.defaults.timeout = 5000
 axios.defaults.baseURL = process.env.NODE_ENV == "development" ? 'http://localhost:8888/api' : '';
 //请求前拦截
 axios.interceptors.request.use(config => {
-    if (loadinginstace) {
+    if (config.url.indexOf('metrics') >= 0) {
+        return config;
+    } else if (loadinginstace) {
         loadinginstace.visible = false;
         loadinginstace = Loading.service({
             fullscreen: true,
@@ -26,7 +28,6 @@ axios.interceptors.request.use(config => {
             text: "接口请求中..."
         });
     }
-
     return config
 }, error => {
     if (loadinginstace) {
@@ -40,7 +41,7 @@ axios.interceptors.response.use(response => {
     if (loadinginstace) {
         loadinginstace.close();
     }
-    if (response.config.url.indexOf('druid') > 0) {
+    if (response.config.url.indexOf('druid') > 0 || response.config.url.indexOf('metrics') > 0) {
         if (response.status == 200) {
             return Promise.resolve(response.data);
         } else {
