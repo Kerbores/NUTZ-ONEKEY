@@ -77,19 +77,7 @@ export default {
   data() {
     return {
       sysName: "NUTZ-ONEKEY",
-      collapsed: false,
-      sysUserName: "",
-      sysUserAvatar: "",
-      form: {
-        name: "",
-        region: "",
-        date1: "",
-        date2: "",
-        delivery: false,
-        type: [],
-        resource: "",
-        desc: ""
-      }
+      collapsed: true,
     };
   },
   computed: {
@@ -148,6 +136,7 @@ export default {
   position: absolute;
   top: 0px;
   bottom: 0px;
+  background-color: #f9f9f9;
   width: 100%;
   .header {
     height: 60px;

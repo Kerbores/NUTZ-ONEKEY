@@ -212,7 +212,7 @@ export default {
       }
     },
     doSearch() {
-      this.$api.User.search(this.pager.page, this.searchKey, result => {
+      this.$api.User.search(this.pager.pager.pageNumber, this.searchKey, result => {
         this.pager = result.pager;
       });
     },
@@ -296,7 +296,7 @@ export default {
       });
     },
     loadData() {
-      this.$api.User.list(this.pager.page, result => {
+      this.$api.User.list(this.pager.pager.pageNumber, result => {
         this.pager = result.pager;
       });
     }

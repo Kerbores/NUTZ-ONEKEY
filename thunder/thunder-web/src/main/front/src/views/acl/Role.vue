@@ -145,7 +145,7 @@ export default {
       }
     },
     doSearch() {
-      this.$api.Role.search(this.pager.page, this.searchKey, result => {
+      this.$api.Role.search(this.pager.pager.pageNumber, this.searchKey, result => {
         this.pager = result.pager;
       });
     },
@@ -200,7 +200,7 @@ export default {
       });
     },
     loadData() {
-      this.$api.Role.list(this.pager.page, result => {
+      this.$api.Role.list(this.pager.pager.pageNumber, result => {
         this.pager = result.pager;
       });
     }

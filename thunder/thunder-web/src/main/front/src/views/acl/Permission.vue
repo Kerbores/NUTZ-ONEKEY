@@ -110,7 +110,7 @@ export default {
       }
     },
     doSearch() {
-      this.$api.Permission.search(this.pager.page, this.searchKey, result => {
+      this.$api.Permission.search(this.pager.pager.pageNumber, this.searchKey, result => {
         this.pager = result.pager;
       });
     },
@@ -151,7 +151,7 @@ export default {
       });
     },
     loadData() {
-      this.$api.Permission.list(this.pager.page, result => {
+      this.$api.Permission.list(this.pager.pager.pageNumber, result => {
         this.pager = result.pager;
       });
     }
