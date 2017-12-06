@@ -29,7 +29,8 @@
                          unique-opened router
                          :collapse="collapsed">
                     <template v-for="(item,index) in $router.options.routes" v-if="!item.hidden">
-                        <el-menu-item v-if="item.leaf" v-show="checkPermission(item)" :index="item.children[0].path" :key="index">
+                        <el-menu-item v-if="item.leaf" v-show="checkPermission(item)" :index="item.children[0].path"
+                                      :key="index">
                             <i :class="item.iconCls || item.children[0].iconCls"></i>
                             <span slot="title">{{item.children[0].name}}</span>
                         </el-menu-item>
@@ -38,7 +39,8 @@
                                 <i :class="item.iconCls"></i>
                                 <span slot="title">{{item.name}}</span>
                             </template>
-                            <el-menu-item v-for="child in item.children" :key="child.path" :index="child.path" v-show="checkPermission(child)">
+                            <el-menu-item v-for="child in item.children" :key="child.path" :index="child.path"
+                                          v-show="checkPermission(child)">
                                 <template slot="title">
                                     <i :class="child.iconCls"></i>
                                     <span slot="title">{{child.name}}</span>
@@ -68,9 +70,11 @@
             </section>
         </el-col>
         <el-col :span="24">
-          <el-footer>{{copyright}} 
-            <bga-back-top :threshold="101" :right="40" :bottom="10" :width="40" :height="40" :svgMajorColor="'#7b79e5'"
-                 :svgMinorColor="'#ba6fda'" :svgType="'rocket_smoke'"/></el-footer>
+            <el-footer>{{copyright}}
+                <bga-back-top :threshold="101" :right="40" :bottom="10" :width="40" :height="40"
+                              :svgMajorColor="'#7b79e5'"
+                              :svgMinorColor="'#ba6fda'" :svgType="'rocket_smoke'"/>
+            </el-footer>
         </el-col>
     </el-row>
 </template>
@@ -92,7 +96,7 @@ export default {
       logo: function() {
         return this.loginUser.headKey
           ? "sufix" + this.loginUser.headKey
-          : "http://www.sucaijishi.com/uploadfile/2014/0524/20140524012041558.png";
+          : "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512546256940&di=f6395296325116fca0ddcc7c9a8c0ed6&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D1740356695%2C2259268870%26fm%3D214%26gp%3D0.jpg";
       }
     }),
     ...mapGetters(["hasRole", "hasPermission"])
@@ -112,9 +116,9 @@ export default {
       }
       if (permissions.length == 0) return true;
       if (permissions.length == 0) return this.hasPermission(permissions[0]);
+      console.log(permissions);
       return (
-        permissions.filter(permission => this.hasPermission(permission))
-          .length > 0
+        permissions.filter(permission => this.hasPermission(permission)).length > 0
       );
     },
     logout: function() {
@@ -137,6 +141,7 @@ export default {
 
 <style scoped lang="scss">
 @import "~scss_vars";
+
 .el-footer {
   position: fixed;
   width: 100%;
@@ -150,6 +155,7 @@ export default {
   line-height: 60px;
   z-index: 10;
 }
+
 .container {
   position: absolute;
   top: 0px;
