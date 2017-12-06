@@ -36,7 +36,8 @@ export default {
   computed: {
     style() {
       return {
-        height: this.mapheight + "px"
+        height: this.mapHeight + "px",
+        width: this.mapWidth + "px"
       };
     }
   },
@@ -45,7 +46,12 @@ export default {
       type: String,
       required: true
     },
-    mapheight: {
+    mapWidth:{
+      type: Number,
+      default: 400,
+      required: false
+    },
+    mapHeight: {
       type: Number,
       default: 400,
       required: false

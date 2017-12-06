@@ -1,7 +1,7 @@
 <template>
     <section>
         机构管理
-        <b-map-component :ak="ak"  @notify="notify"></b-map-component>
+        <b-map-component :ak="ak" mapWidth="800"  @notify="notify"></b-map-component>
     </section>
 </template>
 <style>
