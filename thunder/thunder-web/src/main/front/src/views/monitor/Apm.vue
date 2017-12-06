@@ -10,19 +10,19 @@
             </el-col>
         </el-row>
         <el-table :data="pager.dataList" border style="width: 100%">
-            <el-table-column prop="id" label="ID" sortable>
+            <el-table-column prop="id" label="ID" header-align="center" align="center" width="55">
             </el-table-column>
-            <el-table-column prop="actionTime" label="时间" show-overflow-tooltip :formatter="formatter">
+            <el-table-column prop="actionTime" label="时间" show-overflow-tooltip :formatter="formatter" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
-            <el-table-column prop="account" label="操作用户"  >
+            <el-table-column prop="account" label="操作用户"  show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
-            <el-table-column prop="ip" label="ip">
+            <el-table-column prop="ip" label="ip" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
-            <el-table-column prop="module" label="模块">
+            <el-table-column prop="module" label="模块" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
-            <el-table-column prop="action" label="功能">
+            <el-table-column prop="action" label="功能" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
-            <el-table-column prop="operationTime" label="耗时">
+            <el-table-column prop="operationTime" label="耗时" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
         </el-table>
         <el-row>

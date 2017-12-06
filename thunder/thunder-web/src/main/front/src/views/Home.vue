@@ -115,7 +115,7 @@ export default {
         });
       }
       if (permissions.length == 0) return true;
-      if (permissions.length == 0) return this.hasPermission(permissions[0]);
+      if (permissions.length == 1) return this.hasPermission(permissions[0]);
       return (
         permissions.filter(permission => this.hasPermission(permission)).length > 0
       );
