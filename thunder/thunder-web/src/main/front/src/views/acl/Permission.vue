@@ -10,12 +10,12 @@
                 </el-input>
             </el-col>
             <el-col :span="6" :offset="12">
-                <el-button type="primary" icon="el-icon-fa-plus" @click="addRole" size="small">添加角色</el-button>
+                <el-button type="primary" icon="el-icon-fa-plus" @click="addPermission" size="small">添加权限</el-button>
             </el-col>
         </el-row>
 
         <el-table :data="pager.dataList" border stripe style="width: 100%">
-            <el-table-column prop="id" label="ID"  header-align="center" align="center" width="55">
+            <el-table-column prop="id" label="ID" header-align="center" align="center" width="55">
             </el-table-column>
             <el-table-column prop="name" label="名称" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
@@ -31,12 +31,10 @@
             <el-table-column label="操作" show-overflow-tooltip header-align="center" align="center">
                 <template slot-scope="scope">
                     <el-button-group>
-                        <el-button title="编辑角色" size="mini" type="primary" icon="el-icon-fa-edit"
+                        <el-button title="编辑权限" v-if="!scope.row.installed" size="mini" type="primary" icon="el-icon-fa-edit"
                                    @click="handleEdit(scope.$index,scope.row)"></el-button>
-                        <el-button title="删除角色" v-if="!scope.row.installed" size="mini" type="primary"
+                        <el-button title="删除权限" v-if="!scope.row.installed" size="mini" type="primary"
                                    icon="el-icon-fa-trash" @click="handleDelete(scope.$index,scope.row)"></el-button>
-                        <el-button title="角色授权" size="mini" type="primary" icon="el-icon-fa-bolt"
-                                   @click="handleGrant(scope.$index,scope.row)"></el-button>
                     </el-button-group>
                 </template>
             </el-table-column>
@@ -51,28 +49,18 @@
             </el-col>
         </el-row>
         <!-- 弹框区域-->
-        <el-dialog :title="role.id == 0 ? '添加角色' : '编辑角色' " :visible.sync="addEditShow" width="30%">
-            <el-form :model="role" :rules="$rules" ref="roleForm">
+        <el-dialog :title="Permission.id == 0 ? '添加权限' : '编辑权限' " :visible.sync="addEditShow" width="30%">
+            <el-form :model="Permission" :rules="$rules" ref="PermissionForm">
                 <el-form-item label="名称" :label-width="formLabelWidth" prop="name">
-                    <el-input v-model="role.name" auto-complete="off"></el-input>
+                    <el-input v-model="Permission.name" auto-complete="off"></el-input>
                 </el-form-item>
                 <el-form-item label="描述" :label-width="formLabelWidth" prop="description">
-                    <el-input v-model="role.description" auto-complete="off"></el-input>
+                    <el-input v-model="Permission.description" auto-complete="off"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button @click="addEditShow = false ; user = {installed:false}">取 消</el-button>
-                <el-button type="primary" @click="saveOrUpdateRole('roleForm')">确 定</el-button>
-            </div>
-        </el-dialog>
-
-        <el-dialog title="设置权限" :visible.sync="grantShow" width="35%">
-            <template>
-                <el-transfer v-model="selected" :data="options" :titles="['待选项', '已选项']" filterable></el-transfer>
-            </template>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="grantShow = false">取 消</el-button>
-                <el-button type="primary" @click="grant">确 定</el-button>
+                <el-button type="primary" @click="saveOrUpdatePermission('PermissionForm')">确 定</el-button>
             </div>
         </el-dialog>
     </section>
@@ -94,10 +82,8 @@ export default {
         }
       },
       selected: [],
-      options: [],
       addEditShow: false,
-      grantShow: false,
-      role: {
+      Permission: {
         id: 0,
         name: "",
         description: "",
@@ -106,36 +92,15 @@ export default {
       formLabelWidth: "120px"
     };
   },
-  watch: {
-    options: function() {
-      this.selected = [];
-      this.options.forEach(item => {
-        if (item.selected) {
-          this.selected.push(item.key);
-        }
-      });
-    }
-  },
   methods: {
-    addRole() {
-      this.role = {
+    addPermission() {
+      this.Permission = {
         id: 0,
         name: "",
         description: "",
         installed: false
       };
       this.addEditShow = true;
-    },
-    grant() {
-      this.$api.Role.grant(this.role.id, this.selected, result => {
-        this.$message({
-          type: "success",
-          message: "授权成功!"
-        });
-        window.setTimeout(() => {
-          this.grantShow = false;
-        }, 2000);
-      });
     },
     changePage() {
       if (this.searchKey) {
@@ -145,50 +110,36 @@ export default {
       }
     },
     doSearch() {
-      this.$api.Role.search(this.pager.page, this.searchKey, result => {
+      this.$api.Permission.search(this.pager.page, this.searchKey, result => {
         this.pager = result.pager;
       });
     },
-    saveOrUpdateRole(formName) {
+    saveOrUpdatePermission(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
           var callback = result => {
             this.changePage();
             this.addEditShow = false;
           };
-          this.role.id
-            ? this.$api.Role.update(this.role, callback)
-            : this.$api.Role.save(this.role, callback);
+          this.Permission.id
+            ? this.$api.Permission.update(this.Permission, callback)
+            : this.$api.Permission.save(this.Permission, callback);
         } else {
           return false;
         }
       });
     },
     handleEdit(index, row) {
-      this.role = row;
+      this.Permission = row;
       this.addEditShow = true;
     },
-    handleGrant(index, row) {
-      this.role.id = row.id;
-      this.$api.Role.roleGrantInfo(row.id, result => {
-        this.options = [];
-        result.infos.forEach((item, index) => {
-          this.options.push({
-            key: item.id,
-            label: item.description,
-            selected: item.selected
-          });
-        });
-        this.grantShow = true;
-      });
-    },
     handleDelete(index, row) {
-      this.$confirm("确认删除角色?", "删除确认", {
+      this.$confirm("确认删除权限?", "删除确认", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       }).then(() => {
-        this.$api.Role.delete(row.id, result => {
+        this.$api.Permission.delete(row.id, result => {
           this.$message({
             type: "success",
             message: "删除成功!"
@@ -200,7 +151,7 @@ export default {
       });
     },
     loadData() {
-      this.$api.Role.list(this.pager.page, result => {
+      this.$api.Permission.list(this.pager.page, result => {
         this.pager = result.pager;
       });
     }

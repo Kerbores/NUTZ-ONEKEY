@@ -4,6 +4,7 @@ import Dashboard from './views/dashbord/DashBoard.vue'
 
 import User from './views/acl/User.vue'
 import Role from './views/acl/Role.vue'
+import Permission from './views/acl/Permission.vue'
 
 import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
@@ -57,7 +58,7 @@ let routes = [{
             {
                 path: '/permission',
                 iconCls: 'el-icon-fa-eye',
-                component: User,
+                component: Permission,
                 name: '权限管理'
             }
         ]

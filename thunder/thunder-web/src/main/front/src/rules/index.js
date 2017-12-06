@@ -19,23 +19,63 @@ export default {
         validator: validateMobile,
         trigger: "blur"
     }],
-    name: [{required: true, message: "请输入用户名", trigger: "blur"}],
-    realName: [{required: true, message: "请输入真实姓名", trigger: "blur"}],
-    password: [
-        {required: true, message: "请输入密码", trigger: "blur"},
-        {min: 8, max: 16, message: "请输入8到16位密码", trigger: "blur"}
+    name: [{
+        required: true,
+        message: "请输入名称",
+        trigger: "blur"
+    }],
+    realName: [{
+        required: true,
+        message: "请输入真实姓名",
+        trigger: "blur"
+    }],
+    password: [{
+            required: true,
+            message: "请输入密码",
+            trigger: "blur"
+        },
+        {
+            min: 8,
+            max: 16,
+            message: "请输入8到16位密码",
+            trigger: "blur"
+        }
     ],
-    rePassword: [
-        {required: true, message: "请输入密码", trigger: "blur"},
-        {min: 8, max: 16, message: "请输入8到16位密码", trigger: "blur"},
+    rePassword: [{
+            required: true,
+            message: "请输入密码",
+            trigger: "blur"
+        },
+        {
+            min: 8,
+            max: 16,
+            message: "请输入8到16位密码",
+            trigger: "blur"
+        },
     ],
-    phone: [
-        {required: true, message: "请输入手机号", trigger: "blur"},
-        {validator: validateMobile, trigger: "blur"}
+    phone: [{
+            required: true,
+            message: "请输入手机号",
+            trigger: "blur"
+        },
+        {
+            validator: validateMobile,
+            trigger: "blur"
+        }
     ],
-    email: [
-        {required: true, message: "请输入电子邮箱", trigger: "blur"},
-        {validator: validateEmail, trigger: "blur"}
-    ]
+    email: [{
+            required: true,
+            message: "请输入电子邮箱",
+            trigger: "blur"
+        },
+        {
+            validator: validateEmail,
+            trigger: "blur"
+        }
+    ],
+    description: [{
+        required: true,
+        message: "请输入描述信息",
+        trigger: "blur"
+    }]
 }
-  
