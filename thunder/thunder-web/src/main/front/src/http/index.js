@@ -2,10 +2,7 @@
 
 import axios from 'axios'
 import qs from 'qs'
-import {
-    Loading,
-    Message
-} from 'element-ui'
+import {Loading, Message} from 'element-ui'
 
 var loadinginstace;
 axios.defaults.timeout = 5000
@@ -52,7 +49,7 @@ axios.interceptors.response.use(response => {
     switch (error.response.status) {
         case 403:
             location.href = '/';
-            //return Promise.reject("用户没有登录");
+        //return Promise.reject("用户没有登录");
         case 404:
             return Promise.reject("接口不存在");
         case 500:

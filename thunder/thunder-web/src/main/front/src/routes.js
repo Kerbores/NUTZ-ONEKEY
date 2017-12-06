@@ -1,20 +1,23 @@
 import Login from './views/Login.vue'
+
 import Dashboard from './views/dashbord/DashBoard.vue'
+
+import User from './views/acl/User.vue'
+import Role from './views/acl/Role.vue'
+
 import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
-import Form from './views/acl/Form.vue'
-import User from './views/acl/User.vue'
 import Page4 from './views/nav2/Page4.vue'
 import Page5 from './views/nav2/Page5.vue'
 import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
 
 let routes = [{
-        path: '/',
-        component: Login,
-        name: '',
-        hidden: true
-    },
+    path: '/',
+    component: Login,
+    name: '',
+    hidden: true
+},
     {
         path: '/404',
         component: NotFound,
@@ -40,15 +43,15 @@ let routes = [{
         name: '访问控制',
         iconCls: 'el-icon-fa-users', //图标样式class
         children: [{
-                path: '/user',
-                iconCls: 'el-icon-fa-user',
-                component: User,
-                name: '用户管理'
-            },
+            path: '/user',
+            iconCls: 'el-icon-fa-user',
+            component: User,
+            name: '用户管理'
+        },
             {
                 path: '/role',
                 iconCls: 'el-icon-fa-lock',
-                component: Form,
+                component: Role,
                 name: '角色管理'
             },
             {
@@ -65,11 +68,11 @@ let routes = [{
         name: '码本管理',
         iconCls: 'el-icon-fa-book',
         children: [{
-                path: '/page4',
-                iconCls: 'el-icon-fa-object-group',
-                component: Page4,
-                name: '码本分组'
-            },
+            path: '/page4',
+            iconCls: 'el-icon-fa-object-group',
+            component: Page4,
+            name: '码本分组'
+        },
             {
                 path: '/page5',
                 component: Page5,

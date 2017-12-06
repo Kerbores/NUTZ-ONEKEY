@@ -4,7 +4,8 @@
             <el-col :span="6">
                 <el-input placeholder="请输入内容" v-model="searchKey" prefix-icon="el-icon-fa-search">
                     <div slot="append">
-                        <el-button type="primary" icon="el-icon-fa-search" @click=" pager.page = 1 ;doSearch()"></el-button>
+                        <el-button type="primary" icon="el-icon-fa-search"
+                                   @click=" pager.page = 1 ;doSearch()"></el-button>
                     </div>
                 </el-input>
             </el-col>
@@ -13,13 +14,14 @@
             </el-col>
         </el-row>
         <el-table :data="pager.dataList" border stripe style="width: 100%">
-            <el-table-column prop="id" label="ID"  header-align="center" align="center" width="55">
+            <el-table-column prop="id" label="ID" header-align="center" align="center" width="55">
             </el-table-column>
-            <el-table-column prop="name" label="用户名" show-overflow-tooltip  header-align="center" align="center">
+            <el-table-column prop="name" label="用户名" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
             <el-table-column prop="realName" label="姓名" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
-            <el-table-column prop="createTime" label="创建时间" :formatter="formatter" show-overflow-tooltip header-align="center" align="center">
+            <el-table-column prop="createTime" label="创建时间" :formatter="formatter" show-overflow-tooltip
+                             header-align="center" align="center">
             </el-table-column>
             <el-table-column prop="status" label="状态" show-overflow-tooltip header-align="center" align="center">
                 <template slot-scope="scope">
@@ -31,13 +33,18 @@
             </el-table-column>
             <el-table-column label="操作" show-overflow-tooltip header-align="center" align="center">
                 <template slot-scope="scope">
-                  <el-button-group>
-                    <el-button title="编辑用户" size="mini" type="primary" icon="el-icon-fa-edit" @click="handleEdit(scope.$index,scope.row)"></el-button>
-                    <el-button title="重置密码" size="mini" type="primary" icon="el-icon-fa-lock" @click="handleReset(scope.$index,scope.row)"></el-button>
-                    <el-button title="删除用户" size="mini" type="primary" icon="el-icon-fa-trash" @click="handleDelete(scope.$index,scope.row)"></el-button>
-                    <el-button title="用户角色" size="mini" type="primary" icon="el-icon-fa-fire" @click="handleGrant(scope.$index,scope.row,'role')"></el-button>
-                    <el-button title="用户授权" size="mini" type="primary" icon="el-icon-fa-bolt" @click="handleGrant(scope.$index,scope.row,'permission')"></el-button>
-                  </el-button-group>
+                    <el-button-group>
+                        <el-button title="编辑用户" size="mini" type="primary" icon="el-icon-fa-edit"
+                                   @click="handleEdit(scope.$index,scope.row)"></el-button>
+                        <el-button title="重置密码" size="mini" type="primary" icon="el-icon-fa-lock"
+                                   @click="handleReset(scope.$index,scope.row)"></el-button>
+                        <el-button title="删除用户" size="mini" type="primary" icon="el-icon-fa-trash"
+                                   @click="handleDelete(scope.$index,scope.row)"></el-button>
+                        <el-button title="用户角色" size="mini" type="primary" icon="el-icon-fa-fire"
+                                   @click="handleGrant(scope.$index,scope.row,'role')"></el-button>
+                        <el-button title="用户授权" size="mini" type="primary" icon="el-icon-fa-bolt"
+                                   @click="handleGrant(scope.$index,scope.row,'permission')"></el-button>
+                    </el-button-group>
                 </template>
             </el-table-column>
         </el-table>
@@ -54,18 +61,20 @@
         <el-dialog :title="user.id == 0 ? '添加用户' : '编辑用户' " :visible.sync="addEditShow" width="30%">
             <el-form :model="user" :rules="$rules" ref="userForm">
                 <el-form-item label="用户名" :label-width="formLabelWidth" prop="name">
-                    <el-input v-model="user.name" auto-complete="off" suffix-icon="el-icon-fa-user" ></el-input>
+                    <el-input v-model="user.name" auto-complete="off" suffix-icon="el-icon-fa-user"></el-input>
                 </el-form-item>
                 <el-form-item label="真实姓名" :label-width="formLabelWidth" prop="realName">
                     <el-input v-model="user.realName" auto-complete="off" suffix-icon="el-icon-fa-vcard"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" :label-width="formLabelWidth" prop="password"
                               v-show="user.password != '00000000'">
-                    <el-input type="password" v-model="user.password" auto-complete="off" suffix-icon="el-icon-fa-lock"></el-input>
+                    <el-input type="password" v-model="user.password" auto-complete="off"
+                              suffix-icon="el-icon-fa-lock"></el-input>
                 </el-form-item>
                 <el-form-item label="确认密码" :label-width="formLabelWidth" prop="rePassword"
                               v-show="user.rePassword != '00000000'">
-                    <el-input type="password" v-model="user.rePassword" auto-complete="off" suffix-icon="el-icon-fa-lock"></el-input>
+                    <el-input type="password" v-model="user.rePassword" auto-complete="off"
+                              suffix-icon="el-icon-fa-lock"></el-input>
                 </el-form-item>
                 <el-form-item label="电话" :label-width="formLabelWidth" prop="phone">
                     <el-input v-model="user.phone" auto-complete="off" suffix-icon="el-icon-fa-phone"></el-input>
@@ -87,7 +96,8 @@
         <el-dialog title="重置密码" :visible.sync="resetShow" width="30%">
             <el-form :model="user" :rules="$rules" ref="resetForm">
                 <el-form-item label="密码" :label-width="formLabelWidth" prop="password">
-                    <el-input type="password" v-model="user.password" auto-complete="off" suffix-icon="el-icon-fa-lock"></el-input>
+                    <el-input type="password" v-model="user.password" auto-complete="off"
+                              suffix-icon="el-icon-fa-lock"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -226,11 +236,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid && this.checkSame()) {
           var callback = result => {
-            if (this.searchKey) {
-              this.doSearch();
-            } else {
-              this.loadData();
-            }
+            this.changePage();
             this.addEditShow = false;
           };
           this.user.id
