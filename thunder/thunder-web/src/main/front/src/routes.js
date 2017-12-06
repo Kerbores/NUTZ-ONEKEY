@@ -1,4 +1,5 @@
 import Login from './views/Login.vue'
+import Dashboard from './views/dashbord/DashBoard.vue'
 import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
 import Form from './views/acl/Form.vue'
@@ -23,13 +24,13 @@ let routes = [{
     {
         path: '/',
         component: Home,
-        name: 'Dashboard',
+        name: '主页',
         leaf: true,
         iconCls: 'el-icon-fa-dashboard', //图标样式class
         children: [{
             path: '/dashboard',
             iconCls: 'el-icon-fa-dashboard',
-            component: User,
+            component: Dashboard,
             name: 'Dashboard'
         }]
     },

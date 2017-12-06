@@ -56,7 +56,7 @@ export default {
   },
   created() {
     if (this.loginUser.id) {
-      this.$router.push({ path: "/user" });
+      this.$router.push({ path: "/dashboard" });
     }
   },
   methods: {
@@ -72,7 +72,7 @@ export default {
             loginUser.roles = data.roles;
             loginUser.permissions = data.permissions;
             this.save(loginUser);
-            this.$router.push({ path: "/user" });
+            this.$router.push({ path: "/dashboard" });
           });
         } else {
           return false;

@@ -105,16 +105,7 @@ export default {
      * @param {Function} fail 失败回调(可选)
      */
     postBody(url, data, done, fail) {
-        return axios.post({
-                method: 'post',
-                baseURL: baseUrl,
-                url,
-                data: data,
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Content-Type': 'application/json; charset=UTF-8'
-                }
-            })
+        return axios.post(url, data)
             .then(data => done(data))
             .catch(error => {
                 if (fail) {
