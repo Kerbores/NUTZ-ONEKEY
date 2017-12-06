@@ -15,13 +15,13 @@
 </section>
   
 </template>
-<style>
-html,
-body,
+<style scoped>
+.el-input {
+  z-index: 1;
+}
 #allmap {
-  width: 100%;
-  height: 100%;
   margin: 0;
+  margin-top: -50px;
   font-family: "微软雅黑";
 }
 </style>
@@ -60,7 +60,7 @@ export default {
       this.$emit("notify", rs);
     }
   },
-  mounted() {
+  created() {
     const self = this;
     this.$nextTick(function() {
       MP(this.ak).then(BMap => {
