@@ -9,6 +9,8 @@ import Permission from './views/acl/Permission.vue'
 import CodeBook from './views/codebook/Index.vue'
 import CodeBookGroup from './views/codebook/Group.vue'
 
+import Setting from './views/setting/Index.vue'
+
 
 
 import NotFound from './views/404.vue'
@@ -103,8 +105,8 @@ let routes = [{
         iconCls: 'el-icon-fa-cogs',
         name: '配置管理',
         children: [{
-            path: '/page6',
-            component: Page6,
+            path: '/setting',
+            component: Setting,
             iconCls: 'el-icon-fa-cog',
             name: '配置列表'
         }]
