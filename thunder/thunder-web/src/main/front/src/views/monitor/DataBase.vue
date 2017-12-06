@@ -300,6 +300,9 @@ export default {
       }
     }
   },
+  destroyed () {
+    clearInterval(this.timer);
+  },
   created() {
     axios
       .get("/druid/basic.json")

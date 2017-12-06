@@ -35,6 +35,7 @@ export default {
   },
   data() {
     return {
+      timer: null,
       activeName2: "dynamic",
       line: {
         color: ["#20a0ff", "#13CE66", "#F7BA2A", "#FF4949"],
@@ -355,22 +356,25 @@ export default {
       console.log(tab, event);
     }
   },
+  destroyed() {
+    clearInterval(this.timer);
+  },
   created() {
-    setInterval(() => {
+    this.timer = setInterval(() => {
       axios.get("metrics").then(res => {
         console.log(res);
         this.line.xAxis[0].data.push(new Date().toLocaleTimeString()); //时间戳
-        this.line.series[0].data.push(res['cpu.usage']);
-        this.line.series[1].data.push(res['jvm.usage']);
-        this.line.series[2].data.push(res['mem.user.percent']);
-        this.line.series[3].data.push(res['swap.usage']);
+        this.line.series[0].data.push(res["cpu.usage"]);
+        this.line.series[1].data.push(res["jvm.usage"]);
+        this.line.series[2].data.push(res["mem.user.percent"]);
+        this.line.series[3].data.push(res["swap.usage"]);
         this.line.series[4].data.push(0);
         this.line.series[5].data.push(0);
         this.line.series[6].data.push(0);
-        this.gauge.series[0].data[0].value = res['cpu.usage'].toFixed(2);
+        this.gauge.series[0].data[0].value = res["cpu.usage"].toFixed(2);
         this.gauge.series[1].data[0].value = (1024 / 1024).toFixed(2);
-        this.gauge.series[2].data[0].value = res['jvm.usage'].toFixed(2);
-        this.gauge.series[3].data[0].value = res['mem.user.percent'].toFixed(2);
+        this.gauge.series[2].data[0].value = res["jvm.usage"].toFixed(2);
+        this.gauge.series[3].data[0].value = res["mem.user.percent"].toFixed(2);
       });
     }, 3000);
   }
