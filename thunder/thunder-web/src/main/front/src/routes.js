@@ -14,11 +14,11 @@ import Page6 from './views/nav3/Page6.vue'
 import echarts from './views/charts/echarts.vue'
 
 let routes = [{
-    path: '/',
-    component: Login,
-    name: '',
-    hidden: true
-},
+        path: '/',
+        component: Login,
+        name: '',
+        hidden: true
+    },
     {
         path: '/404',
         component: NotFound,
@@ -44,21 +44,30 @@ let routes = [{
         name: '访问控制',
         iconCls: 'el-icon-fa-users', //图标样式class
         children: [{
-            path: '/user',
-            iconCls: 'el-icon-fa-user',
-            component: User,
-            name: '用户管理'
-        },
+                path: '/user',
+                iconCls: 'el-icon-fa-user',
+                component: User,
+                meta: {
+                    p: 'user.list'
+                },
+                name: '用户管理'
+            },
             {
                 path: '/role',
                 iconCls: 'el-icon-fa-lock',
                 component: Role,
+                meta: {
+                    p: 'role.list'
+                },
                 name: '角色管理'
             },
             {
                 path: '/permission',
                 iconCls: 'el-icon-fa-eye',
                 component: Permission,
+                meta: {
+                    p: 'permission.list'
+                },
                 name: '权限管理'
             }
         ]
@@ -69,11 +78,11 @@ let routes = [{
         name: '码本管理',
         iconCls: 'el-icon-fa-book',
         children: [{
-            path: '/page4',
-            iconCls: 'el-icon-fa-object-group',
-            component: Page4,
-            name: '码本分组'
-        },
+                path: '/page4',
+                iconCls: 'el-icon-fa-object-group',
+                component: Page4,
+                name: '码本分组'
+            },
             {
                 path: '/page5',
                 component: Page5,

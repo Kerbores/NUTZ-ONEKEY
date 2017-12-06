@@ -36,100 +36,100 @@
 </template>
 
 <script>
-    import {mapState, mapGetters, mapMutations} from "vuex";
+import { mapState, mapGetters, mapMutations } from "vuex";
 
-    export default {
-        data: function () {
-            return {
-                captcha: baseUrl + "/captcha?length=4&" + Math.random(),
-                loginForm: {
-                    userName: "admin",
-                    password: "12345678",
-                    captcha: "",
-                    rememberMe: true
-                }
-            };
-        },
-        computed: {
-            ...mapState({
-                loginUser: state => state.loginUser
-            })
-        },
-        created() {
-            if (this.loginUser.id) {
-                this.$router.push({path: "/dashboard"});
-            }
-        },
-        methods: {
-            ...mapMutations(["save", "remove"]),
-            refreshCaptcha() {
-                this.captcha = baseUrl + "/captcha?length=4&" + Math.random();
-            },
-            submitForm(formName) {
-                this.$refs[formName].validate(valid => {
-                    if (valid) {
-                        this.$api.User.login(this.loginForm, data => {
-                            let loginUser = data.loginUser;
-                            loginUser.roles = data.roles;
-                            loginUser.permissions = data.permissions;
-                            this.save(loginUser);
-                            this.$router.push({path: "/dashboard"});
-                        });
-                    } else {
-                        return false;
-                    }
-                });
-            }
-        }
+export default {
+  data: function() {
+    return {
+      captcha: baseUrl + "/captcha?length=4&" + Math.random(),
+      loginForm: {
+        userName: "admin",
+        password: "12345678",
+        captcha: "",
+        rememberMe: true
+      }
     };
+  },
+  computed: {
+    ...mapState({
+      loginUser: state => state.loginUser
+    })
+  },
+  created() {
+    if (this.loginUser.id) {
+      this.$router.push({ path: "/dashboard" });
+    }
+  },
+  methods: {
+    ...mapMutations(["save", "remove"]),
+    refreshCaptcha() {
+      this.captcha = baseUrl + "/captcha?length=4&" + Math.random();
+    },
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          this.$api.User.login(this.loginForm, data => {
+            let loginUser = data.loginUser;
+            loginUser.roles = data.roles;
+            loginUser.permissions = data.permissions;
+            this.save(loginUser);
+            this.$router.push({ path: "/dashboard" });
+          });
+        } else {
+          return false;
+        }
+      });
+    }
+  }
+};
 </script>
 
 <style scoped>
-    .login-wrap {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        background-color: #f5f7f9;
-        background-image: url(../assets/images/background.png);
-        -moz-background-size: 100% 100%;
-        background-size: 100% 100%;
-    }
+.login-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f7f9;
+  background-image: url(../assets/images/background.png);
+  -moz-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
 
-    .append-img {
-        height: 39px;
-        border-radius: 0 4px 4px 0;
-        cursor: pointer;
-        margin-left: -20px;
-        margin-right: -20px;
-        margin-bottom: -5px;
-    }
+.append-img {
+  height: 39px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  margin-left: -20px;
+  margin-right: -20px;
+  margin-bottom: -5px;
+}
 
-    .ms-title {
-        font-family: -webkit-pictograph;
-        text-align: center;
-        font-size: 30px;
-        color: #018abd;
-        padding-bottom: 10px;
-    }
+.ms-title {
+  font-family: -webkit-pictograph;
+  text-align: center;
+  font-size: 30px;
+  color: #018abd;
+  padding-bottom: 10px;
+}
 
-    .ms-login {
-        position: absolute;
-        left: 50%;
-        top: 45%;
-        width: 300px;
-        height: 300px;
-        margin: -150px 0 0 -190px;
-        padding: 40px;
-        border-radius: 5px;
-        background: #fff;
-    }
+.ms-login {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 300px;
+  height: 300px;
+  margin: -150px 0 0 -190px;
+  padding: 40px;
+  border-radius: 5px;
+  background: #fff;
+}
 
-    .login-btn {
-        text-align: center;
-    }
+.login-btn {
+  text-align: center;
+}
 
-    .login-btn button {
-        width: 100%;
-        height: 36px;
-    }
+.login-btn button {
+  width: 100%;
+  height: 36px;
+}
 </style>
