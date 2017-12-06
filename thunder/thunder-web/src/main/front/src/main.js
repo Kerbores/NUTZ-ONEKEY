@@ -16,6 +16,9 @@ import api from "./api";
 import http from './http'
 import rules from './rules'
 
+import BgaBackTop from 'bga-back-top-vue'
+Vue.use(BgaBackTop)
+
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)

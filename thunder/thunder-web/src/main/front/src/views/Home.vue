@@ -48,7 +48,7 @@
                     </template>
                 </el-menu>
             </aside>
-            <section class="content-container">
+            <section class="content-container bga-back-top">
                 <div class="grid-content bg-purple-light">
                     <el-col :span="24" class="breadcrumb-container">
                         <strong class="title">{{$route.name}}</strong>
@@ -68,7 +68,9 @@
             </section>
         </el-col>
         <el-col :span="24">
-          <el-footer>{{copyright}}</el-footer>
+          <el-footer>{{copyright}} 
+            <bga-back-top :threshold="101" :right="40" :bottom="10" :width="40" :height="40" :svgMajorColor="'#7b79e5'"
+                 :svgMinorColor="'#ba6fda'" :svgType="'rocket_smoke'"/></el-footer>
         </el-col>
     </el-row>
 </template>
