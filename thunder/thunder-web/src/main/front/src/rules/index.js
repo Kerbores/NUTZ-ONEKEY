@@ -77,5 +77,16 @@ export default {
         required: true,
         message: "请输入描述信息",
         trigger: "blur"
+    }],
+    groupId: [{
+        type: "number",
+        required: true,
+        message: "请选择数据分组",
+        trigger: "blur"
+    }],
+    value: [{
+        required: true,
+        message: "请输入码本数据值",
+        trigger: "blur"
     }]
 }

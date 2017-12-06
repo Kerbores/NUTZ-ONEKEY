@@ -19,6 +19,9 @@ import rules from './rules'
 import BgaBackTop from 'bga-back-top-vue'
 Vue.use(BgaBackTop)
 
+import ElTreeGrid from 'element-tree-grid';
+Vue.component(ElTreeGrid.name, ElTreeGrid);
+
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)

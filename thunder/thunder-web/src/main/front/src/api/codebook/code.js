@@ -14,13 +14,15 @@ export default {
     /**
      * 码本数据检索
      * @param {number} page 页码
+     * @param {number} groupId 分组id
      * @param {string} key 关键词
      * @param {Function} success 回调
      */
-    search(page, key, success) {
+    search(page, groupId, key, success) {
         http.get('codebook/search', {
             page: page,
-            key: key
+            key: key,
+            group: groupId
         }, success);
     },
     /**
@@ -46,5 +48,21 @@ export default {
      */
     delete(id, success) {
         http.get('codebook/delete/' + id, success);
+    },
+    /**
+     * 加载子节点
+     * @param {number} id 父级id
+     * @param {Function} success 回调
+     */
+    sub(id, success) {
+        http.get('codebook/sub/' + id, success);
+    },
+    /**
+     * 加载顶级
+     * @param {number} id 分组id
+     * @param {Function} success 回调
+     */
+    top(id, success) {
+        http.get("codebook/top/" + id, success)
     }
 }

@@ -13,6 +13,7 @@
     "axios": "^0.17.1",
     "bga-back-top-vue": "^1.0.2",
     "echarts": "^3.8.5",
+    "element-tree-grid": "^0.0.15",
     "element-ui": "^2.0.7",
     "font-awesome": "^4.7.0",
     "moment": "^2.19.3",

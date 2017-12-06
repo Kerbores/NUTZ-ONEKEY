@@ -46,5 +46,12 @@ export default {
      */
     delete(id, status, success) {
         http.get('group/toggle/' + id + '/' + status, success);
+    },
+    /**
+     * 全部分组
+     * @param {Function} success 回调
+     */
+    all(success) {
+        http.get('group/all', success);
     }
 }
