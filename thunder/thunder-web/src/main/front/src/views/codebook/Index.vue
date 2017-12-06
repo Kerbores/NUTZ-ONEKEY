@@ -141,6 +141,7 @@ export default {
     loadGroups() {
       this.$api.CodeBookGroup.all(result => {
         this.groups = result.groups;
+        this.loadData();
       });
     },
     loadTop() {
@@ -230,7 +231,6 @@ export default {
     }
   },
   created: function() {
-    this.loadData();
     this.loadGroups();
   }
 };

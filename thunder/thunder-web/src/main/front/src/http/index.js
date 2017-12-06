@@ -11,19 +11,17 @@ var loadinginstace;
 axios.defaults.timeout = 5000
 axios.defaults.baseURL = process.env.NODE_ENV == "development" ? 'http://localhost:8888/api' : '';
 //请求前拦截
+let status = false;
 axios.interceptors.request.use(config => {
     if (config.url.indexOf('metrics') >= 0) {
         return config;
-    } else if (loadinginstace) {
-        loadinginstace.visible = false;
-        loadinginstace = Loading.service({
-            fullscreen: true,
-            lock: true,
-            text: "接口请求中..."
-        });
+    }
+    if (loadinginstace && loadinginstace.visible && !status) {
+        return config;
     } else {
+        status = true;
         loadinginstace = Loading.service({
-            fullscreen: true,
+            target: '.content-container',
             lock: true,
             text: "接口请求中..."
         });
@@ -32,13 +30,14 @@ axios.interceptors.request.use(config => {
 }, error => {
     if (loadinginstace) {
         loadinginstace.close();
-        loadinginstace = null;
+        status = false;
     }
     return Promise.reject('加载超时')
 })
 //设置response统一处理
 axios.interceptors.response.use(response => {
     if (loadinginstace) {
+        status = false;
         loadinginstace.close();
     }
     if (response.config.url.indexOf('druid') > 0 || response.config.url.indexOf('metrics') > 0) {
@@ -56,6 +55,7 @@ axios.interceptors.response.use(response => {
 }, error => { //http失败
     if (loadinginstace) {
         loadinginstace.close();
+        status = false;
     }
     switch (error.response.status) {
         case 403:
