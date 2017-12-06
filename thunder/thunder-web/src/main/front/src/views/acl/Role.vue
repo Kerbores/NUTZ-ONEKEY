@@ -67,7 +67,7 @@
             </div>
         </el-dialog>
 
-        <el-dialog title="设置权限" :visible.sync="grantShow" width="35%">
+        <el-dialog title="设置权限" :visible.sync="grantShow" :width="dialogWidth">
             <template>
                 <el-transfer v-model="selected" :data="options" :titles="['待选项', '已选项']" filterable></el-transfer>
             </template>
@@ -106,6 +106,11 @@ export default {
       },
       formLabelWidth: "120px"
     };
+  },
+  computed: {
+    dialogWidth() {
+      return 590 * 100 / this.$utils.windowWidth() + "%";
+    }
   },
   watch: {
     options: function() {

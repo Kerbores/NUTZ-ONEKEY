@@ -10,6 +10,14 @@ function padding(s, len) {
 };
 
 export default {
+    windowWidth: function () {
+        let winWidth = 0;
+        if (window.innerWidth)
+            winWidth = window.innerWidth;
+        else if ((document.body) && (document.body.clientWidth))
+            winWidth = document.body.clientWidth;
+        return winWidth;
+    },
     getQueryStringByName: function (name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
         var r = window.location.search.substr(1).match(reg);

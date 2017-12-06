@@ -22,6 +22,8 @@ Vue.use(BgaBackTop)
 import ElTreeGrid from 'element-tree-grid';
 Vue.component(ElTreeGrid.name, ElTreeGrid);
 
+import utils from './common/js/util'
+
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
@@ -30,6 +32,7 @@ Vue.use(Vuex)
 Vue.prototype.$http = http;
 Vue.prototype.$rules = rules;
 Vue.prototype.$api = api;
+Vue.prototype.$utils = utils;
 
 global.baseUrl = process.env.NODE_ENV == "development" ? 'api' : '';
 // NProgress.configure({ showSpinner: false });
