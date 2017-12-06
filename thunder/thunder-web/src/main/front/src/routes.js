@@ -1,4 +1,6 @@
 import Login from './views/Login.vue'
+import Home from './views/Home.vue'
+import NotFound from './views/404.vue'
 
 import Dashboard from './views/dashbord/DashBoard.vue'
 
@@ -11,14 +13,9 @@ import CodeBookGroup from './views/codebook/Group.vue'
 
 import Setting from './views/setting/Index.vue'
 
+import Branch from './views/department/Branch.vue'
+import Department from './views/department/Index.vue'
 
-
-import NotFound from './views/404.vue'
-import Home from './views/Home.vue'
-import Page4 from './views/nav2/Page4.vue'
-import Page5 from './views/nav2/Page5.vue'
-import Page6 from './views/nav3/Page6.vue'
-import echarts from './views/charts/echarts.vue'
 
 let routes = [{
         path: '/',
@@ -117,13 +114,13 @@ let routes = [{
         name: '组织架构',
         iconCls: 'el-icon-fa-building',
         children: [{
-            path: '/echarts',
-            component: echarts,
+            path: '/branch',
+            component: Branch,
             iconCls: 'el-icon-fa-bank',
             name: '机构管理'
         }, {
-            path: '/echarts',
-            component: echarts,
+            path: '/department',
+            component: Department,
             iconCls: 'el-icon-fa-chrome',
             name: '部门管理'
         }]
@@ -134,23 +131,23 @@ let routes = [{
         name: '监控面板',
         iconCls: 'el-icon-fa-camera',
         children: [{
-            path: '/echarts',
-            component: echarts,
+            path: '/department',
+            component: Department,
             iconCls: 'el-icon-fa-database',
             name: 'Druid监控'
         }, {
-            path: '/echarts',
-            component: echarts,
+            path: '/department',
+            component: Department,
             iconCls: 'el-icon-fa-server',
             name: '运行环境'
         }, {
-            path: '/echarts',
-            component: echarts,
+            path: '/department',
+            component: Department,
             iconCls: 'el-icon-fa-history',
             name: '登录日志'
         }, {
-            path: '/echarts',
-            component: echarts,
+            path: '/department',
+            component: Department,
             iconCls: 'el-icon-fa-tags',
             name: '操作日志'
         }]
