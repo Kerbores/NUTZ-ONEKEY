@@ -44,7 +44,7 @@
                 </el-tab-pane>
                 <el-tab-pane label="Sql监控" name="sql">
                     <template>
-                        <el-select v-model="refresh" placeholder="请选择">
+                        <el-select v-model="refresh" placeholder="请选择" style="margin-bottom: 10px;">
                             <el-option
                                 v-for="item in options"
                                 :label="item.label"
