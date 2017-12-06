@@ -1,5 +1,9 @@
 export function MP(ak) {
     return new Promise(function (resolve, reject) {
+        if (window.BMap) {
+            resolve(BMap);
+            return;
+        }
         window.onload = function () {
             resolve(BMap)
         }

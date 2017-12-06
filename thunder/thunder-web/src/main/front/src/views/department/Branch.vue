@@ -1,7 +1,7 @@
 <template>
     <section>
         机构管理
-        <b-map-component :ak="ak" mapWidth="800"  @notify="notify"></b-map-component>
+        <b-map-component :ak="ak" :mapWidth="mapWidth"  @notify="notify"></b-map-component>
     </section>
 </template>
 <style>
@@ -12,7 +12,8 @@ import BMapComponent from "@/components/Map/BaiduMap.vue";
 export default {
   data() {
     return {
-      ak: "CRHkMGE7Db1USNSyFXqVDmdv"
+      ak: "CRHkMGE7Db1USNSyFXqVDmdv",
+      mapWidth: 800
     };
   },
   methods: {

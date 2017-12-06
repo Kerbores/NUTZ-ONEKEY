@@ -108,6 +108,7 @@ public class QiniuAutoConfiguration {
 				DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
 				return new R(qiuniuConfigProperties.getDomain(), putRet.key);
 			} catch (QiniuException e) {
+				e.printStackTrace();
 				log.debugf("QiniuException: %s", e.getMessage());
 				return null;
 			}

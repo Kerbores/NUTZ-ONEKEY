@@ -46,7 +46,7 @@ export default {
       type: String,
       required: true
     },
-    mapWidth:{
+    mapWidth: {
       type: Number,
       default: 400,
       required: false
@@ -66,7 +66,8 @@ export default {
       this.$emit("notify", rs);
     }
   },
-  created() {
+  destroyed() {},
+  mounted() {
     const self = this;
     this.$nextTick(function() {
       MP(this.ak).then(BMap => {

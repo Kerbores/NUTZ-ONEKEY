@@ -89,5 +89,5 @@ swagger:
 qiniu:
   access-key: 0_2UjuhLU6jbRzmcGjnraA7t4H_lpSVgNX3Ld1uV
   secret-key: Svl3Zxbi9KyCFMvAg-2yKNjezhRwgBFNOR-cZQQk
-  bucket: http://7xlb6l.com1.z0.glb.clouddn.com/
-  domain: test
+  bucket: test
+  domain: http://7xlb6l.com1.z0.glb.clouddn.com/

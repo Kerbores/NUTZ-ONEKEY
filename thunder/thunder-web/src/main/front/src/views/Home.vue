@@ -14,9 +14,9 @@
                     <span class="el-dropdown-link userinfo-inner"><img
                             :src="logo"/> {{loginUser.nickName}}</span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>我的消息</el-dropdown-item>
-                        <el-dropdown-item>设置</el-dropdown-item>
-                        <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
+                        <el-dropdown-item @click.native="setAvatar"><i class="el-icon-fa-upload"></i> 设置头像</el-dropdown-item>
+                        <el-dropdown-item @click.native="resetPassword"><i class="el-icon-fa-unlock"></i> 重置密码</el-dropdown-item>
+                        <el-dropdown-item divided @click.native="logout"><i class="el-icon-fa-sign-out"></i> 退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </el-col>
@@ -103,6 +103,12 @@ export default {
   },
   methods: {
     ...mapMutations(["save", "remove"]),
+    setAvatar(){
+      console.log(1)
+    },
+    resetPassword(){
+      console.log(2);
+    },
     checkPermission(item) {
       let permissions = [];
       if (item.meta) {
