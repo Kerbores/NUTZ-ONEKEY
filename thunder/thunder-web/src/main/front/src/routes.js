@@ -16,6 +16,11 @@ import Setting from './views/setting/Index.vue'
 import Branch from './views/department/Branch.vue'
 import Department from './views/department/Index.vue'
 
+import Database from './views/monitor/DataBase.vue'
+import Runtime from './views/monitor/Runtime.vue'
+import APM from './views/monitor/Apm.vue'
+import LoginLog from './views/monitor/LoginLog.vue'
+
 
 let routes = [{
         path: '/',
@@ -131,23 +136,23 @@ let routes = [{
         name: '监控面板',
         iconCls: 'el-icon-fa-camera',
         children: [{
-            path: '/department',
-            component: Department,
+            path: '/db',
+            component: Database,
             iconCls: 'el-icon-fa-database',
             name: 'Druid监控'
         }, {
-            path: '/department',
-            component: Department,
+            path: '/runtime',
+            component: Runtime,
             iconCls: 'el-icon-fa-server',
             name: '运行环境'
         }, {
-            path: '/department',
-            component: Department,
+            path: '/login/log',
+            component: LoginLog,
             iconCls: 'el-icon-fa-history',
             name: '登录日志'
         }, {
-            path: '/department',
-            component: Department,
+            path: '/trace',
+            component: APM,
             iconCls: 'el-icon-fa-tags',
             name: '操作日志'
         }]

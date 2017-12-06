@@ -2,7 +2,10 @@
 
 import axios from 'axios'
 import qs from 'qs'
-import {Loading, Message} from 'element-ui'
+import {
+    Loading,
+    Message
+} from 'element-ui'
 
 var loadinginstace;
 axios.defaults.timeout = 5000
@@ -36,6 +39,13 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(response => {
     if (loadinginstace) {
         loadinginstace.close();
+    }
+    if (response.config.url.indexOf('druid') > 0) {
+        if (response.status == 200) {
+            return Promise.resolve(response.data);
+        } else {
+            return Promise.reject('失败咯!!!');
+        }
     }
     if (response.data.operationState == 'SUCCESS') { //数据成功
         return Promise.resolve(response.data.data)
