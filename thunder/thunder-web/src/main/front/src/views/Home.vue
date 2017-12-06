@@ -81,7 +81,7 @@ export default {
     return {
       sysName: "NUTZ-ONEKEY",
       collapsed: true,
-      copyright:'Copyright © 2018 - Kerbores. All Rights Reserved'
+      copyright: "Copyright © 2018 - Kerbores. All Rights Reserved"
     };
   },
   computed: {
@@ -146,6 +146,7 @@ export default {
   color: #fff;
   text-align: center;
   line-height: 60px;
+  z-index: 10;
 }
 .container {
   position: absolute;
@@ -248,15 +249,10 @@ export default {
       width: 230px;
     }
     .content-container {
-      // background: #f1f2f7;
       flex: 1;
-      // position: absolute;
-      // right: 0px;
-      // top: 0px;
-      // bottom: 0px;
-      // left: 230px;
       overflow-y: scroll;
       padding: 20px;
+      margin-bottom: 60px;
       .breadcrumb-container {
         //margin-bottom: 15px;
         .title {
