@@ -25,6 +25,25 @@ public class Group extends ThunderEntity {
 	@Comment("分组描述")
 	private String description;
 
+	@Column("g_del")
+	@Comment("分组可用状态")
+	private boolean delete;
+
+	/**
+	 * @return the delete
+	 */
+	public boolean isDelete() {
+		return delete;
+	}
+
+	/**
+	 * @param delete
+	 *            the delete to set
+	 */
+	public void setDelete(boolean delete) {
+		this.delete = delete;
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -49,7 +49,8 @@ axios.interceptors.response.use(response => {
     switch (error.response.status) {
         case 403:
             location.href = '/';
-        //return Promise.reject("用户没有登录");
+        case 401:
+            location.href = '/';
         case 404:
             return Promise.reject("接口不存在");
         case 500:
@@ -75,7 +76,6 @@ export default {
     post(url, data, done, fail) {
         return axios({
             method: 'post',
-            baseURL: baseUrl,
             url,
             data: qs.stringify(data),
             headers: {
@@ -134,7 +134,6 @@ export default {
         }
         return axios({
             method: 'get',
-            baseURL: baseUrl,
             url,
             params, // get 请求时带的参数
             headers: {

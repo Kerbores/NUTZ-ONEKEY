@@ -6,6 +6,11 @@ import User from './views/acl/User.vue'
 import Role from './views/acl/Role.vue'
 import Permission from './views/acl/Permission.vue'
 
+import CodeBook from './views/codebook/Index.vue'
+import CodeBookGroup from './views/codebook/Group.vue'
+
+
+
 import NotFound from './views/404.vue'
 import Home from './views/Home.vue'
 import Page4 from './views/nav2/Page4.vue'
@@ -78,14 +83,14 @@ let routes = [{
         name: '码本管理',
         iconCls: 'el-icon-fa-book',
         children: [{
-                path: '/page4',
+                path: '/codebook/group',
                 iconCls: 'el-icon-fa-object-group',
-                component: Page4,
+                component: CodeBookGroup,
                 name: '码本分组'
             },
             {
-                path: '/page5',
-                component: Page5,
+                path: '/codebook',
+                component: CodeBook,
                 iconCls: 'el-icon-fa-cubes',
                 name: '码本数据'
             }

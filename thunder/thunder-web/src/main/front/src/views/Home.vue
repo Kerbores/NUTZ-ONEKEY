@@ -116,7 +116,6 @@ export default {
       }
       if (permissions.length == 0) return true;
       if (permissions.length == 0) return this.hasPermission(permissions[0]);
-      console.log(permissions);
       return (
         permissions.filter(permission => this.hasPermission(permission)).length > 0
       );
