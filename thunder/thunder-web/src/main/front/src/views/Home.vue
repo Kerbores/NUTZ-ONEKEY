@@ -67,6 +67,9 @@
                 </div>
             </section>
         </el-col>
+        <el-col :span="24">
+          <el-footer>{{copyright}}</el-footer>
+        </el-col>
     </el-row>
 </template>
 
@@ -78,6 +81,7 @@ export default {
     return {
       sysName: "NUTZ-ONEKEY",
       collapsed: true,
+      copyright:'Copyright © 2018 - Kerbores. All Rights Reserved'
     };
   },
   computed: {
@@ -131,7 +135,18 @@ export default {
 
 <style scoped lang="scss">
 @import "~scss_vars";
-
+.el-footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background-color: $color-primary;
+  border-color: rgba(238, 241, 146, 0.3);
+  border-top-width: 1px;
+  border-top-style: solid;
+  color: #fff;
+  text-align: center;
+  line-height: 60px;
+}
 .container {
   position: absolute;
   top: 0px;
