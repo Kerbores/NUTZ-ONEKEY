@@ -210,7 +210,6 @@ public class UserController extends BaseController {
 		return userService.setPermission(dto.getGrantIds(), dto.getId());
 	}
 
-
 	/**
 	 * 登录
 	 * 
@@ -251,5 +250,6 @@ public class UserController extends BaseController {
 		SecurityUtils.getSubject().logout();
 		return Result.success();
 	}
+
 
 }

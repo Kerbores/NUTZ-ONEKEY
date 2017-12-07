@@ -1,8 +1,8 @@
 #application
 spring:
   application:
-    name: sino soft scaffold nutz dao vue前后端分离版
-    version: 1.0
+    name: NUTZ-ONEKEY spring-boot+nutzdao vue前后端分离版
+    version: 4.0
   #REDIS
   redis:
     host: 127.0.0.1

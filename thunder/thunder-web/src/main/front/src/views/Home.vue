@@ -96,7 +96,7 @@ export default {
       logo: function() {
         return this.loginUser.headKey
           ? "sufix" + this.loginUser.headKey
-          : "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1512546256940&di=f6395296325116fca0ddcc7c9a8c0ed6&imgtype=jpg&src=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D1740356695%2C2259268870%26fm%3D214%26gp%3D0.jpg";
+          : baseUrl + "/image/avatar";
       }
     }),
     ...mapGetters(["hasRole", "hasPermission"])

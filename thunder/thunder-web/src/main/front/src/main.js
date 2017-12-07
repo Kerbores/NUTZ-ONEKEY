@@ -44,6 +44,9 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     NProgress.start();
+    if (to.path === '/') {
+        store.commit('remove');
+    }
     next()
 })
 
