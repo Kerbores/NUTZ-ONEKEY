@@ -41,6 +41,7 @@
 		<nutz.version>1.r.63</nutz.version>
 		<axe.version>1.5</axe.version>
 		<shiro.version>1.4.0</shiro.version>
+		<destDir>${project.build.outputDirectory}/static/</destDir>
 	</properties>
 
 	<dependencies>
@@ -118,15 +119,6 @@
 			<version>${axe.version}</version>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 	<modules>
 		<module>thunder-bean</module>
 		<module>thunder-biz</module>

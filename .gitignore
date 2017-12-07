@@ -11,6 +11,8 @@
 #workspace Files
 
 node_modules/
+dist/
+.factorypath
 target/
 .settings/
 .classpath

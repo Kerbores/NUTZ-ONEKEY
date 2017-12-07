@@ -10,47 +10,102 @@
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-				</configuration>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>exec-npm-install</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>${npm}</executable>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
+							<workingDirectory>${basedir}/src/main/front</workingDirectory>
+						</configuration>
+					</execution>
+
+					<execution>
+						<id>exec-npm-run-build</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+						<configuration>
+							<executable>${npm}</executable>
+							<arguments>
+								<argument>run</argument>
+								<argument>build</argument>
+							</arguments>
+							<workingDirectory>${basedir}/src/main/front</workingDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<!-- The configuration of the plugin -->
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.outputDirectory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${project.basedir}/src/main/front/dist</directory>
+									<targetPath>${destDir}</targetPath>
+									<filtering>false</filtering>
+								</resource>
+							</resources>
+						</configuration>
+						<inherited></inherited>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
-					<!-- Configuration of the archiver -->
-					<archive>
-						<!-- 生成的jar中，不要包含pom.xml和pom.properties这两个文件 -->
-						<addMavenDescriptor>true</addMavenDescriptor>
-						<!-- Manifest specific configuration -->
-						<manifest>
-							<!-- 是否要把第三方jar放到manifest的classpath中 -->
-							<addClasspath>true</addClasspath>
-							<!-- 生成的manifest中classpath的前缀，因为要把第三方jar放到lib目录下，所以classpath的前缀是lib/ -->
-							<classpathPrefix>lib/</classpathPrefix>
-							<!-- 应用的main class -->
-							<mainClass>club.zhcs.thunder.ThunderLauncher</mainClass>
-						</manifest>
-					</archive>
+					<dotGitDirectory>${project.basedir}/../.git</dotGitDirectory>
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<configuration>
-					<packagingExcludes>WEB-INF/lib/?websocket-*.jar</packagingExcludes>
-				</configuration>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-assembly-plugin</artifactId> 
-				<version>2.4</version> <configuration> <descriptors> <descriptor>src/main/assembly/assembly.xml</descriptor> 
-				</descriptors> </configuration> <executions> <execution> <id>make-assembly</id> 
-				<phase>package</phase> <goals> <goal>single</goal> </goals> </execution> 
-				</executions> </plugin -->
 		</plugins>
 	</build>
+	<profiles>
+		<profile>
+			<id>unix</id>
+			<properties>
+				<npm>cnpm</npm>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>windows</id>
+			<properties>
+				<npm>npm.cmd</npm>
+			</properties>
+		</profile>
+	</profiles>
 	<dependencies>
 		<dependency>
 			<groupId>club.zhcs</groupId>
@@ -73,5 +128,4 @@
 			<version>1.20</version>
 		</dependency>
 	</dependencies>
-	<packaging>war</packaging>
 </project>
