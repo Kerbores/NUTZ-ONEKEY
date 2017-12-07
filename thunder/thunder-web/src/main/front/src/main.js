@@ -16,6 +16,13 @@ import api from "./api";
 import http from './http'
 import rules from './rules'
 
+import AMap from 'vue-amap';
+Vue.use(AMap);
+AMap.initAMapApiLoader({
+    key: 'ae7db9d3bfa41d83f2414eade8e613f9',
+    plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor']
+});
+
 import BgaBackTop from 'bga-back-top-vue'
 Vue.use(BgaBackTop)
 

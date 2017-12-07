@@ -1,7 +1,7 @@
 <template>
 <section>
   <el-row>
-    <el-col :span="8">
+    <el-col :span="seachSpan">
       <el-input v-model="key" placeholder="请输入关键词进行检索" id="autoComplete" name="autoComplete">
         <el-button slot="append" icon="el-icon-search"></el-button>
       </el-input>
@@ -42,6 +42,11 @@ export default {
     }
   },
   props: {
+    seachSpan: {
+      type: Number,
+      default: 8,
+      required: false
+    },
     ak: {
       type: String,
       required: true
@@ -67,10 +72,11 @@ export default {
     }
   },
   destroyed() {},
-  mounted() {
+  created() {
     const self = this;
     this.$nextTick(function() {
       MP(this.ak).then(BMap => {
+        console.log(BMap);
         var map = new BMap.Map("allmap"); // 创建Map实例
         var point = new BMap.Point(
           this.center ? this.center.lng : 0,

@@ -10,6 +10,8 @@ import Setting from './setting'
 import APM from './monitor/apm'
 import Trace from './monitor/trace'
 
+import Branch from './department/branch'
+
 export default {
     User: User,
     Role: Role,
@@ -18,5 +20,6 @@ export default {
     CodeBookGroup: CodeBookGroup,
     Setting: Setting,
     APM: APM,
-    Trace: Trace
+    Trace: Trace,
+    Branch: Branch
 };
