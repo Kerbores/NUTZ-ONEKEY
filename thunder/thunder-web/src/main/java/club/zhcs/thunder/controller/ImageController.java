@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresUser;
 import org.nutz.dao.Cnd;
 import org.nutz.img.Images;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,13 +38,23 @@ public class ImageController {
 	UserService userService;
 
 	@PostMapping("upload")
-	@ResponseBody
-	public Result test(MultipartFile file) throws IOException {
+	public @ResponseBody Result test(MultipartFile file) throws IOException {
 		R r = qiniuUploader.upload(file.getInputStream());
 		return r == null ? Result.fail("上传失败!") : Result.success().addData("url", r.getUrl());
 	}
 
+	@PostMapping("avatar")
+	@RequiresUser
+	public @ResponseBody Result setAvatar(MultipartFile file) throws IOException {
+		R r = qiniuUploader.upload(file.getInputStream());
+		User user = userService.fetch(Cnd.where("name", "=", SecurityUtils.getSubject().getPrincipal()));
+		user.setHeadKey(r.getKey());
+		userService.update(user);
+		return Result.success().addData("r", r);
+	}
+
 	@GetMapping("avatar")
+	@RequiresUser
 	public void avatar(@RequestParam(value = "id", required = false, defaultValue = "0") long id, HttpServletRequest request, HttpServletResponse response) throws IOException {
 		User user = null;
 		if (id == 0) {
@@ -51,7 +62,6 @@ public class ImageController {
 		} else {
 			user = userService.fetch(id);
 		}
-
 		Images.write(Images.createAvatar(user == null ? "N" : user.getNickName()), "png", response.getOutputStream());
 	}
 }

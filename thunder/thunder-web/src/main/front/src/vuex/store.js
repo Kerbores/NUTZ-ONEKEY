@@ -16,6 +16,9 @@ export default new Vuex.Store({
                 roles: [],
                 permissions: []
             }
+        },
+        updateAvatar(state,key){
+            state.loginUser.headKey = key;
         }
     },
     getters: {

@@ -76,6 +76,18 @@
                               :svgMinorColor="'#ba6fda'" :svgType="'rocket_smoke'"/>
             </el-footer>
         </el-col>
+
+        <el-dialog title="设置头像" :visible.sync="setAvatarShow" width="400px">
+          <el-upload
+            class="avatar-uploader"
+            :action="uploadAction"
+            :show-file-list="false"
+            :on-success="handleAvatarSuccess"
+            :before-upload="beforeAvatarUpload">
+            <img v-if="imageUrl" :src="imageUrl" class="avatar">
+            <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          </el-upload>
+        </el-dialog>
     </el-row>
 </template>
 
@@ -87,7 +99,10 @@ export default {
     return {
       sysName: "NUTZ-ONEKEY",
       collapsed: true,
-      copyright: "Copyright © 2018 - Kerbores. All Rights Reserved"
+      setAvatarShow: false,
+      copyright: "Copyright © 2018 - Kerbores. All Rights Reserved",
+      imageUrl: "",
+      uploadAction: baseUrl + "/image/avatar"
     };
   },
   computed: {
@@ -95,18 +110,37 @@ export default {
       loginUser: state => state.loginUser,
       logo: function() {
         return this.loginUser.headKey
-          ? "sufix" + this.loginUser.headKey
+          ? "http://7xlb6l.com1.z0.glb.clouddn.com/" + this.loginUser.headKey
           : baseUrl + "/image/avatar";
       }
     }),
     ...mapGetters(["hasRole", "hasPermission"])
   },
   methods: {
-    ...mapMutations(["save", "remove"]),
-    setAvatar(){
-      console.log(1)
+    ...mapMutations(["save", "remove", "updateAvatar"]),
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+      if (res.operationState === "SUCCESS") {
+        this.setAvatarShow = false;
+        this.updateAvatar(res.data.r.key);
+      }
     },
-    resetPassword(){
+    beforeAvatarUpload(file) {
+      const isPic = file.type.indexOf("image") >= 0;
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      if (!isPic) {
+        this.$message.error("上传头像图片只能选择图片格式!");
+      }
+      if (!isLt2M) {
+        this.$message.error("上传头像图片大小不能超过 2MB!");
+      }
+      return isPic && isLt2M;
+    },
+    setAvatar() {
+      this.imageUrl = this.logo;
+      this.setAvatarShow = true;
+    },
+    resetPassword() {
       console.log(2);
     },
     checkPermission(item) {
@@ -123,7 +157,8 @@ export default {
       if (permissions.length == 0) return true;
       if (permissions.length == 1) return this.hasPermission(permissions[0]);
       return (
-        permissions.filter(permission => this.hasPermission(permission)).length > 0
+        permissions.filter(permission => this.hasPermission(permission))
+          .length > 0
       );
     },
     logout: function() {
@@ -144,7 +179,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 @import "~scss_vars";
 
 .el-footer {
@@ -283,5 +318,32 @@ export default {
       }
     }
   }
+}
+
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader {
+  text-align: center;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
 }
 </style>
