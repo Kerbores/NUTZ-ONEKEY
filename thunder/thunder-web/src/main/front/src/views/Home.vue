@@ -88,6 +88,23 @@
             <i v-else class="el-icon-plus avatar-uploader-icon"></i>
           </el-upload>
         </el-dialog>
+
+         <el-dialog title="修改密码" :visible.sync="resetPasswordShow" width="400px">
+            <el-form :model="user" :rules="$rules" ref="resetForm">
+                <el-form-item label="密码" :label-width="formLabelWidth" prop="password">
+                    <el-input type="password" v-model="user.password" auto-complete="off"
+                              suffix-icon="el-icon-fa-lock"></el-input>
+                </el-form-item>
+                <el-form-item label="确认密码" :label-width="formLabelWidth" prop="rePassword">
+                    <el-input type="password" v-model="user.rePassword" auto-complete="off"
+                              suffix-icon="el-icon-fa-lock"></el-input>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="resetPasswordShow = false">取 消</el-button>
+                <el-button type="primary" @click="resetPasswordSubmit('resetForm')">确 定</el-button>
+            </div>
+        </el-dialog>
     </el-row>
 </template>
 
@@ -97,9 +114,12 @@ import { mapState, mapGetters, mapMutations } from "vuex";
 export default {
   data() {
     return {
+      user: {},
+      formLabelWidth: "100px",
       sysName: "NUTZ-ONEKEY",
       collapsed: true,
       setAvatarShow: false,
+      resetPasswordShow: false,
       copyright: "Copyright © 2018 - Kerbores. All Rights Reserved",
       imageUrl: "",
       uploadAction: baseUrl + "/image/avatar"
@@ -141,7 +161,30 @@ export default {
       this.setAvatarShow = true;
     },
     resetPassword() {
-      console.log(2);
+      this.resetPasswordShow = true;
+    },
+    resetPasswordSubmit(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid && this.user.password === this.user.rePassword) {
+          this.$api.User.resetPassword(
+            this.loginUser.id,
+            this.loginUser.name,
+            this.user.password,
+            result => {
+              this.$message({
+                type: "success",
+                message: "重置成功!"
+              });
+              this.resetPasswordShow = false;
+            }
+          );
+        } else if (this.user.password != this.user.rePassword) {
+          this.$message.error("两次输入密码不一致!");
+          return false;
+        } else {
+          return false;
+        }
+      });
     },
     checkPermission(item) {
       let permissions = [];
