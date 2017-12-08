@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.authz.UnauthenticatedException;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +20,7 @@ public class GlobalExceptionHandler {
 	public Result defaultErrorHandler(HttpServletResponse response, Exception e) throws Exception {
 		logger.error("error=>", e);
 		if (e instanceof UnauthenticatedException) {
-			response.setStatus(401);
+			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			return Result.fail("没有权限进行此操作!");
 		}
 		return Result.exception(e);
