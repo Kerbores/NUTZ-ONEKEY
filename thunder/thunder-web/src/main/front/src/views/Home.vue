@@ -130,7 +130,7 @@ export default {
       loginUser: state => state.loginUser,
       logo: function() {
         return this.loginUser.headKey
-          ? "http://7xlb6l.com1.z0.glb.clouddn.com/" + this.loginUser.headKey
+          ? baseUrl + "/image/" + this.loginUser.headKey
           : baseUrl + "/image/avatar";
       }
     }),
