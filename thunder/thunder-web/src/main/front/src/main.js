@@ -45,7 +45,7 @@ global.baseUrl = process.env.NODE_ENV == "development" ? 'api' : '';
 // NProgress.configure({ showSpinner: false });
 
 const router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     routes: routes
 })
 
