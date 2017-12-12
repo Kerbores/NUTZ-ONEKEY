@@ -23,11 +23,11 @@ import LoginLog from './views/monitor/LoginLog.vue'
 
 
 let routes = [{
-        path: '/',
-        component: Login,
-        name: '',
-        hidden: true
-    },
+    path: '/',
+    component: Login,
+    name: '',
+    hidden: true
+},
     {
         path: '/404',
         component: NotFound,
@@ -53,14 +53,14 @@ let routes = [{
         name: '访问控制',
         iconCls: 'el-icon-fa-users', //图标样式class
         children: [{
-                path: '/user',
-                iconCls: 'el-icon-fa-user',
-                component: User,
-                meta: {
-                    p: 'user.list'
-                },
-                name: '用户管理'
+            path: '/user',
+            iconCls: 'el-icon-fa-user',
+            component: User,
+            meta: {
+                p: 'user.list'
             },
+            name: '用户管理'
+        },
             {
                 path: '/role',
                 iconCls: 'el-icon-fa-lock',
@@ -87,11 +87,11 @@ let routes = [{
         name: '码本管理',
         iconCls: 'el-icon-fa-book',
         children: [{
-                path: '/codebook/group',
-                iconCls: 'el-icon-fa-object-group',
-                component: CodeBookGroup,
-                name: '码本分组'
-            },
+            path: '/codebook/group',
+            iconCls: 'el-icon-fa-object-group',
+            component: CodeBookGroup,
+            name: '码本分组'
+        },
             {
                 path: '/codebook',
                 component: CodeBook,

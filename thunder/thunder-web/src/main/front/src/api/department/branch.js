@@ -18,11 +18,10 @@ export default {
      * @param {string} key 关键词
      * @param {Function} success 回调
      */
-    search(page, groupId, key, success) {
+    search(page, key, success) {
         http.get('branch/search', {
             page: page,
-            key: key,
-            group: groupId
+            key: key
         }, success);
     },
     /**
@@ -62,7 +61,7 @@ export default {
      * @param {number} id 分组id
      * @param {Function} success 回调
      */
-    top(id, success) {
-        http.get("branch/top/" + id, success)
+    top(success) {
+        http.get("branch/top", success)
     }
 }

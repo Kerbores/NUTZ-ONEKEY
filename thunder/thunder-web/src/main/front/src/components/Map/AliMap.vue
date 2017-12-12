@@ -1,12 +1,12 @@
 <template>
-  <div class="amap-page-container">
-    <el-amap-search-box class="search-box" :search-option="searchOption"
-                        :on-search-result="onSearchResult"></el-amap-search-box>
-    <el-amap :plugin="plugin" vid="ali-map" :center="mapCenter" :events="events" :zoom="12" class="ali-map"
-             :class="mapClass">
-      <el-amap-marker :position="mapCenter"></el-amap-marker>
-    </el-amap>
-  </div>
+    <div class="amap-page-container">
+        <el-amap-search-box class="search-box" :search-option="searchOption"
+                            :on-search-result="onSearchResult"></el-amap-search-box>
+        <el-amap :plugin="plugin" vid="ali-map" :center="mapCenter" :events="events" :zoom="12" class="ali-map"
+                 :class="mapClass">
+            <el-amap-marker :position="mapCenter"></el-amap-marker>
+        </el-amap>
+    </div>
 </template>
 <style scoped>
 .ali-map {
@@ -31,6 +31,9 @@
 .amap-copyright,
 .amap-logo {
   display: none !important;
+}
+.el-vue-search-box-container .search-box-wrapper .search-btn {
+  background: #ccc !important;
 }
 </style>
 

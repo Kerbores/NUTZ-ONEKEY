@@ -5,7 +5,7 @@
                 <el-input placeholder="请输入内容" v-model="searchKey" prefix-icon="el-icon-fa-search">
                     <div slot="append">
                         <el-button type="primary" icon="el-icon-fa-search"
-                                   @click=" pager.page = 1 ;doSearch()"></el-button>
+                                   @click=" pager.pager.pageNumber = 1 ;doSearch()"></el-button>
                     </div>
                 </el-input>
             </el-col>
@@ -15,7 +15,7 @@
         </el-row>
 
         <el-table :data="pager.dataList" border stripe style="width: 100%">
-            <el-table-column prop="id" label="ID"  header-align="center" align="center" width="55">
+            <el-table-column prop="id" label="ID" header-align="center" align="center" width="55">
             </el-table-column>
             <el-table-column prop="name" label="名称" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
@@ -54,11 +54,13 @@
         <el-dialog :title="role.id == 0 ? '添加角色' : '编辑角色' " :visible.sync="addEditShow" width="30%">
             <el-form :model="role" :rules="$rules" ref="roleForm">
                 <el-form-item label="名称" :label-width="formLabelWidth" prop="name">
-                    <el-input v-model="role.name" auto-complete="off" placeholder="请填写角色名称" suffix-icon="el-icon-fa-vcard" ></el-input>
+                    <el-input v-model="role.name" auto-complete="off" placeholder="请填写角色名称"
+                              suffix-icon="el-icon-fa-vcard"></el-input>
                 </el-form-item>
                 <el-form-item label="描述" :label-width="formLabelWidth" prop="description">
                     <el-input type="textarea" :maxlength="500"
-                    :autosize="{ minRows: 4, maxRows: 8}" v-model="role.description" auto-complete="off" placeholder="请填写角色描述" suffix-icon="el-icon-fa-file-word-o"></el-input>
+                              :autosize="{ minRows: 4, maxRows: 8}" v-model="role.description" auto-complete="off"
+                              placeholder="请填写角色描述" suffix-icon="el-icon-fa-file-word-o"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -82,141 +84,141 @@
 
 </style>
 <script>
-export default {
-  data() {
-    return {
-      searchKey: "",
-      pager: {
-        pager: {
-          pageCount: 0,
-          pageNumber: 1,
-          pageSize: 15,
-          recordCount: 0
+    export default {
+        data() {
+            return {
+                searchKey: "",
+                pager: {
+                    pager: {
+                        pageCount: 0,
+                        pageNumber: 1,
+                        pageSize: 15,
+                        recordCount: 0
+                    }
+                },
+                selected: [],
+                options: [],
+                addEditShow: false,
+                grantShow: false,
+                role: {
+                    id: 0,
+                    name: "",
+                    description: "",
+                    installed: false
+                },
+                formLabelWidth: "120px"
+            };
+        },
+        computed: {
+            dialogWidth() {
+                return 590 * 100 / this.$utils.windowWidth() + "%";
+            }
+        },
+        watch: {
+            options: function () {
+                this.selected = [];
+                this.options.forEach(item => {
+                    if (item.selected) {
+                        this.selected.push(item.key);
+                    }
+                });
+            }
+        },
+        methods: {
+            addRole() {
+                this.role = {
+                    id: 0,
+                    name: "",
+                    description: "",
+                    installed: false
+                };
+                this.addEditShow = true;
+            },
+            grant() {
+                this.$api.Role.grant(this.role.id, this.selected, result => {
+                    this.$message({
+                        type: "success",
+                        message: "授权成功!"
+                    });
+                    window.setTimeout(() => {
+                        this.grantShow = false;
+                    }, 2000);
+                });
+            },
+            changePage() {
+                if (this.searchKey) {
+                    this.doSearch();
+                } else {
+                    this.loadData();
+                }
+            },
+            doSearch() {
+                this.$api.Role.search(
+                    this.pager.pager.pageNumber,
+                    this.searchKey,
+                    result => {
+                        this.pager = result.pager;
+                    }
+                );
+            },
+            saveOrUpdateRole(formName) {
+                this.$refs[formName].validate(valid => {
+                    if (valid) {
+                        var callback = result => {
+                            this.changePage();
+                            this.addEditShow = false;
+                        };
+                        this.role.id
+                            ? this.$api.Role.update(this.role, callback)
+                            : this.$api.Role.save(this.role, callback);
+                    } else {
+                        return false;
+                    }
+                });
+            },
+            handleEdit(index, row) {
+                this.role = row;
+                this.addEditShow = true;
+            },
+            handleGrant(index, row) {
+                this.role.id = row.id;
+                this.$api.Role.roleGrantInfo(row.id, result => {
+                    this.options = [];
+                    result.infos.forEach((item, index) => {
+                        this.options.push({
+                            key: item.id,
+                            label: item.description,
+                            selected: item.selected
+                        });
+                    });
+                    this.grantShow = true;
+                });
+            },
+            handleDelete(index, row) {
+                this.$confirm("确认删除角色?", "删除确认", {
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    type: "warning"
+                }).then(() => {
+                    this.$api.Role.delete(row.id, result => {
+                        this.$message({
+                            type: "success",
+                            message: "删除成功!"
+                        });
+                        window.setTimeout(() => {
+                            this.changePage();
+                        }, 2000);
+                    });
+                });
+            },
+            loadData() {
+                this.$api.Role.list(this.pager.pager.pageNumber, result => {
+                    this.pager = result.pager;
+                });
+            }
+        },
+        created: function () {
+            this.loadData();
         }
-      },
-      selected: [],
-      options: [],
-      addEditShow: false,
-      grantShow: false,
-      role: {
-        id: 0,
-        name: "",
-        description: "",
-        installed: false
-      },
-      formLabelWidth: "120px"
     };
-  },
-  computed: {
-    dialogWidth() {
-      return 590 * 100 / this.$utils.windowWidth() + "%";
-    }
-  },
-  watch: {
-    options: function() {
-      this.selected = [];
-      this.options.forEach(item => {
-        if (item.selected) {
-          this.selected.push(item.key);
-        }
-      });
-    }
-  },
-  methods: {
-    addRole() {
-      this.role = {
-        id: 0,
-        name: "",
-        description: "",
-        installed: false
-      };
-      this.addEditShow = true;
-    },
-    grant() {
-      this.$api.Role.grant(this.role.id, this.selected, result => {
-        this.$message({
-          type: "success",
-          message: "授权成功!"
-        });
-        window.setTimeout(() => {
-          this.grantShow = false;
-        }, 2000);
-      });
-    },
-    changePage() {
-      if (this.searchKey) {
-        this.doSearch();
-      } else {
-        this.loadData();
-      }
-    },
-    doSearch() {
-      this.$api.Role.search(
-        this.pager.pager.pageNumber,
-        this.searchKey,
-        result => {
-          this.pager = result.pager;
-        }
-      );
-    },
-    saveOrUpdateRole(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          var callback = result => {
-            this.changePage();
-            this.addEditShow = false;
-          };
-          this.role.id
-            ? this.$api.Role.update(this.role, callback)
-            : this.$api.Role.save(this.role, callback);
-        } else {
-          return false;
-        }
-      });
-    },
-    handleEdit(index, row) {
-      this.role = row;
-      this.addEditShow = true;
-    },
-    handleGrant(index, row) {
-      this.role.id = row.id;
-      this.$api.Role.roleGrantInfo(row.id, result => {
-        this.options = [];
-        result.infos.forEach((item, index) => {
-          this.options.push({
-            key: item.id,
-            label: item.description,
-            selected: item.selected
-          });
-        });
-        this.grantShow = true;
-      });
-    },
-    handleDelete(index, row) {
-      this.$confirm("确认删除角色?", "删除确认", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(() => {
-        this.$api.Role.delete(row.id, result => {
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
-          window.setTimeout(() => {
-            this.changePage();
-          }, 2000);
-        });
-      });
-    },
-    loadData() {
-      this.$api.Role.list(this.pager.pager.pageNumber, result => {
-        this.pager = result.pager;
-      });
-    }
-  },
-  created: function() {
-    this.loadData();
-  }
-};
 </script>

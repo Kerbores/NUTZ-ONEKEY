@@ -10,12 +10,13 @@
                                 :value="item.id" :key="item.id">
                         </el-option>
                     </el-select>
-                    <el-button type="primary" slot="append" icon="search" @click=" pager.page = 1 ;doSearch()">GO
+                    <el-button type="primary" slot="append" icon="search" @click=" pager.pager.pageNumber = 1 ;doSearch()">GO
                     </el-button>
                 </el-input>
             </el-col>
             <el-col :span="6" :offset="10">
-                <el-button type="primary"  icon="el-icon-fa-plus" size="small" @click="addEditShow = true ; codebook={groupId:null};nodes=[]">
+                <el-button type="primary" icon="el-icon-fa-plus" size="small"
+                           @click="addEditShow = true ; codebook={groupId:null};nodes=[]">
                     添加码本
                 </el-button>
             </el-col>
@@ -35,9 +36,9 @@
             <el-table-column label="操作">
                 <template slot-scope="scope">
                     <el-button-group>
-                        <el-button title="编辑码本"  size="mini" type="primary" icon="el-icon-fa-edit"
+                        <el-button title="编辑码本" size="mini" type="primary" icon="el-icon-fa-edit"
                                    @click="handleEdit(scope.$index,scope.row)"></el-button>
-                        <el-button title="删除码本"  size="mini" type="primary"
+                        <el-button title="删除码本" size="mini" type="primary"
                                    icon="el-icon-fa-trash" @click="handleDelete(scope.$index,scope.row)"></el-button>
                     </el-button-group>
                 </template>
@@ -78,7 +79,7 @@
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button @click="addEditShow = false ; user = {installed:false}">取 消</el-button>
+                <el-button @click="addEditShow = false ;">取 消</el-button>
                 <el-button type="primary" @click="saveOrUpdateCodebook('codebookForm')">确 定</el-button>
             </div>
         </el-dialog>

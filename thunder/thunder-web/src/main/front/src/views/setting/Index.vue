@@ -19,14 +19,15 @@
             </el-table-column>
             <el-table-column prop="name" label="名称" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
-             <el-table-column prop="value" label="值" show-overflow-tooltip header-align="center" align="center">
+            <el-table-column prop="value" label="值" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
             <el-table-column prop="description" label="描述" show-overflow-tooltip header-align="center" align="center">
             </el-table-column>
             <el-table-column label="操作" show-overflow-tooltip header-align="center" align="center">
                 <template slot-scope="scope">
                     <el-button-group>
-                        <el-button title="编辑配置" v-if="!scope.row.installed" size="mini" type="primary" icon="el-icon-fa-edit"
+                        <el-button title="编辑配置" v-if="!scope.row.installed" size="mini" type="primary"
+                                   icon="el-icon-fa-edit"
                                    @click="handleEdit(scope.$index,scope.row)"></el-button>
                         <el-button title="删除配置" v-if="!scope.row.installed" size="mini" type="primary"
                                    icon="el-icon-fa-trash" @click="handleDelete(scope.$index,scope.row)"></el-button>
@@ -47,14 +48,17 @@
         <el-dialog :title="Setting.id == 0 ? '添加配置' : '编辑配置' " :visible.sync="addEditShow" width="30%">
             <el-form :model="Setting" :rules="$rules" ref="SettingForm">
                 <el-form-item label="名称" :label-width="formLabelWidth" prop="name">
-                    <el-input v-model="Setting.name" auto-complete="off" placeholder="请填写配置名称" suffix-icon="el-icon-fa-vcard" ></el-input>
+                    <el-input v-model="Setting.name" auto-complete="off" placeholder="请填写配置名称"
+                              suffix-icon="el-icon-fa-vcard"></el-input>
                 </el-form-item>
                 <el-form-item label="值" :label-width="formLabelWidth" prop="value">
-                    <el-input v-model="Setting.value" auto-complete="off" placeholder="请填写配置值" suffix-icon="el-icon-fa-terminal"></el-input>
+                    <el-input v-model="Setting.value" auto-complete="off" placeholder="请填写配置值"
+                              suffix-icon="el-icon-fa-terminal"></el-input>
                 </el-form-item>
                 <el-form-item label="描述" :label-width="formLabelWidth" prop="description">
                     <el-input type="textarea" :maxlength="500"
-                    :autosize="{ minRows: 4, maxRows: 8}" v-model="Setting.description" auto-complete="off" placeholder="请填写配置描述" suffix-icon="el-icon-fa-file-word-o"></el-input>
+                              :autosize="{ minRows: 4, maxRows: 8}" v-model="Setting.description" auto-complete="off"
+                              placeholder="请填写配置描述" suffix-icon="el-icon-fa-file-word-o"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -68,95 +72,95 @@
 
 </style>
 <script>
-export default {
-  data() {
-    return {
-      searchKey: "",
-      pager: {
-        pager: {
-          pageCount: 0,
-          pageNumber: 1,
-          pageSize: 15,
-          recordCount: 0
+    export default {
+        data() {
+            return {
+                searchKey: "",
+                pager: {
+                    pager: {
+                        pageCount: 0,
+                        pageNumber: 1,
+                        pageSize: 15,
+                        recordCount: 0
+                    }
+                },
+                selected: [],
+                addEditShow: false,
+                Setting: {
+                    id: 0,
+                    name: "",
+                    description: "",
+                    installed: false
+                },
+                formLabelWidth: "120px"
+            };
+        },
+        methods: {
+            addSetting() {
+                this.Setting = {
+                    id: 0,
+                    name: "",
+                    description: "",
+                    installed: false
+                };
+                this.addEditShow = true;
+            },
+            changePage() {
+                if (this.searchKey) {
+                    this.doSearch();
+                } else {
+                    this.loadData();
+                }
+            },
+            doSearch() {
+                this.$api.Setting.search(this.pager.pager.pageNumber, this.searchKey, result => {
+                    this.pager = result.pager;
+                });
+            },
+            saveOrUpdateSetting(formName) {
+                this.$refs[formName].validate(valid => {
+                    if (valid) {
+                        var callback = result => {
+                            this.changePage();
+                            this.addEditShow = false;
+                        };
+                        this.Setting.id
+                            ? this.$api.Setting.update(this.Setting, callback)
+                            : this.$api.Setting.save(this.Setting, callback);
+                    } else {
+                        return false;
+                    }
+                });
+            },
+            handleEdit(index, row) {
+                this.Setting = row;
+                this.addEditShow = true;
+            },
+            handleDelete(index, row) {
+                this.$confirm("确认删除配置?", "删除确认", {
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    type: "warning"
+                }).then(() => {
+                    this.$api.Setting.delete(row.id, result => {
+                        this.$message({
+                            type: "success",
+                            message: "删除成功!"
+                        });
+                        window.setTimeout(() => {
+                            this.changePage();
+                        }, 2000);
+                    });
+                });
+            },
+            loadData() {
+                this.$api.Setting.list(this.pager.pager.pageNumber, result => {
+                    this.pager = result.pager;
+                });
+            }
+        },
+        created: function () {
+            this.loadData();
         }
-      },
-      selected: [],
-      addEditShow: false,
-      Setting: {
-        id: 0,
-        name: "",
-        description: "",
-        installed: false
-      },
-      formLabelWidth: "120px"
     };
-  },
-  methods: {
-    addSetting() {
-      this.Setting = {
-        id: 0,
-        name: "",
-        description: "",
-        installed: false
-      };
-      this.addEditShow = true;
-    },
-    changePage() {
-      if (this.searchKey) {
-        this.doSearch();
-      } else {
-        this.loadData();
-      }
-    },
-    doSearch() {
-      this.$api.Setting.search(this.pager.pager.pageNumber, this.searchKey, result => {
-        this.pager = result.pager;
-      });
-    },
-    saveOrUpdateSetting(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          var callback = result => {
-            this.changePage();
-            this.addEditShow = false;
-          };
-          this.Setting.id
-            ? this.$api.Setting.update(this.Setting, callback)
-            : this.$api.Setting.save(this.Setting, callback);
-        } else {
-          return false;
-        }
-      });
-    },
-    handleEdit(index, row) {
-      this.Setting = row;
-      this.addEditShow = true;
-    },
-    handleDelete(index, row) {
-      this.$confirm("确认删除配置?", "删除确认", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(() => {
-        this.$api.Setting.delete(row.id, result => {
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
-          window.setTimeout(() => {
-            this.changePage();
-          }, 2000);
-        });
-      });
-    },
-    loadData() {
-      this.$api.Setting.list(this.pager.pager.pageNumber, result => {
-        this.pager = result.pager;
-      });
-    }
-  },
-  created: function() {
-    this.loadData();
-  }
-};
 </script>

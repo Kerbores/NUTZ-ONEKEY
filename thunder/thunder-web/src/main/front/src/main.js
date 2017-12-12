@@ -17,27 +17,30 @@ import http from "./http";
 import rules from "./rules";
 
 import AMap from 'vue-amap';
+
 Vue.use(AMap);
 AMap.initAMapApiLoader({
-  key: "ae7db9d3bfa41d83f2414eade8e613f9",
-  plugin: [
-    "AMap.Autocomplete",
-    "AMap.Geocoder",
-    "AMap.PlaceSearch",
-    "AMap.Scale",
-    "AMap.OverView",
-    "AMap.ToolBar",
-    "AMap.MapType",
-    "AMap.PolyEditor",
-    "AMap.CircleEditor",
-    "AMap.Geolocation"
-  ]
+    key: "ae7db9d3bfa41d83f2414eade8e613f9",
+    plugin: [
+        "AMap.Autocomplete",
+        "AMap.Geocoder",
+        "AMap.PlaceSearch",
+        "AMap.Scale",
+        "AMap.OverView",
+        "AMap.ToolBar",
+        "AMap.MapType",
+        "AMap.PolyEditor",
+        "AMap.CircleEditor",
+        "AMap.Geolocation"
+    ]
 });
 
 import BgaBackTop from "bga-back-top-vue";
+
 Vue.use(BgaBackTop);
 
 import ElTreeGrid from "element-tree-grid";
+
 Vue.component(ElTreeGrid.name, ElTreeGrid);
 
 import utils from "./common/js/util";
@@ -55,24 +58,24 @@ global.baseUrl = process.env.NODE_ENV == "development" ? "api" : "";
 // NProgress.configure({ showSpinner: false });
 
 const router = new VueRouter({
-  // mode: 'history',
-  routes: routes
+    // mode: 'history',
+    routes: routes
 });
 
 router.beforeEach((to, from, next) => {
-  NProgress.start();
-  if (to.path === "/") {
-    store.commit("remove");
-  }
-  next();
+    NProgress.start();
+    if (to.path === "/") {
+        store.commit("remove");
+    }
+    next();
 });
 
 router.afterEach(transition => {
-  NProgress.done();
+    NProgress.done();
 });
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount("#app");

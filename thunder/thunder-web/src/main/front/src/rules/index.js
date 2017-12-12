@@ -30,10 +30,10 @@ export default {
         trigger: "blur"
     }],
     password: [{
-            required: true,
-            message: "请输入密码",
-            trigger: "blur"
-        },
+        required: true,
+        message: "请输入密码",
+        trigger: "blur"
+    },
         {
             min: 8,
             max: 16,
@@ -42,10 +42,10 @@ export default {
         }
     ],
     rePassword: [{
-            required: true,
-            message: "请输入密码",
-            trigger: "blur"
-        },
+        required: true,
+        message: "请输入密码",
+        trigger: "blur"
+    },
         {
             min: 8,
             max: 16,
@@ -54,20 +54,20 @@ export default {
         },
     ],
     phone: [{
-            required: true,
-            message: "请输入手机号",
-            trigger: "blur"
-        },
+        required: true,
+        message: "请输入手机号",
+        trigger: "blur"
+    },
         {
             validator: validateMobile,
             trigger: "blur"
         }
     ],
     email: [{
-            required: true,
-            message: "请输入电子邮箱",
-            trigger: "blur"
-        },
+        required: true,
+        message: "请输入电子邮箱",
+        trigger: "blur"
+    },
         {
             validator: validateEmail,
             trigger: "blur"

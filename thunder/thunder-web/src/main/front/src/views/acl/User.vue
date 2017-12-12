@@ -5,7 +5,7 @@
                 <el-input placeholder="请输入内容" v-model="searchKey" prefix-icon="el-icon-fa-search">
                     <div slot="append">
                         <el-button type="primary" icon="el-icon-fa-search"
-                                   @click=" pager.page = 1 ;doSearch()"></el-button>
+                                   @click=" pager.pager.pageNumber = 1 ;doSearch()"></el-button>
                     </div>
                 </el-input>
             </el-col>
@@ -61,10 +61,12 @@
         <el-dialog :title="user.id == 0 ? '添加用户' : '编辑用户' " :visible.sync="addEditShow" width="30%">
             <el-form :model="user" :rules="$rules" ref="userForm">
                 <el-form-item label="用户名" :label-width="formLabelWidth" prop="name">
-                    <el-input v-model="user.name" auto-complete="off" suffix-icon="el-icon-fa-user" placeholder="请填写用户名"></el-input>
+                    <el-input v-model="user.name" auto-complete="off" suffix-icon="el-icon-fa-user"
+                              placeholder="请填写用户名"></el-input>
                 </el-form-item>
                 <el-form-item label="真实姓名" :label-width="formLabelWidth" prop="realName">
-                    <el-input v-model="user.realName" auto-complete="off" suffix-icon="el-icon-fa-vcard" placeholder="请填写用户真实姓名"></el-input>
+                    <el-input v-model="user.realName" auto-complete="off" suffix-icon="el-icon-fa-vcard"
+                              placeholder="请填写用户真实姓名"></el-input>
                 </el-form-item>
                 <el-form-item label="密码" :label-width="formLabelWidth" prop="password"
                               v-show="user.password != '00000000'">
@@ -77,10 +79,12 @@
                               suffix-icon="el-icon-fa-lock" placeholder="请再次填写用户密码"></el-input>
                 </el-form-item>
                 <el-form-item label="电话" :label-width="formLabelWidth" prop="phone">
-                    <el-input v-model="user.phone" auto-complete="off" suffix-icon="el-icon-fa-phone" placeholder="请填写用户电话号码"></el-input>
+                    <el-input v-model="user.phone" auto-complete="off" suffix-icon="el-icon-fa-phone"
+                              placeholder="请填写用户电话号码"></el-input>
                 </el-form-item>
                 <el-form-item label="邮箱" :label-width="formLabelWidth" prop="email">
-                    <el-input v-model="user.email" auto-complete="off" suffix-icon="el-icon-fa-envelope" placeholder="请填写用户Email地址"></el-input>
+                    <el-input v-model="user.email" auto-complete="off" suffix-icon="el-icon-fa-envelope"
+                              placeholder="请填写用户Email地址"></el-input>
                 </el-form-item>
                 <el-form-item label="用户状态" :label-width="formLabelWidth">
                     <el-switch v-model="user.status" active-value="ACTIVED" inactive-value="DISABLED">
@@ -119,201 +123,201 @@
     </section>
 </template>
 <script>
-import moment from "moment";
+    import moment from "moment";
 
-export default {
-  data() {
-    return {
-      searchKey: "",
-      pager: {
-        pager: {
-          pageCount: 0,
-          pageNumber: 1,
-          pageSize: 15,
-          recordCount: 0
+    export default {
+        data() {
+            return {
+                searchKey: "",
+                pager: {
+                    pager: {
+                        pageCount: 0,
+                        pageNumber: 1,
+                        pageSize: 15,
+                        recordCount: 0
+                    }
+                },
+                selected: [],
+                options: [],
+                addEditShow: false,
+                resetShow: false,
+                grantShow: false,
+                type: "role",
+                user: {
+                    id: 0,
+                    name: "",
+                    realName: "",
+                    status: "ACTIVED",
+                    password: "",
+                    rePassword: "",
+                    phone: "",
+                    email: ""
+                },
+                formLabelWidth: "100px"
+            };
+        },
+        computed: {
+            dialogWidth() {
+                return 590 * 100 / this.$utils.windowWidth() + "%";
+            }
+        },
+        watch: {
+            options: function () {
+                this.selected = [];
+                this.options.forEach(item => {
+                    if (item.selected) {
+                        this.selected.push(item.key);
+                    }
+                });
+            }
+        },
+        methods: {
+            grant() {
+                let url = "/user/grant/" + this.type;
+                let data = {
+                    userId: this.user.id,
+                    grantIds: this.selected
+                };
+                this.$api.User.grant(this.user.id, this.type, this.selected, result => {
+                    this.$message({
+                        type: "success",
+                        message: "授权成功!"
+                    });
+                    window.setTimeout(() => {
+                        this.grantShow = false;
+                    }, 2000);
+                });
+            },
+            resetPassword(formName) {
+                this.$refs[formName].validate(valid => {
+                    if (valid) {
+                        this.$api.User.resetPassword(
+                            this.user.id,
+                            this.user.name,
+                            this.user.password,
+                            result => {
+                                this.$message({
+                                    type: "success",
+                                    message: "重置成功!"
+                                });
+                                this.resetShow = false;
+                            }
+                        );
+                    } else {
+                        return false;
+                    }
+                });
+            },
+            handleReset(index, row) {
+                this.user.id = row.id;
+                this.user.name = row.name;
+                this.resetShow = true;
+            },
+            changePage() {
+                if (this.searchKey) {
+                    this.doSearch();
+                } else {
+                    this.loadData();
+                }
+            },
+            doSearch() {
+                this.$api.User.search(
+                    this.pager.pager.pageNumber,
+                    this.searchKey,
+                    result => {
+                        this.pager = result.pager;
+                    }
+                );
+            },
+            checkSame() {
+                return this.user.password === this.user.rePassword;
+            },
+            addUser() {
+                this.addEditShow = true;
+                this.user = {
+                    id: 0,
+                    name: "",
+                    realName: "",
+                    status: "ACTIVED",
+                    password: "",
+                    rePassword: "",
+                    phone: "",
+                    email: ""
+                };
+            },
+            saveOrUpdateUser(formName) {
+                this.$refs[formName].validate(valid => {
+                    if (valid && this.checkSame()) {
+                        var callback = result => {
+                            this.changePage();
+                            this.addEditShow = false;
+                        };
+                        this.user.id
+                            ? this.$api.User.update(this.user, callback)
+                            : this.$api.User.save(this.user, callback);
+                    } else {
+                        return false;
+                    }
+                });
+            },
+            formatter(row, column) {
+                return moment(row.createTime, "YYYY-MM-DD hh:mm:ss").format(
+                    "YYYY年MM月DD日"
+                );
+            },
+            handleEdit(index, row) {
+                let id = this.pager.dataList[index].id;
+                this.user = row;
+                this.user.password = "00000000";
+                this.user.rePassword = "00000000";
+                this.addEditShow = true;
+            },
+            handleGrant(index, row, type) {
+                this.user.id = row.id;
+                this.type = type;
+                this.$api.User.userGrantInfo(type, row.id, result => {
+                    this.options = [];
+                    result.infos.forEach((item, index) => {
+                        this.options.push({
+                            key: item.id,
+                            label: item.description,
+                            selected: item.selected
+                        });
+                    });
+                    this.grantShow = true;
+                });
+            },
+            handleDelete(index, row) {
+                this.$confirm("确认删除用户?", "删除确认", {
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    type: "warning"
+                }).then(() => {
+                    this.$api.User.delete(row.id, result => {
+                        this.$message({
+                            type: "success",
+                            message: "删除成功!"
+                        });
+                        window.setTimeout(() => {
+                            if (this.searchKey) {
+                                this.doSearch();
+                            } else {
+                                this.loadData();
+                            }
+                        }, 2000);
+                    });
+                });
+            },
+            loadData() {
+                this.$api.User.list(this.pager.pager.pageNumber, result => {
+                    this.pager = result.pager;
+                });
+            }
+        },
+        mounted: function () {
+            this.loadData();
         }
-      },
-      selected: [],
-      options: [],
-      addEditShow: false,
-      resetShow: false,
-      grantShow: false,
-      type: "role",
-      user: {
-        id: 0,
-        name: "",
-        realName: "",
-        status: "ACTIVED",
-        password: "",
-        rePassword: "",
-        phone: "",
-        email: ""
-      },
-      formLabelWidth: "100px"
     };
-  },
-  computed: {
-    dialogWidth() {
-      return 590 * 100 / this.$utils.windowWidth() + "%";
-    }
-  },
-  watch: {
-    options: function() {
-      this.selected = [];
-      this.options.forEach(item => {
-        if (item.selected) {
-          this.selected.push(item.key);
-        }
-      });
-    }
-  },
-  methods: {
-    grant() {
-      let url = "/user/grant/" + this.type;
-      let data = {
-        userId: this.user.id,
-        grantIds: this.selected
-      };
-      this.$api.User.grant(this.user.id, this.type, this.selected, result => {
-        this.$message({
-          type: "success",
-          message: "授权成功!"
-        });
-        window.setTimeout(() => {
-          this.grantShow = false;
-        }, 2000);
-      });
-    },
-    resetPassword(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          this.$api.User.resetPassword(
-            this.user.id,
-            this.user.name,
-            this.user.password,
-            result => {
-              this.$message({
-                type: "success",
-                message: "重置成功!"
-              });
-              this.resetShow = false;
-            }
-          );
-        } else {
-          return false;
-        }
-      });
-    },
-    handleReset(index, row) {
-      this.user.id = row.id;
-      this.user.name = row.name;
-      this.resetShow = true;
-    },
-    changePage() {
-      if (this.searchKey) {
-        this.doSearch();
-      } else {
-        this.loadData();
-      }
-    },
-    doSearch() {
-      this.$api.User.search(
-        this.pager.pager.pageNumber,
-        this.searchKey,
-        result => {
-          this.pager = result.pager;
-        }
-      );
-    },
-    checkSame() {
-      return this.user.password === this.user.rePassword;
-    },
-    addUser() {
-      this.addEditShow = true;
-      this.user = {
-        id: 0,
-        name: "",
-        realName: "",
-        status: "ACTIVED",
-        password: "",
-        rePassword: "",
-        phone: "",
-        email: ""
-      };
-    },
-    saveOrUpdateUser(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid && this.checkSame()) {
-          var callback = result => {
-            this.changePage();
-            this.addEditShow = false;
-          };
-          this.user.id
-            ? this.$api.User.update(this.user, callback)
-            : this.$api.User.save(this.user, callback);
-        } else {
-          return false;
-        }
-      });
-    },
-    formatter(row, column) {
-      return moment(row.createTime, "YYYY-MM-DD hh:mm:ss").format(
-        "YYYY年MM月DD日"
-      );
-    },
-    handleEdit(index, row) {
-      let id = this.pager.dataList[index].id;
-      this.user = row;
-      this.user.password = "00000000";
-      this.user.rePassword = "00000000";
-      this.addEditShow = true;
-    },
-    handleGrant(index, row, type) {
-      this.user.id = row.id;
-      this.type = type;
-      this.$api.User.userGrantInfo(type, row.id, result => {
-        this.options = [];
-        result.infos.forEach((item, index) => {
-          this.options.push({
-            key: item.id,
-            label: item.description,
-            selected: item.selected
-          });
-        });
-        this.grantShow = true;
-      });
-    },
-    handleDelete(index, row) {
-      this.$confirm("确认删除用户?", "删除确认", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(() => {
-        this.$api.User.delete(row.id, result => {
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
-          window.setTimeout(() => {
-            if (this.searchKey) {
-              this.doSearch();
-            } else {
-              this.loadData();
-            }
-          }, 2000);
-        });
-      });
-    },
-    loadData() {
-      this.$api.User.list(this.pager.pager.pageNumber, result => {
-        this.pager = result.pager;
-      });
-    }
-  },
-  mounted: function() {
-    this.loadData();
-  }
-};
 </script>
 
 <style scoped>
