@@ -389,4 +389,7 @@ export default {
   height: 178px;
   display: block;
 }
+.el-select,.el-input{
+  width: 100%
+}
 </style>
