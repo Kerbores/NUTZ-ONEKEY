@@ -3,7 +3,8 @@ package club.zhcs.thunder.config.qiniu;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author kerbores
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @ConfigurationProperties(prefix = "qiniu")

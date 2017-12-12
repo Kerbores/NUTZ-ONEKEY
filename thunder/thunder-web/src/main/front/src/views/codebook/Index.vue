@@ -10,7 +10,8 @@
                                 :value="item.id" :key="item.id">
                         </el-option>
                     </el-select>
-                    <el-button type="primary" slot="append" icon="search" @click=" pager.pager.pageNumber = 1 ;doSearch()">GO
+                    <el-button type="primary" slot="append" icon="search"
+                               @click=" pager.pager.pageNumber = 1 ;doSearch()">GO
                     </el-button>
                 </el-input>
             </el-col>
@@ -90,149 +91,149 @@
 
 </style>
 <script>
-export default {
-  data() {
-    return {
-      groupId: "",
-      nodes: [],
-      defaultProps: {
-        children: "children",
-        label: "value"
-      },
-      searchKey: "",
-      pager: {
-        pager: {
-          pageCount: 0,
-          pageNumber: 1,
-          pageSize: 15,
-          recordCount: 0
+    export default {
+        data() {
+            return {
+                groupId: "",
+                nodes: [],
+                defaultProps: {
+                    children: "children",
+                    label: "value"
+                },
+                searchKey: "",
+                pager: {
+                    pager: {
+                        pageCount: 0,
+                        pageNumber: 1,
+                        pageSize: 15,
+                        recordCount: 0
+                    }
+                },
+                addEditShow: false,
+                groups: [],
+                codebook: {
+                    id: 0,
+                    name: "",
+                    value: "",
+                    groupId: null,
+                    parentId: 0,
+                    index: 0
+                },
+                formLabelWidth: "120px"
+            };
+        },
+        methods: {
+            check(node, s, l) {
+                if (this.$refs.tree.getCheckedNodes().length > 1) {
+                    this.$message("只能选择一个父节点");
+                    this.$refs.tree.setChecked(node, false);
+                }
+            },
+            remote(row, callback) {
+                this.$api.CodeBook.sub(row.id, result => {
+                    const data = [];
+                    result.codes.forEach(item => {
+                        item.children = [{}];
+                        item.depth = row.depth ? row.depth + 1 : 1;
+                        data.push(item);
+                    });
+                    callback(data);
+                });
+            },
+            loadGroups() {
+                this.$api.CodeBookGroup.all(result => {
+                    this.groups = result.groups;
+                    this.loadData();
+                });
+            },
+            loadTop() {
+                if (this.codebook.groupId) {
+                    this.$api.CodeBook.top(this.codebook.groupId, result => {
+                        this.nodes = result.codes;
+                    });
+                }
+            },
+            loadNode(node, resolve) {
+                if (node.data.id) {
+                    this.$api.CodeBook.sub(node.data.id, result => {
+                        resolve(result.codes);
+                    });
+                }
+            },
+            changePage() {
+                if (this.searchKey) {
+                    this.doSearch();
+                } else {
+                    this.loadData();
+                }
+            },
+            doSearch() {
+                this.$api.CodeBook.search(
+                    this.pager.pager.pageNumber,
+                    this.groupId,
+                    this.searchKey,
+                    result => {
+                        this.pager = result.pager;
+                        this.pager.dataList.forEach(item => {
+                            item.children = [{}];
+                            item.depth = 1;
+                        });
+                    }
+                );
+            },
+            saveOrUpdateCodebook(formName) {
+                if (this.$refs.tree.getCheckedNodes().length) {
+                    this.codebook.parentId = this.$refs.tree.getCheckedNodes()[0].id;
+                }
+                this.$refs[formName].validate(valid => {
+                    if (valid) {
+                        var callback = result => {
+                            this.changePage();
+                            this.addEditShow = false;
+                        };
+                        this.codebook.id
+                            ? this.$api.CodeBook.update(this.codebook, callback)
+                            : this.$api.CodeBook.save(this.codebook, callback);
+                    } else {
+                        return false;
+                    }
+                });
+            },
+            handleEdit(index, row) {
+                this.codebook = row;
+                this.loadTop();
+                this.addEditShow = true;
+            },
+            handleDelete(index, row) {
+                let id = row.id;
+                this.$confirm("确认删除码本数据?", "删除确认", {
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    type: "warning"
+                }).then(() => {
+                    this.$api.CodeBook.delete(id, result => {
+                        this.$message({
+                            type: "success",
+                            message: "删除成功!"
+                        });
+                        window.setTimeout(() => {
+                            this.changePage();
+                        }, 2000);
+                    });
+                });
+            },
+            loadData() {
+                this.$api.CodeBook.list(this.pager.pager.pageNumber, result => {
+                    this.pager = result.pager;
+                    this.pager.dataList.forEach(item => {
+                        item.children = [{}];
+                        item.depth = 1;
+                    });
+                });
+            }
+        },
+        created: function () {
+            this.loadGroups();
         }
-      },
-      addEditShow: false,
-      groups: [],
-      codebook: {
-        id: 0,
-        name: "",
-        value: "",
-        groupId: null,
-        parentId: 0,
-        index: 0
-      },
-      formLabelWidth: "120px"
     };
-  },
-  methods: {
-    check(node, s, l) {
-      if (this.$refs.tree.getCheckedNodes().length > 1) {
-        this.$message("只能选择一个父节点");
-        this.$refs.tree.setChecked(node, false);
-      }
-    },
-    remote(row, callback) {
-      this.$api.CodeBook.sub(row.id, result => {
-        const data = [];
-        result.codes.forEach(item => {
-          item.children = [{}];
-          item.depth = row.depth ? row.depth + 1 : 1;
-          data.push(item);
-        });
-        callback(data);
-      });
-    },
-    loadGroups() {
-      this.$api.CodeBookGroup.all(result => {
-        this.groups = result.groups;
-        this.loadData();
-      });
-    },
-    loadTop() {
-      if (this.codebook.groupId) {
-        this.$api.CodeBook.top(this.codebook.groupId, result => {
-          this.nodes = result.codes;
-        });
-      }
-    },
-    loadNode(node, resolve) {
-      if (node.data.id) {
-        this.$api.CodeBook.sub(node.data.id, result => {
-          resolve(result.codes);
-        });
-      }
-    },
-    changePage() {
-      if (this.searchKey) {
-        this.doSearch();
-      } else {
-        this.loadData();
-      }
-    },
-    doSearch() {
-      this.$api.CodeBook.search(
-        this.pager.pager.pageNumber,
-        this.groupId,
-        this.searchKey,
-        result => {
-          this.pager = result.pager;
-          this.pager.dataList.forEach(item => {
-            item.children = [{}];
-            item.depth = 1;
-          });
-        }
-      );
-    },
-    saveOrUpdateCodebook(formName) {
-      if (this.$refs.tree.getCheckedNodes().length) {
-        this.codebook.parentId = this.$refs.tree.getCheckedNodes()[0].id;
-      }
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          var callback = result => {
-            this.changePage();
-            this.addEditShow = false;
-          };
-          this.codebook.id
-            ? this.$api.CodeBook.update(this.codebook, callback)
-            : this.$api.CodeBook.save(this.codebook, callback);
-        } else {
-          return false;
-        }
-      });
-    },
-    handleEdit(index, row) {
-      this.codebook = row;
-      this.loadTop();
-      this.addEditShow = true;
-    },
-    handleDelete(index, row) {
-      let id = row.id;
-      this.$confirm("确认删除码本数据?", "删除确认", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      }).then(() => {
-        this.$api.CodeBook.delete(id, result => {
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
-          window.setTimeout(() => {
-            this.changePage();
-          }, 2000);
-        });
-      });
-    },
-    loadData() {
-      this.$api.CodeBook.list(this.pager.pager.pageNumber, result => {
-        this.pager = result.pager;
-        this.pager.dataList.forEach(item => {
-          item.children = [{}];
-          item.depth = 1;
-        });
-      });
-    }
-  },
-  created: function() {
-    this.loadGroups();
-  }
-};
 </script>

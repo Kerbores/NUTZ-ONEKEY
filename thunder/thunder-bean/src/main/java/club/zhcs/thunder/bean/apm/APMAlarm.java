@@ -13,15 +13,8 @@ import org.nutz.lang.random.R;
 import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
- * @author Kerbores(kerbores@gmail.com)
- *
- * @project bean
- *
- * @file APMAlarm.java
- *
- * @description 应用性能告警
- *
- * @time 2016年3月15日 下午3:30:08
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @Table("t_apm_alarm")

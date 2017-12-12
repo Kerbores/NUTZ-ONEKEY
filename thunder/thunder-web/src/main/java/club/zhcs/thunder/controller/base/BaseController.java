@@ -19,9 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import eu.bitwalker.useragentutils.UserAgent;
 
 /**
- * @author admin
- *
- * @email kerbores@gmail.com
+ * 
+ * @author kerbores@gmail.com
  *
  */
 public class BaseController {

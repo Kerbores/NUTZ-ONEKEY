@@ -13,8 +13,11 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisConnectionUtils;
 
 /**
- * @author kerbores
+ * 
+ * @author kerbores@gmail.com
  *
+ * @param <K>
+ * @param <V>
  */
 public class RedisCache<K, V> implements Cache<K, V> {
 

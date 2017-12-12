@@ -9,7 +9,8 @@ import org.apache.shiro.cache.CacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 
 /**
- * @author kerbores
+ * 
+ * @author kerbores@gmail.com
  *
  */
 public class RedisCacheManager implements CacheManager {

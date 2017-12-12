@@ -7,7 +7,8 @@ import org.apache.shiro.authc.credential.SimpleCredentialsMatcher;
 import org.nutz.lang.Lang;
 
 /**
- * @author kerbores(kerbores@gmail.com)
+ * 
+ * @author kerbores@gmail.com
  *
  */
 public class SINOCredentialsMatcher extends SimpleCredentialsMatcher {

@@ -3,6 +3,7 @@ package club.zhcs.thunder.ext.shiro.token;
 import org.apache.shiro.authc.AuthenticationToken;
 
 /**
+ * 
  * @author kerbores@gmail.com
  *
  */

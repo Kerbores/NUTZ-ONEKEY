@@ -16,9 +16,8 @@ import club.zhcs.thunder.ext.shiro.anno.SINORequiresPermissions;
 import club.zhcs.thunder.ext.shiro.anno.SINORequiresRoles;
 
 /**
- * @author admin
- *
- * @email kerbores@gmail.com
+ * 
+ * @author kerbores@gmail.com
  *
  */
 public class SINOAdvisor extends StaticMethodMatcherPointcutAdvisor {

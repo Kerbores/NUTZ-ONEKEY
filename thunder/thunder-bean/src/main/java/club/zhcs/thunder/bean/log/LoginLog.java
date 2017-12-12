@@ -10,15 +10,8 @@ import org.nutz.lang.Times;
 import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
- * @author Kerbores(kerbores@gmail.com)
- *
- * @project bean
- *
- * @file LoginLog.java
- *
- * @description 登录日志
- *
- * @time 2016年3月15日 下午4:37:02
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @Table("t_user_login")

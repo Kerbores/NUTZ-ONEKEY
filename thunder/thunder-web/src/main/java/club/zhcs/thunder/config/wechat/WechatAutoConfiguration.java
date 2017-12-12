@@ -19,7 +19,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.RedisTemplate;
 
 /**
- * @author kerbores
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @Configuration

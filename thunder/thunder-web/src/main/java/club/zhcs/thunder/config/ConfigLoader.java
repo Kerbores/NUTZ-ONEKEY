@@ -6,7 +6,8 @@ import org.nutz.ioc.impl.PropertiesProxy;
 import org.springframework.stereotype.Service;
 
 /**
- * @author kerbores
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @Service

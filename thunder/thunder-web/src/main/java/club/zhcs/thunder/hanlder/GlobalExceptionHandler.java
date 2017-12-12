@@ -11,6 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import club.zhcs.common.Result;
 
+/**
+ * 
+ * @author kerbores@gmail.com
+ *
+ */
 @RestController
 @ControllerAdvice
 public class GlobalExceptionHandler {

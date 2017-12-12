@@ -9,16 +9,8 @@ import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * 
- * @author 王贵源
+ * @author kerbores@gmail.com
  *
- * @email kerbores@kerbores.com
- *
- * @description 角色实体类
- * 
- * @copyright 内部代码,禁止转发
- *
- *
- * @time 2016年1月26日 下午2:17:54
  */
 @Table("t_role")
 @Comment("角色表")

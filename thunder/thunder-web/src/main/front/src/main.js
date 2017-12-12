@@ -17,6 +17,9 @@ import http from "./http";
 import rules from "./rules";
 
 import AMap from 'vue-amap';
+import BgaBackTop from "bga-back-top-vue";
+import ElTreeGrid from "element-tree-grid";
+import utils from "./common/js/util";
 
 Vue.use(AMap);
 AMap.initAMapApiLoader({
@@ -35,15 +38,9 @@ AMap.initAMapApiLoader({
     ]
 });
 
-import BgaBackTop from "bga-back-top-vue";
-
 Vue.use(BgaBackTop);
 
-import ElTreeGrid from "element-tree-grid";
-
 Vue.component(ElTreeGrid.name, ElTreeGrid);
-
-import utils from "./common/js/util";
 
 Vue.use(ElementUI);
 Vue.use(VueRouter);

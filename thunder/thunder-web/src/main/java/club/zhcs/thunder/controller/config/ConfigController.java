@@ -21,7 +21,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
- * @author kerbores
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @RestController

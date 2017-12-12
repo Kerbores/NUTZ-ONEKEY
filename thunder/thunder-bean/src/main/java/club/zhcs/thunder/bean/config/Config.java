@@ -10,15 +10,8 @@ import org.nutz.dao.entity.annotation.Table;
 import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
- * @author Kerbores(kerbores@gmail.com)
- *
- * @project bean
- *
- * @file Config.java
- *
- * @description Config
- *
- * @time 2016年3月15日 下午1:20:36
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @Table("t_sys_config")

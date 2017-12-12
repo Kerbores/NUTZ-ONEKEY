@@ -11,9 +11,7 @@ import club.zhcs.thunder.vo.InstallPermission;
 
 /**
  * 
- * @author kerbores
- *
- * @email kerbores@gmail.com
+ * @author kerbores@gmail.com
  *
  */
 @Target({ ElementType.TYPE, ElementType.METHOD })

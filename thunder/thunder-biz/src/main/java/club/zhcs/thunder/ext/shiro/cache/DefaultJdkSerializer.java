@@ -9,7 +9,8 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 
 /**
- * @author kerbores
+ * 
+ * @author kerbores@gmail.com
  *
  */
 public class DefaultJdkSerializer implements CacheSerializer {

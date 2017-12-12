@@ -7,16 +7,9 @@ import org.nutz.dao.entity.annotation.Comment;
 import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
- * @author 王贵源
- *
- * @email kerbores@kerbores.com
- *
- * @description 微信用户
  * 
- * @copyright 内部代码,禁止转发
+ * @author kerbores@gmail.com
  *
- *
- * @time 2016年1月28日 上午9:06:29
  */
 public class WxUser extends ThunderEntity {
 

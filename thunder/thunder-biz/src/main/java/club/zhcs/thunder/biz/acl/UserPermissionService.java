@@ -7,9 +7,7 @@ import club.zhcs.thunder.bean.acl.UserPermission;
 
 /**
  * 
- * @author kerbores
- *
- * @email kerbores@gmail.com
+ * @author kerbores@gmail.com
  *
  */
 @Service

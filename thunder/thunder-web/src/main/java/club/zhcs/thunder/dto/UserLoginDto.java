@@ -4,7 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * @author kerbores kerbores@gmail.com
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @ApiModel("登录模型")

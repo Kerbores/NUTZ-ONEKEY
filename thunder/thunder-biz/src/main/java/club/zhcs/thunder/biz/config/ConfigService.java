@@ -7,7 +7,7 @@ import club.zhcs.thunder.bean.config.Config;
 
 /**
  * 
- * @author kerbores
+ * @author kerbores@gmail.com
  *
  */
 @Service

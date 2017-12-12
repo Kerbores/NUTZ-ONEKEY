@@ -1,26 +1,15 @@
 package club.zhcs.thunder;
 
-/****
+/**
  * 
- * @author Kerbores(kerbores@gmail.com)
- *
- * @project syl-bean
- *
- * @file Application.java
- *
- * @description 应用常量数据
- *
- * @time 2016年3月8日 上午10:51:26
+ * @author kerbores@gmail.com
  *
  */
 public class Application {
 
 	/**
-	 *
-	 * @author 王贵源
-	 * @description session keys
-	 * @Copyright 内部代码,禁止转发
-	 * @date 2015年12月28日 下午9:54:31
+	 * 
+	 * @author kerbores@gmail.com
 	 *
 	 */
 	public static class SessionKeys {

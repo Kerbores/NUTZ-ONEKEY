@@ -6,15 +6,8 @@ import org.nutz.dao.entity.annotation.Comment;
 import org.nutz.dao.entity.annotation.Table;
 
 /**
- * @author Kerbores(kerbores@gmail.com)
- *
- * @project thunder-bean
- *
- * @file Nutzer.java
- *
- * @description Nutz 用户
- *
- * @time 2016年9月5日 上午8:54:35
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @Table("t_nutzer")

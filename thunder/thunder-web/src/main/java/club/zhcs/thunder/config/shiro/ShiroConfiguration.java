@@ -20,7 +20,11 @@ import org.springframework.context.annotation.Configuration;
 import club.zhcs.thunder.ext.shiro.SINOAdvisor;
 import club.zhcs.thunder.ext.shiro.matcher.SINOCredentialsMatcher;
 import club.zhcs.thunder.ext.shiro.realm.SINORealm;
-
+/**
+ * 
+ * @author kerbores@gmail.com
+ *
+ */
 @Configuration
 public class ShiroConfiguration {
 

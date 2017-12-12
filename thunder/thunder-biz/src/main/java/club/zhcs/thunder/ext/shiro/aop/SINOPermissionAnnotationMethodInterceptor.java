@@ -23,9 +23,7 @@ import org.apache.shiro.authz.aop.PermissionAnnotationMethodInterceptor;
 
 /**
  * 
- * @author kerbores
- *
- * @email kerbores@gmail.com
+ * @author kerbores@gmail.com
  *
  */
 public class SINOPermissionAnnotationMethodInterceptor extends PermissionAnnotationMethodInterceptor {

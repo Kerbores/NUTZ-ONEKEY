@@ -35,9 +35,7 @@ import club.zhcs.thunder.vo.InstallPermission;
 
 /**
  * 
- * @author kerbores
- *
- * @email kerbores@gmail.com
+ * @author kerbores@gmail.com
  *
  */
 public class SINOPermissionAnnotationHandler extends PermissionAnnotationHandler {

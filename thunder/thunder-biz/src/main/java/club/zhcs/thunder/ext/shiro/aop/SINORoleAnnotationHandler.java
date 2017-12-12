@@ -17,9 +17,7 @@ import club.zhcs.thunder.vo.InstalledRole;
 
 /**
  * 
- * @author kerbores
- *
- * @email kerbores@gmail.com
+ * @author kerbores@gmail.com
  *
  */
 public class SINORoleAnnotationHandler extends RoleAnnotationHandler {

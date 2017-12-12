@@ -2,10 +2,7 @@
 
 import axios from 'axios'
 import qs from 'qs'
-import {
-    Loading,
-    Message
-} from 'element-ui'
+import {Loading, Message} from 'element-ui'
 
 var loadinginstace;
 axios.defaults.timeout = 5000

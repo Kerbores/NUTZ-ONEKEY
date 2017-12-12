@@ -7,7 +7,7 @@ import club.zhcs.thunder.bean.log.OperationLog;
 
 /**
  * 
- * @author kerbores
+ * @author kerbores@gmail.com
  *
  */
 @Service

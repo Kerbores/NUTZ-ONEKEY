@@ -6,7 +6,11 @@ import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import club.zhcs.thunder.bean.ThunderEntity;
-
+/**
+ * 
+ * @author kerbores@gmail.com
+ *
+ */
 @Table("t_codebook")
 @Comment("码表")
 public class CodeBook extends ThunderEntity {

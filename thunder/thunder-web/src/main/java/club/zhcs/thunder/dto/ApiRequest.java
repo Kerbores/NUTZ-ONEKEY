@@ -1,8 +1,10 @@
 package club.zhcs.thunder.dto;
 
 /**
- * @author kerbores kerbores@gmail.com
+ * 
+ * @author kerbores@gmail.com
  *
+ * @param <T>
  */
 public class ApiRequest<T> {
 

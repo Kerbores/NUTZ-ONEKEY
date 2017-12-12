@@ -12,15 +12,8 @@ import com.google.common.collect.Lists;
 import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
- * @author Kerbores(kerbores@gmail.com)
- *
- * @project platform-domain
- *
- * @file WechatMenu.java
- *
- * @description 微信菜单
- *
- * @time 2016年8月3日 下午10:35:05
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @Table("t_wechat_menu")

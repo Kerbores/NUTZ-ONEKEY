@@ -21,7 +21,11 @@ import club.zhcs.thunder.bean.acl.User;
 import club.zhcs.thunder.bean.acl.User.Status;
 import club.zhcs.thunder.biz.acl.ShiroUserService;
 import club.zhcs.thunder.ext.shiro.matcher.SINOCredentialsMatcher;
-
+/**
+ * 
+ * @author kerbores@gmail.com
+ *
+ */
 @Component
 public class SINORealm extends AuthorizingRealm {
 

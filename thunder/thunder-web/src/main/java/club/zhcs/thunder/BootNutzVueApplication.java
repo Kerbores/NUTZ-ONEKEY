@@ -52,7 +52,11 @@ import club.zhcs.thunder.biz.qa.NutzerService;
 import club.zhcs.thunder.ext.shiro.matcher.SINOCredentialsMatcher;
 import club.zhcs.thunder.vo.InstallPermission;
 import club.zhcs.thunder.vo.InstalledRole;
-
+/**
+ * 
+ * @author kerbores@gmail.com
+ *
+ */
 @SpringBootApplication
 @EnableRedisHttpSession
 @EnableAsync

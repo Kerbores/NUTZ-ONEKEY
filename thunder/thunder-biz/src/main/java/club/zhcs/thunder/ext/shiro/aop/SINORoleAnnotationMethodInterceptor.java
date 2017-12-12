@@ -5,9 +5,7 @@ import org.apache.shiro.authz.aop.RoleAnnotationMethodInterceptor;
 
 /**
  * 
- * @author kerbores
- *
- * @email kerbores@gmail.com
+ * @author kerbores@gmail.com
  *
  */
 public class SINORoleAnnotationMethodInterceptor extends RoleAnnotationMethodInterceptor {

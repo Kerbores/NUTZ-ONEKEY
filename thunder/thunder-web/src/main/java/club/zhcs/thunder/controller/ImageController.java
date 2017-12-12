@@ -31,7 +31,8 @@ import club.zhcs.thunder.config.qiniu.QiniuAutoConfiguration.R;
 import club.zhcs.thunder.config.qiniu.QiuniuConfigProperties;
 
 /**
- * @author kerbores
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @Controller

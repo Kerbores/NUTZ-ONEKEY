@@ -10,7 +10,8 @@ import org.nutz.log.Logs;
 import org.springframework.web.servlet.View;
 
 /**
- * @author kerbores
+ * 
+ * @author kerbores@gmail.com
  *
  */
 public class NutzViewWrapper implements View {

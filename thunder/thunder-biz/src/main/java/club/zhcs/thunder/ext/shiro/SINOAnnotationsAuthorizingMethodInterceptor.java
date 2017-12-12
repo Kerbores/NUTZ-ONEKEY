@@ -22,9 +22,8 @@ import club.zhcs.thunder.ext.shiro.aop.SINOPermissionAnnotationMethodInterceptor
 import club.zhcs.thunder.ext.shiro.aop.SINORoleAnnotationMethodInterceptor;
 
 /**
- * @author admin
- *
- * @email kerbores@gmail.com
+ * 
+ * @author kerbores@gmail.com
  *
  */
 public class SINOAnnotationsAuthorizingMethodInterceptor extends AnnotationsAuthorizingMethodInterceptor implements MethodInterceptor {

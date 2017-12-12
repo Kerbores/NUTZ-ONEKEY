@@ -1,7 +1,8 @@
 package club.zhcs.thunder.dto;
 
 /**
- * @author kerbores
+ * 
+ * @author kerbores@gmail.com
  *
  */
 public class GrantDTO {

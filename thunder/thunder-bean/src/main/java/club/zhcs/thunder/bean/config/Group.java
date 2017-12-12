@@ -6,7 +6,11 @@ import org.nutz.dao.entity.annotation.Name;
 import org.nutz.dao.entity.annotation.Table;
 
 import club.zhcs.thunder.bean.ThunderEntity;
-
+/**
+ * 
+ * @author kerbores@gmail.com
+ *
+ */
 @Table("t_code_book_group")
 @Comment("码表分组")
 public class Group extends ThunderEntity {

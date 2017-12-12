@@ -7,7 +7,7 @@ import club.zhcs.thunder.bean.qa.Nutzer;
 
 /**
  * 
- * @author kerbores
+ * @author kerbores@gmail.com
  *
  */
 @Service

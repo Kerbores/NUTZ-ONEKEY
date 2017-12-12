@@ -30,9 +30,7 @@ import club.zhcs.thunder.biz.log.LoginLogService;
 
 /**
  * 
- * @author kerbores
- *
- * @email kerbores@gmail.com
+ * @author kerbores@gmail.com
  *
  */
 @Service

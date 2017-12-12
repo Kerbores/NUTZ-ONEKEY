@@ -1,7 +1,8 @@
 package club.zhcs.thunder.ext.shiro.cache;
 
 /**
- * @author kerbores
+ * 
+ * @author kerbores@gmail.com
  *
  */
 public interface CacheSerializer {

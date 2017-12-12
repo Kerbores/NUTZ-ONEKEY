@@ -7,7 +7,7 @@ import club.zhcs.thunder.bean.struts.Branch;
 
 /**
  * 
- * @author kerbores
+ * @author kerbores@gmail.com
  *
  */
 @Service

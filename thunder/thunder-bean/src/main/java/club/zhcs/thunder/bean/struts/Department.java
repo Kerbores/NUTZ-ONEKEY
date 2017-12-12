@@ -1,20 +1,17 @@
 package club.zhcs.thunder.bean.struts;
 
+import org.nutz.dao.entity.annotation.Comment;
+import org.nutz.dao.entity.annotation.Table;
+
 import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
  * 
- * @author Kerbores(kerbores@gmail.com)
- *
- * @project 基础业务
- *
- * @file Department.java
- *
- * @description 部门
- *
- * @time 2016年3月8日 上午10:51:26
+ * @author kerbores@gmail.com
  *
  */
+@Table("t_departmanet")
+@Comment("部门表")
 public class Department extends ThunderEntity {
 
 	/**

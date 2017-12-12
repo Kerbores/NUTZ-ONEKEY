@@ -2,15 +2,8 @@ package club.zhcs.thunder.vo;
 
 /**
  * 
- * @author 王贵源
+ * @author kerbores@gmail.com
  *
- * @email kerbores@kerbores.com
- *
- * @description 内置权限
- * 
- * @copyright copyright©2016 zhcs.club
- *
- * @createTime 2016年8月23日 上午8:59:45
  */
 public enum InstallPermission {
 	/**

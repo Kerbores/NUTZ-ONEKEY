@@ -6,15 +6,8 @@ import org.nutz.dao.entity.annotation.Table;
 import club.zhcs.thunder.bean.ThunderEntity;
 
 /**
- * @author Kerbores(kerbores@gmail.com)
- *
- * @project thunder-bean
- *
- * @file Article.java
- *
- * @description 文章
- *
- * @time 2016年9月7日 下午3:54:16
+ * 
+ * @author kerbores@gmail.com
  *
  */
 @Table("t_article")

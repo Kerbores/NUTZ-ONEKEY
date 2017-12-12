@@ -17,7 +17,7 @@ import com.google.common.cache.RemovalNotification;
 
 /**
  * 
- * @author kerbores
+ * @author kerbores@gmail.com
  *
  */
 public class WechatJsSDKConfiger {
