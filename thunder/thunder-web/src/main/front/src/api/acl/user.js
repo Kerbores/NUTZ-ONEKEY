@@ -6,8 +6,8 @@ export default {
      * @param {Object} loginForm 登录信息
      * @param {*} success 回调
      */
-    login(loginForm, success) {
-        http.postBody('user/login', loginForm, success);
+    login(loginForm, success,fail) {
+        http.postBody('user/login', loginForm, success,fail);
     },
     /**
      * 用户列表
