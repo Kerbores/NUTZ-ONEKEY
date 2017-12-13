@@ -81,6 +81,12 @@ public class BranchController extends BaseController {
 		return branchService.save(branch) == null ? Result.fail("保存数据失败!") : Result.success().addData("branch", branch);
 	}
 
+	@GetMapping("all")
+	@ApiOperation("机构详情")
+	public Result all() {
+		return Result.success().addData("branchs", branchService.query());
+	}
+
 	/**
 	 * 机构数据详情
 	 * 

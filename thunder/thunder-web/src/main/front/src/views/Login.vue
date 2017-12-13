@@ -74,7 +74,7 @@
                             loginUser.permissions = data.permissions;
                             this.save(loginUser);
                             this.$router.push({path: "/dashboard"});
-                        },error=>{
+                        }, error => {
                             this.$message.error(error);
                             this.refreshCaptcha();
                         });

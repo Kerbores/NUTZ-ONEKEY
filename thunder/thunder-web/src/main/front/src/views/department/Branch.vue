@@ -26,9 +26,9 @@
             <el-table-column label="操作" show-overflow-tooltip header-align="center" align="center">
                 <template slot-scope="scope">
                     <el-button-group>
-                        <el-button title="编辑码本" size="mini" type="primary" icon="el-icon-fa-edit"
+                        <el-button title="编辑机构" size="mini" type="primary" icon="el-icon-fa-edit"
                                    @click="handleEdit(scope.$index,scope.row)"></el-button>
-                        <el-button title="删除码本" size="mini" type="primary"
+                        <el-button title="删除机构" size="mini" type="primary"
                                    icon="el-icon-fa-trash" @click="handleDelete(scope.$index,scope.row)"></el-button>
                     </el-button-group>
                 </template>

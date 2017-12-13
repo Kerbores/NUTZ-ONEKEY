@@ -158,6 +158,22 @@ public enum InstallPermission {
 	/**
 	 * 
 	 */
+	/**
+	 * 
+	 */
+	DEPT_LIST("dept.list", "部门列表"),
+	/**
+	 * 
+	 */
+	DEPT_ADD("dept.add", "部门添加"),
+	/**
+	 * 
+	 */
+	DEPT_EDIT("dept.edit", "部门编辑"),
+	/**
+	 * 
+	 */
+	DEPT_DELETE("dept.delete", "部门状态"),
 	;
 
 	private String name;
