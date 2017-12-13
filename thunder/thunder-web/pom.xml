@@ -127,5 +127,11 @@
 			<artifactId>UserAgentUtils</artifactId>
 			<version>1.20</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.nutz/nutz-plugins-ngrok -->
+		<dependency>
+			<groupId>org.nutz</groupId>
+			<artifactId>nutz-plugins-ngrok</artifactId>
+			<version>1.r.63</version>
+		</dependency>
 	</dependencies>
 </project>

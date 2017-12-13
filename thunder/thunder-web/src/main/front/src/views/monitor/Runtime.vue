@@ -27,7 +27,9 @@
     }
 </style>
 <script>
-    import IEcharts from "vue-echarts-v3";
+    import IEcharts from 'vue-echarts-v3/src/lite.js';
+    import 'echarts/lib/chart/line';
+    import 'echarts/lib/chart/gauge';
     import axios from "axios";
 
     export default {
