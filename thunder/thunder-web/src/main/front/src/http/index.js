@@ -6,7 +6,7 @@ import {Loading, Message} from 'element-ui'
 
 var loadinginstace;
 axios.defaults.timeout = 5000
-axios.defaults.baseURL = process.env.NODE_ENV == "development" ? 'http://localhost:8888/api' : '';
+axios.defaults.baseURL = process.env.NODE_ENV == "development" ? 'api/' : '';
 //请求前拦截
 let status = false;
 axios.interceptors.request.use(config => {

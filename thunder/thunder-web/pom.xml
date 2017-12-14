@@ -133,5 +133,10 @@
 			<artifactId>nutz-plugins-ngrok</artifactId>
 			<version>1.r.63</version>
 		</dependency>
+		<dependency>
+			<groupId>org.nutz</groupId>
+			<artifactId>nutz-plugins-nop</artifactId>
+			<version>1.r.63</version>
+		</dependency>
 	</dependencies>
 </project>
