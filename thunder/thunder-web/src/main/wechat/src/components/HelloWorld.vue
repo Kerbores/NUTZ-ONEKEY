@@ -11,6 +11,11 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App'
     }
+  },
+  created () {
+    this.$api.Topic.list(2,15,undefined,undefined,undefined,result=>{
+      console.log(result);
+    })
   }
 }
 </script>

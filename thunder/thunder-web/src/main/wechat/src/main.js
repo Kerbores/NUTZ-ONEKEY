@@ -3,14 +3,16 @@
 import Vue from "vue";
 import App from "./App";
 import router from "./router";
-import store from './store'
+import store from "./store";
 import FastClick from "fastclick";
-import { WechatPlugin } from "vux";
-import http from './http'
+import { WechatPlugin,ToastPlugin } from "vux";
+import http from "./http";
+import api from "./api";
 
+Vue.use(ToastPlugin)
 Vue.use(WechatPlugin);
 
-
+Vue.prototype.$api = api;
 
 router.beforeEach(function(to, from, next) {
   store.commit("updateLoadingStatus", { isLoading: true });

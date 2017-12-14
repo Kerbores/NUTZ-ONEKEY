@@ -78,9 +78,7 @@ export default {
         if (fail) {
           fail(error);
         } else {
-          Message.error({
-            message: error
-          });
+          console.log(error);
         }
       });
   },
@@ -99,9 +97,7 @@ export default {
         if (fail) {
           fail(error);
         } else {
-          Message.error({
-            message: error
-          });
+          console.log(error);
         }
       });
   },
@@ -136,9 +132,7 @@ export default {
         if (fail) {
           fail(error);
         } else {
-          Message.error({
-            message: error
-          });
+          console.log(error);
         }
       });
   }
