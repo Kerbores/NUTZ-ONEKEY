@@ -12,13 +12,14 @@
   export default {
     data() {
       return {
-        id: ''
+        topic:{}
       }
     },
     created() {
-      this.id = this.$route.params.id
-      this.$api.Topic.detail(this.id, result => {
+      this.topic.id = this.$route.params.id
+      this.$api.Topic.detail(this.topic.id, result => {
         console.log(result);
+        this.topic = result.topic.data;
       })
     }
   }

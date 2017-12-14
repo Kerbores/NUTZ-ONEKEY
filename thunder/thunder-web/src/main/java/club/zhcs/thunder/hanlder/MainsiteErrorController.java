@@ -29,7 +29,10 @@ public class MainsiteErrorController implements ErrorController {
 
 	@RequestMapping(ERROR_PATH)
 	public String hanldError(HttpServletResponse response) {
-		response.setStatus(HttpStatus.OK.value());
-		return "/index.html";
+		if (response.getStatus() == HttpStatus.NOT_FOUND.value()) {
+			response.setStatus(HttpStatus.OK.value());
+			return "/index.html";
+		}
+		return null;
 	}
 }
