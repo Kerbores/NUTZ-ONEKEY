@@ -14,8 +14,24 @@ public class WechatConfigProperties {
 	protected String appid;
 	protected String appsecret;
 	protected String encodingAesKey;
+	protected String domain;
 
 	protected boolean redisCacheEnable = false;
+
+	/**
+	 * @return the domain
+	 */
+	public String getDomain() {
+		return domain;
+	}
+
+	/**
+	 * @param domain
+	 *            the domain to set
+	 */
+	public void setDomain(String domain) {
+		this.domain = domain;
+	}
 
 	/**
 	 * @return the redisCacheEnable

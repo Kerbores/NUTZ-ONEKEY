@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 import org.nutz.lang.Lang;
 import org.nutz.lang.Strings;
+import org.nutz.log.Log;
+import org.nutz.log.Logs;
 import org.nutz.mvc.View;
 import org.nutz.mvc.view.ForwardView;
 import org.nutz.mvc.view.JspView;
@@ -26,10 +28,12 @@ import eu.bitwalker.useragentutils.UserAgent;
 public class BaseController {
 
 	@Autowired
-	HttpServletRequest request;
+	protected HttpServletRequest request;
 
 	@Autowired
-	HttpServletResponse response;
+	protected HttpServletResponse response;
+
+	protected Log log = Logs.get();
 
 	public Logger logger = Logger.getLogger(getClass());
 

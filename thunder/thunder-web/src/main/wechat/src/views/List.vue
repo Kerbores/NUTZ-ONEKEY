@@ -20,11 +20,13 @@
     Tab,
     TabItem,
     Scroller,
-    Search
+    Search,
+    querystring
   } from 'vux'
   export default {
     data() {
       return {
+        openid:'',
         config: {
           content: '上拉加载更多',
           pullUpHeight: 60,
@@ -144,6 +146,9 @@
       Search
     },
     created() {
+      if(location.search){
+        this.openid = querystring.parse(location.search.substr(1)).openid;
+      }
       this.loadTopic(true);
     }
   }
