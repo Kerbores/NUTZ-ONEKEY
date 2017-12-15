@@ -147,11 +147,11 @@ public class QAController extends BaseController {
 	@ApiOperation("发表回帖")
 	public Result reply(@RequestParam("id") @ApiParam("帖子id") String id,
 			@RequestParam("content") @ApiParam("回帖内容") String content,
-			@SessionAttribute(BootNutzVueApplication.NUTZ_USER_KEY) Nutzer nutzer) {
-		if (nutzer == null || Strings.isBlank(nutzer.getAccessToken()))
+			@RequestParam("token") @ApiParam("token") String token) {
+		if (Strings.isBlank(token))
 			return Result.fail("非法用户");
 		Response response = Http.post2("https://nutz.cn/yvr/api/v1/topic/" + id + "/replies",
-				NutMap.NEW().addv("id", id).addv("content", content + "<br>来自 NB 哄哄的 nutz-onekey 微信客户端!").addv("accesstoken", nutzer.getAccessToken()),
+				NutMap.NEW().addv("id", id).addv("content", content + "<br>来自 NB 哄哄的 nutz-onekey 微信客户端!").addv("accesstoken", token),
 				5000);
 		if (response.isOK()) {
 			return Result.success();

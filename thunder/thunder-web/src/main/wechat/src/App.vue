@@ -25,14 +25,11 @@ export default {
   },
   created() {
     this.$api.wechat.config(location.href, result => {
-      console.log(result);
       this.$wechat.config(result.config);
 
       this.$wechat.ready(() => {
-        console.log(arguments);
       });
       this.$wechat.error(res => {
-        console.log(res);
       });
     });
   }

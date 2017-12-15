@@ -37,5 +37,8 @@ export default {
   },
   bind (openid, token, success) {
     http.get('qa/bind', { openid: openid, token: token }, success)
+  },
+  reply (id, content, token, success) {
+    http.get('qa/reply', { id: id, content: content, token: token }, success)
   }
 }
