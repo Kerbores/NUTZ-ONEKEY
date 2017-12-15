@@ -7,10 +7,13 @@
     <scroller lock-x scrollbar-y ref="scroller" :use-pullup="true" :pullup-config="config" @on-pullup-loading="loadMore()">
       <panel :list="list" :type="'5'" @on-img-error="onImgError"></panel>
     </scroller>
+    <div class="pop-btn" v-if="logined()">
+      <i class="fa fa-plus" @click="toAdd"></i>
+    </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 
 </style>
 
@@ -21,6 +24,7 @@
     TabItem,
     Scroller,
     Search,
+    Icon,
     querystring
   } from 'vux'
   import {
@@ -102,6 +106,11 @@
         this.page = 1;
         this.loadTopic(true);
       },
+      toAdd() {
+        this.$router.push({
+          path: '/add'
+        })
+      },
       loadTopic(clear, done) {
         this.$api.Topic.list(this.page, this.limit, this.tab, this.tag, this.search, result => {
           if (clear) {
@@ -152,17 +161,19 @@
       Tab,
       TabItem,
       Scroller,
-      Search
+      Search,
+      Icon
     },
     created() {
       if (location.search) {
         this.openid = querystring.parse(location.search.substr(1)).openid;
+        this.$api.Topic.nutzer(this.openid, result => {
+          this.save(result)
+        })
+      }else{
+        this.remove();
       }
       this.loadTopic(true);
-      this.$api.Topic.nutzer(this.openid, result => {
-        this.save(result);
-      })
-      console.log(this.logined())
     }
   }
 </script>

@@ -119,12 +119,13 @@ public class QAController extends BaseController {
 	@ApiOperation("发帖")
 	public Result topic(
 			@RequestParam("title") @ApiParam("标题") String title,
+			@RequestParam("tab") @ApiParam("分类") String tab,
 			@RequestParam("content") @ApiParam("内容") String content,
-			@SessionAttribute(BootNutzVueApplication.NUTZ_USER_KEY) Nutzer nutzer) {
-		if (nutzer == null || Strings.isBlank(nutzer.getAccessToken()))
+			@RequestParam("token") @ApiParam("token") String token) {
+		if (Strings.isBlank(token))
 			return Result.fail("非法用户");
 		Response response = Http.post2("https://nutz.cn/yvr/api/v1/topics",
-				NutMap.NEW().addv("title", title).addv("content", content).addv("accesstoken", nutzer.getAccessToken()),
+				NutMap.NEW().addv("title", title).addv("content", content).addv("type", tab).addv("accesstoken", token),
 				5000);
 		if (response.isOK()) {
 			return Result.success();
@@ -184,6 +185,9 @@ public class QAController extends BaseController {
 	@ApiOperation("获取个人信息")
 	public Result me(@PathVariable("openid") String openid) {
 		Nutzer nutzer = nutzerService.fetch(Cnd.where("openid", "=", openid));
+		if (nutzer == null) {
+			return Result.success();
+		}
 		Response response = Http.get("https://nutz.cn/yvr/api/v1/accesstoken?accesstoken=" + nutzer.getAccessToken());
 		if (response.isOK()) {
 			NutMap data = Lang.map(response.getContent());
@@ -205,7 +209,11 @@ public class QAController extends BaseController {
 	 */
 	@GetMapping("bind")
 	@ApiOperation("绑定用户")
-	public @ResponseBody Result bind(@Param("token") String token, @SessionAttribute(BootNutzVueApplication.NUTZ_USER_KEY) Nutzer nutzer) {
+	public @ResponseBody Result bind(@Param("token") String token, @Param("openid") String openid) {
+		Nutzer nutzer = nutzerService.fetch(Cnd.where("openid", "=", openid));
+		if (nutzer == null) {
+			return Result.fail("不存在的用户,请重新关注公众号!");
+		}
 		Response response = Http.post2("https://nutz.cn/yvr/api/v1/accesstoken", NutMap.NEW().addv("accesstoken", token), 5000);
 		if (response.isOK()) {
 			NutMap data = Lang.map(response.getContent());
