@@ -21,5 +21,11 @@ export default {
    */
   detail(id, success) {
     http.get("qa/detail/" + id, success);
+  },
+  /**
+   *
+   */
+  nutzer(openid,success){
+    http.get("qa/nutzer/" + openid, success);
   }
 };

@@ -2,6 +2,7 @@ package club.zhcs.thunder.controller.wechat;
 
 import java.io.IOException;
 
+import org.nutz.dao.Cnd;
 import org.nutz.http.Header;
 import org.nutz.http.Http;
 import org.nutz.http.Response;
@@ -179,19 +180,20 @@ public class QAController extends BaseController {
 	 * @param nutzer
 	 * @return
 	 */
-	@GetMapping("me")
+	@GetMapping("nutzer/{openid}")
 	@ApiOperation("获取个人信息")
-	public Result me(@SessionAttribute(BootNutzVueApplication.NUTZ_USER_KEY) Nutzer nutzer) {
+	public Result me(@PathVariable("openid") String openid) {
+		Nutzer nutzer = nutzerService.fetch(Cnd.where("openid", "=", openid));
 		Response response = Http.get("https://nutz.cn/yvr/api/v1/accesstoken?accesstoken=" + nutzer.getAccessToken());
 		if (response.isOK()) {
 			NutMap data = Lang.map(response.getContent());
 			String loginname = data.getString("loginname");
 			response = Http.get("https://nutz.cn/yvr/api/v1/user/" + loginname);
 			if (response.isOK()) {
-				return Result.success().addData("me", Lang.map(response.getContent()));
+				return Result.success().addData("nutzer", Lang.map(response.getContent()).setv("wechatUser", nutzer));
 			}
 		}
-		return Result.fail("Nutz.cn 接口失败: " + response.getStatus());
+		return Result.success().addData("nutzer", NutMap.NEW().setv("wechatUser", nutzer));
 	}
 
 	/**

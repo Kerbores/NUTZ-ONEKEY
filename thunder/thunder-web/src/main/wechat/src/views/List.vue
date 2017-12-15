@@ -23,10 +23,15 @@
     Search,
     querystring
   } from 'vux'
+  import {
+    mapState,
+    mapGetters,
+    mapMutations
+  } from "vuex";
   export default {
     data() {
       return {
-        openid:'',
+        openid: '',
         config: {
           content: '上拉加载更多',
           pullUpHeight: 60,
@@ -71,7 +76,11 @@
         limit: 15
       }
     },
+    computed: {
+      ...mapGetters(["logined"])
+    },
     methods: {
+      ...mapMutations(["save", "remove"]),
       onImgError(item, $event) {
         console.log(item, $event)
       },
@@ -146,10 +155,14 @@
       Search
     },
     created() {
-      if(location.search){
+      if (location.search) {
         this.openid = querystring.parse(location.search.substr(1)).openid;
       }
       this.loadTopic(true);
+      this.$api.Topic.nutzer(this.openid, result => {
+        this.save(result);
+      })
+      console.log(this.logined())
     }
   }
 </script>

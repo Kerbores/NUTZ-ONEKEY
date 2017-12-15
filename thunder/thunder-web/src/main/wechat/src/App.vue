@@ -26,7 +26,7 @@
     },
     computed: {
       ...mapState({
-        isLoading: state => state.isLoading
+        isLoading: state => state.loading.isLoading
       })
     }
   };
