@@ -40,5 +40,11 @@ export default {
   },
   reply (id, content, token, success) {
     http.get('qa/reply', { id: id, content: content, token: token }, success)
+  },
+  upload (file, token, success) {
+    var formdata = new FormData()
+    formdata.append('img', file)
+    formdata.append('token', token)
+    http.upload('qa/upload', formdata, success)
   }
 }

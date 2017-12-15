@@ -161,14 +161,14 @@ public class QAController extends BaseController {
 
 	@PostMapping("upload")
 	@ApiOperation("上传图片")
-	public NutMap upload(MultipartFile img, @SessionAttribute(BootNutzVueApplication.NUTZ_USER_KEY) Nutzer nutzer) throws IOException {
-		if (nutzer == null || Strings.isBlank(nutzer.getAccessToken())) {
+	public NutMap upload(MultipartFile img, @RequestParam("token") @ApiParam("token") String token) throws IOException {
+		if (Strings.isBlank(token)) {
 			return NutMap.NEW().addv("success", 0).addv("message", "用户不存在!");
 		}
 		NutMap paras = NutMap.NEW();
 		// TODO 文件处理
 		paras.addv("file", null);
-		Response response = Http.upload("https://nutz.cn/yvr/api/v1/images?accesstoken=" + nutzer.getAccessToken(), paras, Header.create(), 100000);
+		Response response = Http.upload("https://nutz.cn/yvr/api/v1/images?accesstoken=" + token, paras, Header.create(), 100000);
 		if (response.isOK()) {
 			return NutMap.NEW().addv("success", 1).addv("message", "上传成功!").addv("url", "https://nutz.cn" + Lang.map(response.getContent()).getString("url"));
 		}

@@ -135,5 +135,27 @@ export default {
           console.log(error)
         }
       })
+  },
+  /**
+   *上传文件
+   * @param {string} url 地址
+   * @param {FormData} data 表单
+   * @param {Function} done 成功回调
+   * @param {Function} fail 失败回调
+   */
+  upload (url, data, done, fail) {
+    axios({
+      url: url,
+      method: 'post',
+      data: data,
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }).then(data => done(data))
+      .catch(error => {
+        if (fail) {
+          fail(error)
+        } else {
+          console.log(error)
+        }
+      })
   }
 }

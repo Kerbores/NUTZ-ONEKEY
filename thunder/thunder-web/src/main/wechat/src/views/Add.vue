@@ -5,7 +5,7 @@
       <x-input title="标题" placeholder="请填写话题标题" v-model="topic.title" required :show-clear="true"></x-input>
     </group>
     <group title="话题内容">
-      <mavon-editor v-model="value" :subfield="false" :toolbars="toolbars" @change="editChange" />
+      <mavon-editor @imgAdd="imgAdd" v-model="value" :subfield="false" :toolbars="toolbars" @change="editChange" />
     </group>
     <box gap="10px 10px">
       <x-button :gradients="['#1D62F0', '#19D5FD']" :disabled="!logined()" @click.native="submitTopic">我要答案</x-button>
@@ -129,6 +129,12 @@
       ...mapMutations(["save", "remove"]),
       editChange(value, rended) {
         this.topic.content = rended;
+      },
+      imgAdd(pos, file){
+        console.log(pos,file)
+        this.$api.Topic.upload(file,this.token(),result=>{
+          console.log(result);
+        })
       },
       submitTopic() {
         this.$api.Topic.add(this.topic, this.token(), result => {
