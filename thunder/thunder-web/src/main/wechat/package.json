@@ -11,10 +11,12 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "animate.css": "^3.5.2",
     "axios": "^0.17.1",
     "fastclick": "^1.0.6",
     "font-awesome": "^4.7.0",
     "mavon-editor": "^2.4.13",
+    "toast.js": "^0.0.4",
     "vue": "^2.5.2",
     "vue-markdown-editor": "^0.2.0",
     "vue-router": "^3.0.1",

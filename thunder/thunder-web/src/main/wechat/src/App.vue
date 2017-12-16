@@ -35,6 +35,10 @@ export default {
   }
 };
 </script>
+<style>
+@import '../node_modules/toast.js/toast.css';
+@import '../node_modules/animate.css/animate.min.css';
+</style>
 
 <style lang="less">
 @import "~font-awesome/less/font-awesome.less";
