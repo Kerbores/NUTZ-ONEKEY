@@ -119,5 +119,9 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/com/qiniu/happy-dns-java/0.1.6/happy-dns-java-0.1.6.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/nutz/nutzwx/1.r.63/nutzwx-1.r.63.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/eu/bitwalker/UserAgentUtils/1.20/UserAgentUtils-1.20.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/nutz/nutz-plugins-ngrok/1.r.63/nutz-plugins-ngrok-1.r.63.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/nutz/nutz-integration-jedis/1.r.63/nutz-integration-jedis-1.r.63.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/io/netty/netty-all/4.1.16.Final/netty-all-4.1.16.Final.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/nutz/nutz-plugins-nop/1.r.63/nutz-plugins-nop-1.r.63.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="true" runInBatchMode="false"/>
 </factorypath>

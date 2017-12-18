@@ -1,39 +1,22 @@
 package club.zhcs.thunder;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.log4j.Logger;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
-import org.nutz.http.Http;
 import org.nutz.lang.ContinueLoop;
 import org.nutz.lang.Each;
 import org.nutz.lang.ExitLoop;
 import org.nutz.lang.Lang;
 import org.nutz.lang.LoopException;
-import org.nutz.lang.Strings;
-import org.nutz.lang.util.NutMap;
-import org.nutz.log.Log;
-import org.nutz.log.Logs;
-import org.nutz.weixin.impl.WxApi2Impl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.core.MethodParameter;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import club.zhcs.thunder.bean.acl.Permission;
@@ -42,16 +25,15 @@ import club.zhcs.thunder.bean.acl.RolePermission;
 import club.zhcs.thunder.bean.acl.User;
 import club.zhcs.thunder.bean.acl.User.Status;
 import club.zhcs.thunder.bean.acl.UserRole;
-import club.zhcs.thunder.bean.qa.Nutzer;
 import club.zhcs.thunder.biz.acl.PermissionService;
 import club.zhcs.thunder.biz.acl.RolePermissionService;
 import club.zhcs.thunder.biz.acl.RoleService;
 import club.zhcs.thunder.biz.acl.UserRoleService;
 import club.zhcs.thunder.biz.acl.UserService;
-import club.zhcs.thunder.biz.qa.NutzerService;
 import club.zhcs.thunder.ext.shiro.matcher.SINOCredentialsMatcher;
 import club.zhcs.thunder.vo.InstallPermission;
 import club.zhcs.thunder.vo.InstalledRole;
+
 /**
  * 
  * @author kerbores@gmail.com
@@ -165,125 +147,6 @@ public class BootNutzVueApplication extends WebMvcConfigurerAdapter {
 
 		});
 		application.run(args);
-	}
-
-	public static class QAUserCheckInterceptor implements HandlerInterceptor {
-
-		@Override
-		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-			HandlerMethod method = (HandlerMethod) handler;
-			if (!bindedUser(request) && needSession(method)) {
-				response.setStatus(401);
-				return false;
-			}
-			return true;
-		}
-
-		private boolean needSession(HandlerMethod method) {
-			for (MethodParameter parameter : method.getMethodParameters()) {
-				if (parameter.getParameterAnnotation(SessionAttribute.class) != null) {
-					return true;
-				}
-			}
-			return false;
-		}
-
-		/**
-		 * 已绑定用户
-		 * 
-		 * @param request
-		 * @return
-		 */
-		private boolean bindedUser(HttpServletRequest request) {
-			if (request.getSession().getAttribute(BootNutzVueApplication.NUTZ_USER_KEY) == null) {
-				return false;
-			} else if (!(request.getSession().getAttribute(BootNutzVueApplication.NUTZ_USER_KEY) instanceof Nutzer)) {
-				return false;
-			} else if (Strings.isBlank(((Nutzer) request.getSession().getAttribute(BootNutzVueApplication.NUTZ_USER_KEY)).getOpenid())) {
-				return false;
-			} else {
-				return true;
-			}
-		}
-
-		@Override
-		public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
-		}
-
-		@Override
-		public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-
-		}
-	}
-
-	public static class QAUserInjectInterceptor implements HandlerInterceptor {
-
-		@Autowired
-		WxApi2Impl api;
-
-		@Autowired
-		NutzerService nutzerService;
-
-		Log log = Logs.get();
-
-		public boolean isDebug(HttpServletRequest request) {
-			String serverName = request.getServerName();
-			return Strings.equalsIgnoreCase("kerbores.ngrok.wendal.cn", serverName)
-					|| Strings.equalsIgnoreCase("127.0.0.1", serverName)
-					|| Strings.equalsIgnoreCase("localhost", serverName);
-		}
-
-		@Override
-		public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-			if (isDebug(request)) {
-				request.getSession().setAttribute("openid", "otOKDvwEbkaeI8MewpbAFWonrCp0");
-				request.getSession().setAttribute(BootNutzVueApplication.NUTZ_USER_KEY, nutzerService.fetch(Cnd.where("openid", "=", "otOKDvwEbkaeI8MewpbAFWonrCp0")));
-				// 继续尝试是否可真实获取
-			}
-			String code = request.getParameter("code");
-			if (Strings.isBlank(code)) {// 没有code参数
-				return true;
-			}
-			String wechatInterface = "https://api.weixin.qq.com/sns/oauth2/access_token?appid=" + api.getAppid() + "&secret=" + api.getAppsecret() + "&code=" + code
-					+ "&grant_type=authorization_code";
-			log.debug("ready to invoke url : " + wechatInterface);
-			String info = Http.get(wechatInterface).getContent();
-			NutMap data = Lang.map(info);
-			if (data.get("errcode") != null) {// 调用微信出错
-				log.error("=====error msg:" + data.get("errcode") + ",error msg:" + data.get("errmsg") + "======");
-				return true;
-			}
-			log.debug("successful invoke ,return message:\n" + data.toString());
-			request.getSession().setAttribute("openid", data.getString("openid"));
-			request.getSession().setAttribute(BootNutzVueApplication.NUTZ_USER_KEY, nutzerService.fetch(Cnd.where("openid", "=", data.getString("openid"))));
-			return true;
-		}
-
-		@Override
-		public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-
-		}
-
-		@Override
-		public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
-		}
-	}
-
-	@Bean
-	public QAUserCheckInterceptor qaUserCheckInterceptor() {
-		return new QAUserCheckInterceptor();
-	}
-
-	@Bean
-	public QAUserInjectInterceptor qaUserInjectInterceptor() {
-		return new QAUserInjectInterceptor();
-	}
-
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(qaUserInjectInterceptor()).addPathPatterns("/qa/**");// qa用户注入
-		registry.addInterceptor(qaUserCheckInterceptor()).addPathPatterns("/qa/**");// qa用户检测
 	}
 
 }

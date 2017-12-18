@@ -224,7 +224,7 @@ public class WechatEventController extends BaseController {
 			return null;
 		}
 		ModelAndView view = new ModelAndView();
-		view.setView(new RedirectView(String.format("http://kerbores.ngrok.wendal.cn/?openid=%s#%s", data.getString("openid"), biz.getUrl())));
+		view.setView(new RedirectView(String.format("%/wechat?openid=%s#%s",wechatConfigProperties.getDomain(), data.getString("openid"), biz.getUrl())));
 		return view;
 	}
 
