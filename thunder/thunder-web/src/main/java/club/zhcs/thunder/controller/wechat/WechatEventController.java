@@ -281,7 +281,7 @@ public class WechatEventController extends BaseController {
 	@PostMapping("config")
 	@ApiOperation("获取 JSSDK 配置")
 	public @ResponseBody Result config(@RequestParam("url") @ApiParam("网页地址") String url) throws ExecutionException {
-		return Result.success().addData("config", wechatJsSDKConfiger.getConfig(url));
+		return Result.success().addData("config", wechatJsSDKConfiger.loadConfig(url));
 	}
 
 }
