@@ -6,7 +6,7 @@ import { querystring } from "vux";
 import toast from "toast.js";
 
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL = process.env.NODE_ENV == "development" ? "api/" : "";
+axios.defaults.baseURL = process.env.NODE_ENV == "development" ? "api/" : "https://thunder.kerbores.com/";
 // 请求前拦截
 axios.interceptors.request.use(
   config => {
