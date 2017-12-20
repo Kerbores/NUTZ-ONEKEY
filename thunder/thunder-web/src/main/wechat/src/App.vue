@@ -24,7 +24,7 @@ export default {
     })
   },
   created() {
-    this.$api.wechat.config(location.href, result => {
+    this.$api.wechat.config(location.href.split('#')[0], result => {
       this.$wechat.config(result.config);
 
       this.$wechat.ready(() => {
