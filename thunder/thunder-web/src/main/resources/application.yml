@@ -72,12 +72,12 @@ sino:
   config:
     test: test111
 wechat:
-  appid: wx6e4f32b9bfd64693
-  appsecret: 7ec96826e905841e4912e8acdf5037ed
+  appid: wx4103f8df5a08feb7
+  appsecret: 1a71b047109c3a097f882b2e6eaae366
   encoding-aes-key: Kerbores
   redis-cache-enable: true
   token: Kerbores
-  domain: http://kerbores.ngrok.wendal.cn/api/
+  domain: https://thunder.kerbores.com/
 swagger:
   base-package: club.zhcs
   contact-email: kerbores@gmail.com
