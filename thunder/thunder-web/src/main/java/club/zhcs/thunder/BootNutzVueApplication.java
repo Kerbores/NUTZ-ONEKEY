@@ -1,25 +1,43 @@
 package club.zhcs.thunder;
 
-import club.zhcs.thunder.bean.acl.*;
-import club.zhcs.thunder.bean.acl.User.Status;
-import club.zhcs.thunder.biz.acl.*;
-import club.zhcs.thunder.ext.shiro.matcher.SINOCredentialsMatcher;
-import club.zhcs.thunder.vo.InstallPermission;
-import club.zhcs.thunder.vo.InstalledRole;
 import org.apache.log4j.Logger;
+import org.flowable.engine.RepositoryService;
+import org.flowable.engine.RuntimeService;
+import org.flowable.engine.TaskService;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.dao.util.Daos;
-import org.nutz.lang.*;
+import org.nutz.lang.ContinueLoop;
+import org.nutz.lang.Each;
+import org.nutz.lang.ExitLoop;
+import org.nutz.lang.Lang;
+import org.nutz.lang.LoopException;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import club.zhcs.thunder.bean.acl.Permission;
+import club.zhcs.thunder.bean.acl.Role;
+import club.zhcs.thunder.bean.acl.RolePermission;
+import club.zhcs.thunder.bean.acl.User;
+import club.zhcs.thunder.bean.acl.User.Status;
+import club.zhcs.thunder.bean.acl.UserRole;
+import club.zhcs.thunder.biz.acl.PermissionService;
+import club.zhcs.thunder.biz.acl.RolePermissionService;
+import club.zhcs.thunder.biz.acl.RoleService;
+import club.zhcs.thunder.biz.acl.UserRoleService;
+import club.zhcs.thunder.biz.acl.UserService;
+import club.zhcs.thunder.ext.shiro.matcher.SINOCredentialsMatcher;
+import club.zhcs.thunder.vo.InstallPermission;
+import club.zhcs.thunder.vo.InstalledRole;
 
 /**
  * @author kerbores@gmail.com
@@ -34,6 +52,23 @@ public class BootNutzVueApplication extends WebMvcConfigurerAdapter {
     public static final String USER_KEY = "SINO_USER_KEY";
     public static final String USER_COOKIE_KEY = "SINO_USER_COOKIE";
     public static final String NUTZ_USER_KEY = "SINO_NUTZ_USER_KEY";
+    
+    
+    @Bean
+	public CommandLineRunner commandLineRunner(final RepositoryService repositoryService, final RuntimeService runtimeService,
+			final TaskService taskService) {
+
+		return new CommandLineRunner() {
+			@Override
+			public void run(String... strings) throws Exception {
+				System.out.println(
+						"Number of process definitions : " + repositoryService.createProcessDefinitionQuery().count());
+				System.out.println("Number of tasks : " + taskService.createTaskQuery().count());
+				runtimeService.startProcessInstanceByKey("oneTaskProcess");
+				System.out.println("Number of tasks after process start: " + taskService.createTaskQuery().count());
+			}
+		};
+	}
 
     public static void main(String[] args) {
         SpringApplication application = new SpringApplication(BootNutzVueApplication.class);
