@@ -57,7 +57,43 @@ public class User extends ThunderEntity {
 			this.name = name;
 		}
 	}
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return 31 * 1 + ((name == null) ? 0 : name.hashCode());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		User other = (User) obj;
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	 * 用户类型
@@ -118,97 +154,6 @@ public class User extends ThunderEntity {
 	@Comment("用户微信 openid")
 	private String openid;
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((createTime == null) ? 0 : createTime.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((headKey == null) ? 0 : headKey.hashCode());
-		result = prime * result + ((headUrl == null) ? 0 : headUrl.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((nickName == null) ? 0 : nickName.hashCode());
-		result = prime * result + ((openid == null) ? 0 : openid.hashCode());
-		result = prime * result + ((password == null) ? 0 : password.hashCode());
-		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
-		result = prime * result + ((realName == null) ? 0 : realName.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((userType == null) ? 0 : userType.hashCode());
-		return result;
-	}
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (createTime == null) {
-			if (other.createTime != null)
-				return false;
-		} else if (!createTime.equals(other.createTime))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (headKey == null) {
-			if (other.headKey != null)
-				return false;
-		} else if (!headKey.equals(other.headKey))
-			return false;
-		if (headUrl == null) {
-			if (other.headUrl != null)
-				return false;
-		} else if (!headUrl.equals(other.headUrl))
-			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (nickName == null) {
-			if (other.nickName != null)
-				return false;
-		} else if (!nickName.equals(other.nickName))
-			return false;
-		if (openid == null) {
-			if (other.openid != null)
-				return false;
-		} else if (!openid.equals(other.openid))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
-		if (phone == null) {
-			if (other.phone != null)
-				return false;
-		} else if (!phone.equals(other.phone))
-			return false;
-		if (realName == null) {
-			if (other.realName != null)
-				return false;
-		} else if (!realName.equals(other.realName))
-			return false;
-		if (status != other.status)
-			return false;
-		if (userType != other.userType)
-			return false;
-		return true;
-	}
-
 	/**
 	 * @return the createTime
 	 */
@@ -265,7 +210,6 @@ public class User extends ThunderEntity {
 	public Type getUserType() {
 		return userType;
 	}
-
 
 	public boolean isAvailable() {
 		return status == Status.ACTIVED;
