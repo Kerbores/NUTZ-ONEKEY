@@ -45,15 +45,17 @@ public class RedisCache<K, V> implements Cache<K, V> {
 
 	@Override
 	public V get(K key) {
-		if (debug)
+		if (debug) {
 			log.debugf("HGET name=%s key=%s", name, key);
+		}
 		RedisConnection conn = null;
 		byte[] buf = null;
 		try {
 			conn = jedis();
 			buf = conn.hGet(nameByteArray, genKey(key));
-			if (buf == null)
+			if (buf == null) {
 				return null;
+			}
 			return (V) serializer.toObject(buf);
 		} finally {
 			RedisConnectionUtils.releaseConnection(conn, connectionFactory);
@@ -62,8 +64,9 @@ public class RedisCache<K, V> implements Cache<K, V> {
 
 	@Override
 	public V put(K key, V value) {
-		if (debug)
+		if (debug) {
 			log.debugf("HSET name=%s key=%s", name, key);
+		}
 		RedisConnection conn = null;
 		try {
 			conn = jedis();
@@ -76,8 +79,9 @@ public class RedisCache<K, V> implements Cache<K, V> {
 
 	@Override
 	public V remove(K key) {
-		if (debug)
+		if (debug) {
 			log.debugf("HDEL name=%s key=%s", name, key);
+		}
 		RedisConnection conn = null;
 		try {
 			conn = jedis();
@@ -90,8 +94,9 @@ public class RedisCache<K, V> implements Cache<K, V> {
 
 	@Override
 	public void clear() {
-		if (debug)
+		if (debug) {
 			log.debugf("DEL name=%s", name);
+		}
 		RedisConnection conn = null;
 		try {
 			conn = jedis();
@@ -103,8 +108,9 @@ public class RedisCache<K, V> implements Cache<K, V> {
 
 	@Override
 	public int size() {
-		if (debug)
+		if (debug) {
 			log.debugf("HLEN name=%s", name);
+		}
 		RedisConnection conn = null;
 		try {
 			conn = jedis();
@@ -116,8 +122,9 @@ public class RedisCache<K, V> implements Cache<K, V> {
 
 	@Override
 	public Set<K> keys() {
-		if (debug)
+		if (debug) {
 			log.debugf("HKEYS name=%s", name);
+		}
 		RedisConnection conn = null;
 		try {
 			conn = jedis();
@@ -129,15 +136,17 @@ public class RedisCache<K, V> implements Cache<K, V> {
 
 	@Override
 	public Collection<V> values() {
-		if (debug)
+		if (debug) {
 			log.debugf("HVALES name=%s", name);
+		}
 		RedisConnection conn = null;
 		try {
 			conn = jedis();
 			Collection<byte[]> vals = conn.hVals(nameByteArray);
 			List<V> list = new ArrayList<V>();
-			for (byte[] buf : vals)
+			for (byte[] buf : vals) {
 				list.add((V) serializer.fromObject(buf));
+			}
 			return list;
 		} finally {
 			RedisConnectionUtils.releaseConnection(conn, connectionFactory);

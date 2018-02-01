@@ -43,7 +43,7 @@ public class PermissionController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.PERMISSION_LIST)
 	@ApiOperation("权限列表")
 	public Result list(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", permissionService.searchByPage(_fixPage(page), Cnd.NEW().desc("id")));
+		return Result.success().addData("pager", permissionService.searchByPage(fixPage(page), Cnd.NEW().desc("id")));
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class PermissionController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.PERMISSION_LIST)
 	@ApiOperation("权限分页搜索")
 	public Result search(@RequestParam("key") @ApiParam("搜索关键词") String key, @RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", permissionService.searchByKeyAndPage(_fixSearchKey(key), _fixPage(page), "name", "description").addParam("key", key));
+		return Result.success().addData("pager", permissionService.searchByKeyAndPage(fixSearchKey(key), fixPage(page), "name", "description").addParam("key", key));
 	}
 
 	/**

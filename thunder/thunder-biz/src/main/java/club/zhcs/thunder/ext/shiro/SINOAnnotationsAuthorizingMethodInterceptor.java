@@ -60,10 +60,13 @@ public class SINOAnnotationsAuthorizingMethodInterceptor extends AnnotationsAuth
 	@Override
 	protected void assertAuthorized(org.apache.shiro.aop.MethodInvocation methodInvocation) throws AuthorizationException {
 		Collection<AuthorizingAnnotationMethodInterceptor> aamis = getMethodInterceptors();
-		if ((aamis != null) && (!(aamis.isEmpty())))
-			for (AuthorizingAnnotationMethodInterceptor aami : aamis)
-				if (aami.supports(methodInvocation))
+		if ((aamis != null) && (!(aamis.isEmpty()))) {
+			for (AuthorizingAnnotationMethodInterceptor aami : aamis) {
+				if (aami.supports(methodInvocation)) {
 					aami.assertAuthorized(methodInvocation);
+				}
+			}
+		}
 	}
 
 	/**

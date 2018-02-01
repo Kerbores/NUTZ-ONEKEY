@@ -40,7 +40,7 @@ public class TraceController extends BaseController {
 	@SINORequiresRoles(InstalledRole.SU)
 	@ApiOperation("登录日志列表")
 	public Result list(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", loginLogService.searchByPage(_fixPage(page), Cnd.NEW().desc("id")));
+		return Result.success().addData("pager", loginLogService.searchByPage(fixPage(page), Cnd.NEW().desc("id")));
 	}
 
 	/**
@@ -56,6 +56,6 @@ public class TraceController extends BaseController {
 	@SINORequiresRoles(InstalledRole.SU)
 	@ApiOperation("登录日志检索")
 	public Result search(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page, @RequestParam("key") @ApiParam("关键词") String key) {
-		return Result.success().addData("pager", loginLogService.searchByKeyAndPage(_fixSearchKey(key), _fixPage(page), "account", "ip").addParam("key", key));
+		return Result.success().addData("pager", loginLogService.searchByKeyAndPage(fixSearchKey(key), fixPage(page), "account", "ip").addParam("key", key));
 	}
 }

@@ -67,7 +67,7 @@ public class QAController extends BaseController {
 			@RequestParam(value = "tag", required = false) @ApiParam("标签") String tag,
 			@RequestParam(value = "search", required = false) @ApiParam("关键词") String search,
 			@RequestParam(value = "limit", defaultValue = "5") @ApiParam("页面大小") int limit) {
-		UserAgent ua = _ua();
+		UserAgent ua = ua();
 		Logs.get().debugf("%s,%s,%s", ua.getBrowser(), ua.getBrowserVersion(), ua.getOperatingSystem());
 		String topicApi = "https://nutz.cn/yvr/api/v1/topics?page=" + page + "&limit=" + limit;
 		if (Strings.isNotBlank(tab)) {
@@ -121,7 +121,9 @@ public class QAController extends BaseController {
 			@RequestParam("content") @ApiParam("内容") String content,
 			@RequestParam("token") @ApiParam("token") String token) {
 		if (Strings.isBlank(token))
+		{
 			return Result.fail("非法用户");
+		}
 		Response response = Http.post2("https://nutz.cn/yvr/api/v1/topics",
 				NutMap.NEW().addv("title", title).addv("content", content).addv("type", tab).addv("accesstoken", token),
 				5000);
@@ -146,8 +148,9 @@ public class QAController extends BaseController {
 	public Result reply(@RequestParam("id") @ApiParam("帖子id") String id,
 			@RequestParam("content") @ApiParam("回帖内容") String content,
 			@RequestParam("token") @ApiParam("token") String token) {
-		if (Strings.isBlank(token))
+		if (Strings.isBlank(token)) {
 			return Result.fail("非法用户");
+		}
 		Response response = Http.post2("https://nutz.cn/yvr/api/v1/topic/" + id + "/replies",
 				NutMap.NEW().addv("id", id).addv("content", content + "<br>来自 NB 哄哄的 nutz-onekey 微信客户端!").addv("accesstoken", token),
 				5000);

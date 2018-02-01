@@ -28,16 +28,17 @@ public class SINORoleAnnotationHandler extends RoleAnnotationHandler {
 
 	@Override
 	public void assertAuthorized(Annotation a) throws AuthorizationException {
-		if (!(a instanceof SINORequiresRoles))
+		if (!(a instanceof SINORequiresRoles)) {
 			return;
+		}
 
 		SINORequiresRoles rpAnnotation = (SINORequiresRoles) a;
-		InstalledRole[] roles_ = rpAnnotation.value();
+		InstalledRole[] installRoles = rpAnnotation.value();
 		Subject subject = getSubject();
 
-		final String[] roles = new String[roles_.length];
+		final String[] roles = new String[installRoles.length];
 
-		Lang.each(roles_, new Each<InstalledRole>() {
+		Lang.each(installRoles, new Each<InstalledRole>() {
 
 			@Override
 			public void invoke(int index, InstalledRole ele, int length) throws ExitLoop, ContinueLoop, LoopException {
@@ -55,11 +56,14 @@ public class SINORoleAnnotationHandler extends RoleAnnotationHandler {
 		}
 		if (Logical.OR.equals(rpAnnotation.logical())) {
 			boolean hasAtLeastOneRoles = false;
-			for (String role : roles)
-				if (getSubject().hasRole(role))
+			for (String role : roles) {
+				if (getSubject().hasRole(role)) {
 					hasAtLeastOneRoles = true;
-			if (!hasAtLeastOneRoles)
+				}
+			}
+			if (!hasAtLeastOneRoles) {
 				getSubject().checkRole(roles[0]);
+			}
 		}
 	}
 }

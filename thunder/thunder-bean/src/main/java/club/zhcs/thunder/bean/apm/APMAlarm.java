@@ -27,7 +27,26 @@ public class APMAlarm extends ThunderEntity {
 	private static final long serialVersionUID = 1L;
 
 	public static enum Type {
-		SLOW, MEM, DISK, CPU, NETWORK;
+		/**
+		 * 
+		 */
+		SLOW, 
+		/**
+		 * 
+		 */
+		MEM, 
+		/**
+		 * 
+		 */
+		DISK, 
+		/**
+		 * 
+		 */
+		CPU, 
+		/**
+		 * 
+		 */
+		NETWORK;
 	}
 
 	@Name

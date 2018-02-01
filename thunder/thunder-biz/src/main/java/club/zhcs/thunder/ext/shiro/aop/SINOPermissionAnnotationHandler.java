@@ -63,16 +63,17 @@ public class SINOPermissionAnnotationHandler extends PermissionAnnotationHandler
 	 */
 	@Override
 	public void assertAuthorized(Annotation a) throws AuthorizationException {
-		if (!(a instanceof SINORequiresPermissions))
+		if (!(a instanceof SINORequiresPermissions)) {
 			return;
+		}
 
 		SINORequiresPermissions rpAnnotation = (SINORequiresPermissions) a;
-		InstallPermission[] perms_ = rpAnnotation.value();
+		InstallPermission[] installPermissions = rpAnnotation.value();
 		Subject subject = getSubject();
 
-		final String[] perms = new String[perms_.length];
+		final String[] perms = new String[installPermissions.length];
 
-		Lang.each(perms_, new Each<InstallPermission>() {
+		Lang.each(installPermissions, new Each<InstallPermission>() {
 
 			@Override
 			public void invoke(int index, InstallPermission ele, int length) throws ExitLoop, ContinueLoop, LoopException {
@@ -90,11 +91,14 @@ public class SINOPermissionAnnotationHandler extends PermissionAnnotationHandler
 		}
 		if (Logical.OR.equals(rpAnnotation.logical())) {
 			boolean hasAtLeastOnePermission = false;
-			for (String permission : perms)
-				if (getSubject().isPermitted(permission))
+			for (String permission : perms) {
+				if (getSubject().isPermitted(permission)) {
 					hasAtLeastOnePermission = true;
-			if (!hasAtLeastOnePermission)
+				}
+			}
+			if (!hasAtLeastOnePermission) {
 				getSubject().checkPermission(perms[0]);
+			}
 		}
 	}
 }

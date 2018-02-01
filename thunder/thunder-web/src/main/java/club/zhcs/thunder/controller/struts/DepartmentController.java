@@ -43,7 +43,7 @@ public class DepartmentController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.DEPT_LIST)
 	@ApiOperation("部门列表")
 	public Result list(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", departmentService.searchByPage(_fixPage(page)));
+		return Result.success().addData("pager", departmentService.searchByPage(fixPage(page)));
 	}
 
 	/**
@@ -64,8 +64,8 @@ public class DepartmentController extends BaseController {
 			@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
 		return Result.success().addData("pager",
 				departmentService.searchByKeyAndPage(
-						_fixSearchKey(key),
-						_fixPage(page),
+						fixSearchKey(key),
+						fixPage(page),
 						branchId == 0 ? null : Cnd.where("branchId", "=", branchId),
 						"name",
 						"description")

@@ -42,7 +42,7 @@ public class ConfigController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.CONFIG_LIST)
 	@ApiOperation("配置列表")
 	public Result list(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", configService.searchByPage(_fixPage(page), Cnd.NEW().desc("id")));
+		return Result.success().addData("pager", configService.searchByPage(fixPage(page), Cnd.NEW().desc("id")));
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class ConfigController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.CONFIG_LIST)
 	@ApiOperation("配置检索")
 	public Result search(@RequestParam("key") @ApiParam("关键词") String key, @RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", configService.searchByKeyAndPage(_fixSearchKey(key), _fixPage(page), "name", "description").addParam("key", key));
+		return Result.success().addData("pager", configService.searchByKeyAndPage(fixSearchKey(key), fixPage(page), "name", "description").addParam("key", key));
 	}
 
 	/**

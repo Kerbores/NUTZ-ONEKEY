@@ -39,7 +39,7 @@ public class SystemLogController extends BaseController {
 	@SINORequiresRoles(InstalledRole.SU)
 	@ApiOperation("审计日志列表")
 	public Result list(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", operationLogService.searchByPage(_fixPage(page), Cnd.NEW().desc("id")));
+		return Result.success().addData("pager", operationLogService.searchByPage(fixPage(page), Cnd.NEW().desc("id")));
 	}
 
 	@GetMapping("search")
@@ -47,6 +47,6 @@ public class SystemLogController extends BaseController {
 	@ApiOperation("审计日志检索")
 	public Result search(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page, @RequestParam("key") @ApiParam("关键词") String key) {
 		return Result.success().addData("pager",
-				operationLogService.searchByKeyAndPage(_fixSearchKey(key), _fixPage(page), "account", "ip", "module", "action", "description").addParam("key", key));
+				operationLogService.searchByKeyAndPage(fixSearchKey(key), fixPage(page), "account", "ip", "module", "action", "description").addParam("key", key));
 	}
 }

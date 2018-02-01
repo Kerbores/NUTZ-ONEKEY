@@ -33,8 +33,9 @@ public class DefaultJdkSerializer implements CacheSerializer {
 
 	@Override
 	public Object toObject(Object obj) {
-		if (obj == null)
+		if (obj == null) {
 			return null;
+		}
 		try {
 			ObjectInputStream ins = new ObjectInputStream(new ByteArrayInputStream((byte[]) obj));
 			Object tmp = ins.readUnshared();

@@ -45,7 +45,7 @@ public class CodeBookController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.CODEBOOK_LIST)
 	@ApiOperation("码本列表")
 	public Result list(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", codebookService.searchByPage(_fixPage(page), Cnd.where("parentId", "=", 0).desc("id")));
+		return Result.success().addData("pager", codebookService.searchByPage(fixPage(page), Cnd.where("parentId", "=", 0).desc("id")));
 	}
 
 	/**
@@ -69,8 +69,8 @@ public class CodeBookController extends BaseController {
 		return Result.success()
 				.addData("pager",
 						codebookService.searchByKeyAndPage(
-								_fixSearchKey(key),
-								_fixPage(page),
+								fixSearchKey(key),
+								fixPage(page),
 								groupId == 0 ? Cnd.where("parentId", "=", 0) : Cnd.where("parentId", "=", 0).and("groupId", "=", groupId), "name", "value")
 								.addParam("key", key));
 	}

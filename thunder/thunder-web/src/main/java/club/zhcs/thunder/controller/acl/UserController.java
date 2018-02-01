@@ -62,7 +62,7 @@ public class UserController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.USER_LIST)
 	@ApiOperation(value = "用户分页列表")
 	public Result list(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", userService.searchByPage(_fixPage(page), Cnd.NEW().desc("id")));
+		return Result.success().addData("pager", userService.searchByPage(fixPage(page), Cnd.NEW().desc("id")));
 	}
 
 	/**
@@ -79,8 +79,8 @@ public class UserController extends BaseController {
 	public Result search(@RequestParam("key") @ApiParam("搜索关键字") String key, @RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
 		return Result.success()
 				.addData("pager", userService.searchByKeyAndPage(
-						_fixSearchKey(key),
-						_fixPage(page),
+						fixSearchKey(key),
+						fixPage(page),
 						// Cnd.NEW().desc("id"),
 						"name", "nickName", "realName")
 						.addParam("key", key));
@@ -227,13 +227,13 @@ public class UserController extends BaseController {
 			Result result = shiroUserService.login(userLoginDto.getUserName(), userLoginDto.getPassword(), Lang.getIP(request()));
 			if (result.isSuccess()) {
 				// 登录成功处理
-				_putSession(BootNutzVueApplication.USER_KEY, result.getData().get("loginUser"));
+				putSession(BootNutzVueApplication.USER_KEY, result.getData().get("loginUser"));
 				if (userLoginDto.isRememberMe()) {
 					NutMap data = NutMap.NEW();
 					data.put("user", userLoginDto.getUserName());
 					data.put("password", userLoginDto.getPassword());
 					data.put("rememberMe", userLoginDto.getPassword());
-					_addCookie("kerbores", DES.encrypt(Json.toJson(data)), 24 * 60 * 60 * 365);
+					addCookie("kerbores", DES.encrypt(Json.toJson(data)), 24 * 60 * 60 * 365);
 				}
 				return result
 						.addData("roles", shiroUserService.roleInfos(userLoginDto.getUserName()))

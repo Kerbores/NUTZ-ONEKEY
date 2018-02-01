@@ -63,10 +63,13 @@ public class SINORealm extends AuthorizingRealm {
 		String userName = upToken.getUsername();
 		User user = shiroUserService.findByName(userName);
 		if (Lang.isEmpty(user))// 用户不存在
+		{
 			return null;
+		}
 		if (user.getStatus() == Status.DISABLED)// 用户被锁定
+		{
 			throw new LockedAccountException("Account [" + upToken.getUsername() + "] is locked.");
-
+		}
 		SimpleAuthenticationInfo account = new SimpleAuthenticationInfo(user.getName(), user.getPassword(), getName());
 
 		return account;
@@ -79,9 +82,13 @@ public class SINORealm extends AuthorizingRealm {
 		String userName = principalCollection.getPrimaryPrincipal().toString();
 		User user = shiroUserService.findByName(userName);
 		if (user == null)// 用户不存在
+		{
 			return null;
+		}
 		if (user.getStatus() == Status.DISABLED)// 用户被锁定
+		{
 			throw new LockedAccountException("Account [" + userName + "] is locked.");
+		}
 		SimpleAuthorizationInfo auth = new SimpleAuthorizationInfo();
 		List<String> roleNameList = shiroUserService.getRolesInfo(user.getId());
 		auth.addRoles(roleNameList);// 添加角色

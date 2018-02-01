@@ -46,7 +46,7 @@ public class GroupController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.GROUP_LIST)
 	@ApiOperation("码本分组列表")
 	public Result list(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", groupService.searchByPage(_fixPage(page), Cnd.NEW().desc("id")));
+		return Result.success().addData("pager", groupService.searchByPage(fixPage(page), Cnd.NEW().desc("id")));
 	}
 
 	/**
@@ -62,7 +62,7 @@ public class GroupController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.GROUP_LIST)
 	@ApiOperation("码本分组搜索")
 	public Result search(@RequestParam("key") @ApiParam("关键词") String key, @RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", groupService.searchByKeyAndPage(_fixSearchKey(key), _fixPage(page), "name", "description").addParam("key", key));
+		return Result.success().addData("pager", groupService.searchByKeyAndPage(fixSearchKey(key), fixPage(page), "name", "description").addParam("key", key));
 	}
 
 	/**

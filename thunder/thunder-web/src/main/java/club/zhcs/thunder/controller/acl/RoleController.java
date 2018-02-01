@@ -45,7 +45,7 @@ public class RoleController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.ROLE_LIST)
 	@ApiOperation("角色列表")
 	public Result list(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", roleService.searchByPage(_fixPage(page), Cnd.NEW().desc("id")));
+		return Result.success().addData("pager", roleService.searchByPage(fixPage(page), Cnd.NEW().desc("id")));
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class RoleController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.ROLE_LIST)
 	@ApiOperation("角色分页搜索")
 	public Result search(@RequestParam("key") String key, @RequestParam(value = "page", defaultValue = "1") int page) {
-		return Result.success().addData("pager", roleService.searchByKeyAndPage(_fixSearchKey(key), _fixPage(page), "name", "description").addParam("key", key));
+		return Result.success().addData("pager", roleService.searchByKeyAndPage(fixSearchKey(key), fixPage(page), "name", "description").addParam("key", key));
 	}
 
 	/**

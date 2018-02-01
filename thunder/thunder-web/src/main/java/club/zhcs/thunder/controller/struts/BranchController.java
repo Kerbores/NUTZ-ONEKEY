@@ -45,7 +45,7 @@ public class BranchController extends BaseController {
 	@SINORequiresPermissions(InstallPermission.BRANCH_LIST)
 	@ApiOperation("机构列表")
 	public Result list(@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
-		return Result.success().addData("pager", branchService.searchByPage(_fixPage(page), Cnd.where("parentId", "=", 0)));
+		return Result.success().addData("pager", branchService.searchByPage(fixPage(page), Cnd.where("parentId", "=", 0)));
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class BranchController extends BaseController {
 			@RequestParam("key") @ApiParam("关键词") String key,
 			@RequestParam(value = "page", defaultValue = "1") @ApiParam("页码") int page) {
 		return Result.success().addData("pager",
-				branchService.searchByKeyAndPage(_fixSearchKey(key), _fixPage(page), Cnd.where("parentId", "=", 0), "name", "description", "address").addParam("key", key));
+				branchService.searchByKeyAndPage(fixSearchKey(key), fixPage(page), Cnd.where("parentId", "=", 0), "name", "description", "address").addParam("key", key));
 	}
 
 	/**

@@ -39,7 +39,14 @@ public class User extends ThunderEntity {
 	 * @time 2016年1月26日 下午2:18:59
 	 */
 	public static enum Status {
-		ACTIVED("正常"), DISABLED("禁用");
+		/**
+		 * 
+		 */
+		ACTIVED("正常"), 
+		/**
+		 * 
+		 */
+		DISABLED("禁用");
 		/**
 		 * 中文描述,主要用于页面展示
 		 */
@@ -103,7 +110,18 @@ public class User extends ThunderEntity {
 	 *         create at 2016年1月11日 下午3:55:01
 	 */
 	public static enum Type {
-		PLATFORM, MERCHANTS, CUSTOMER
+		/**
+		 * 
+		 */
+		PLATFORM, 
+		/**
+		 * 
+		 */
+		MERCHANTS, 
+		/**
+		 * 
+		 */
+		CUSTOMER
 	}
 
 	@Column("u_name")
