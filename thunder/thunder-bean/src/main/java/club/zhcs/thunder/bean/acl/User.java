@@ -20,277 +20,288 @@ import club.zhcs.thunder.bean.ThunderEntity;
 @Comment("用户表")
 public class User extends ThunderEntity {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 
-	 * @author 王贵源
-	 *
-	 * @email kerbores@kerbores.com
-	 *
-	 * @description 用户状态枚举
-	 * 
-	 * @copyright 内部代码,禁止转发
-	 *
-	 *
-	 * @time 2016年1月26日 下午2:18:59
-	 */
-	public static enum Status {
-		/**
-		 * 
-		 */
-		ACTIVED("正常"), 
-		/**
-		 * 
-		 */
-		DISABLED("禁用");
-		/**
-		 * 中文描述,主要用于页面展示
-		 */
-		private String name;
+    /**
+     * 
+     * @author 王贵源
+     *
+     * @email kerbores@kerbores.com
+     *
+     * @description 用户状态枚举
+     * 
+     * @copyright 内部代码,禁止转发
+     *
+     *
+     * @time 2016年1月26日 下午2:18:59
+     */
+    public static enum Status {
+        /**
+         * 
+         */
+        ACTIVED("正常"),
+        /**
+         * 
+         */
+        DISABLED("禁用");
+        /**
+         * 中文描述,主要用于页面展示
+         */
+        private String name;
 
-		private Status(String name) {
-			this.name = name;
-		}
+        private Status(String name) {
+            this.name = name;
+        }
 
-		public String getName() {
-			return name;
-		}
+        public String getName() {
+            return name;
+        }
 
-		public void setName(String name) {
-			this.name = name;
-		}
-	}
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		return 31 * 1 + ((name == null) ? 0 : name.hashCode());
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return 31 * 1 + ((name == null) ? 0 : name.hashCode());
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		User other = (User) obj;
-		if (name == null) {
-			if (other.name != null) {
-				return false;
-			}
-		} else if (!name.equals(other.name)) {
-			return false;
-		}
-		return true;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        User other = (User) obj;
+        if (name == null) {
+            if (other.name != null) {
+                return false;
+            }
+        } else if (!name.equals(other.name)) {
+            return false;
+        }
+        return true;
+    }
 
-	/**
-	 * 用户类型
-	 * 
-	 * @author 王贵源<kerbores>
-	 *
-	 *         create at 2016年1月11日 下午3:55:01
-	 */
-	public static enum Type {
-		/**
-		 * 
-		 */
-		PLATFORM, 
-		/**
-		 * 
-		 */
-		MERCHANTS, 
-		/**
-		 * 
-		 */
-		CUSTOMER
-	}
+    /**
+     * 用户类型
+     * 
+     * @author 王贵源<kerbores>
+     *
+     *         create at 2016年1月11日 下午3:55:01
+     */
+    public static enum Type {
+        /**
+         * 
+         */
+        PLATFORM,
+        /**
+         * 
+         */
+        MERCHANTS,
+        /**
+         * 
+         */
+        CUSTOMER
+    }
 
-	@Column("u_name")
-	@Name
-	@Comment("用户登录名")
-	private String name;
+    @Column("u_name")
+    @Name
+    @Comment("用户登录名")
+    private String name;
 
-	@Column("u_real_name")
-	@Comment("用户真实姓名")
-	private String realName;
+    @Column("u_real_name")
+    @Comment("用户真实姓名")
+    private String realName;
 
-	@Column("u_nick_name")
-	@Comment("用户昵称")
-	private String nickName;
+    @Column("u_nick_name")
+    @Comment("用户昵称")
+    private String nickName;
 
-	@Column("u_pwd")
-	@Comment("用户登录密码")
-	private String password;
+    @Column("u_pwd")
+    @Comment("用户登录密码")
+    private String password;
 
-	@Column("u_phone")
-	@Comment("用户手机号")
-	private String phone;
+    @Column("u_phone")
+    @Comment("用户手机号")
+    private String phone;
 
-	@Column("u_email")
-	@Comment("用户邮箱")
-	private String email;
+    @Column("u_email")
+    @Comment("用户邮箱")
+    private String email;
 
-	@Column("u_head_key")
-	@Comment("用户头像")
-	@ColDefine(width = 200)
-	private String headKey;
+    @Column("u_head_key")
+    @Comment("用户头像")
+    @ColDefine(width = 200)
+    private String headKey;
 
-	private String headUrl;
+    @Column("t_test")
+    private String test;
 
-	@Column("u_create_time")
-	@Comment("用户创建时间")
-	private Date createTime = Times.now();
+    public String getTest() {
+        return test;
+    }
 
-	@Column("u_status")
-	@Comment("用户状态")
-	private Status status = Status.ACTIVED;
+    public void setTest(String test) {
+        this.test = test;
+    }
 
-	@Column("u_type")
-	@Comment("用户类型")
-	private Type userType = Type.PLATFORM;
+    private String headUrl;
 
-	@Column("u_openid")
-	@Comment("用户微信 openid")
-	private String openid;
+    @Column("u_create_time")
+    @Comment("用户创建时间")
+    private Date createTime = Times.now();
 
-	/**
-	 * @return the createTime
-	 */
-	public Date getCreateTime() {
-		return createTime;
-	}
+    @Column("u_status")
+    @Comment("用户状态")
+    private Status status = Status.ACTIVED;
 
-	public String getEmail() {
-		return email;
-	}
+    @Column("u_type")
+    @Comment("用户类型")
+    private Type userType = Type.PLATFORM;
 
-	public String getHeadKey() {
-		return headKey;
-	}
+    @Column("u_openid")
+    @Comment("用户微信 openid")
+    private String openid;
 
-	public String getHeadUrl() {
-		return headUrl;
-	}
+    /**
+     * @return the createTime
+     */
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	/**
-	 * @return the nickName
-	 */
-	public String getNickName() {
-		return nickName;
-	}
+    public String getHeadKey() {
+        return headKey;
+    }
 
-	public String getOpenid() {
-		return openid;
-	}
+    public String getHeadUrl() {
+        return headUrl;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getPhone() {
-		return phone;
-	}
+    /**
+     * @return the nickName
+     */
+    public String getNickName() {
+        return nickName;
+    }
 
-	public String getRealName() {
-		return realName;
-	}
+    public String getOpenid() {
+        return openid;
+    }
 
-	public Status getStatus() {
-		return status;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	/**
-	 * @return the userType
-	 */
-	public Type getUserType() {
-		return userType;
-	}
+    public String getPhone() {
+        return phone;
+    }
 
-	public boolean isAvailable() {
-		return status == Status.ACTIVED;
-	}
+    public String getRealName() {
+        return realName;
+    }
 
-	/**
-	 * @param createTime
-	 *            the createTime to set
-	 */
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public Status getStatus() {
+        return status;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * @return the userType
+     */
+    public Type getUserType() {
+        return userType;
+    }
 
-	public void setHeadKey(String headKey) {
-		this.headKey = headKey;
-	}
+    public boolean isAvailable() {
+        return status == Status.ACTIVED;
+    }
 
-	protected void setHeadUrl(String headUrl) {
-		this.headUrl = headUrl;
-	}
+    /**
+     * @param createTime
+     *            the createTime to set
+     */
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	/**
-	 * @param nickName
-	 *            the nickName to set
-	 */
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
+    public void setHeadKey(String headKey) {
+        this.headKey = headKey;
+    }
 
-	public void setOpenid(String openid) {
-		this.openid = openid;
-	}
+    protected void setHeadUrl(String headUrl) {
+        this.headUrl = headUrl;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
+    /**
+     * @param nickName
+     *            the nickName to set
+     */
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
 
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
 
-	public void setStatus(Status status) {
-		this.status = status;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	/**
-	 * @param userType
-	 *            the userType to set
-	 */
-	protected void setUserType(Type userType) {
-		this.userType = userType;
-	}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    /**
+     * @param userType
+     *            the userType to set
+     */
+    protected void setUserType(Type userType) {
+        this.userType = userType;
+    }
 
 }

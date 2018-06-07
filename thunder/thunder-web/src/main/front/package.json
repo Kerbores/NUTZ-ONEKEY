@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "babel-preset-es2015": "^6.24.1",
     "bga-back-top-vue": "^1.0.2",
     "echarts": "^3.8.5",
     "element-tree-grid": "^0.0.15",

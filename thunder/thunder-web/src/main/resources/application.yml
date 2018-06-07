@@ -3,10 +3,6 @@ spring:
   application:
     name: NUTZ-ONEKEY spring-boot+nutzdao vue前后端分离版
     version: 4.0
-  #REDIS
-  redis:
-    host: 127.0.0.1
-    port: 6379
   datasource:
     druid:
       url: jdbc:mysql://127.0.0.1:3306/spring-thunder?useUnicode=true&characterEncoding=utf8&useSSL=false

@@ -22,7 +22,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
@@ -45,7 +44,6 @@ import club.zhcs.thunder.vo.InstalledRole;
  * @author kerbores@gmail.com
  */
 @SpringBootApplication
-@EnableRedisHttpSession
 @EnableAsync
 @EnableTransactionManagement
 public class BootNutzVueApplication extends WebMvcConfigurerAdapter {
